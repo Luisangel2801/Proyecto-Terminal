@@ -36,6 +36,20 @@
     
     Las estimaciones de SBP y DBP fueron comparables a las de un monitor de presión arterial comercial, con un error absoluto medio (MAE) de $2.72 \pm 3.42$ mmHg para SBP y $2.29 \pm 3.53$ mmHg para DBP.
 
+
+\newpage
+\section{Justificación}
+
+En México, las enfermedades cardiovasculares representan la primera causa de muerte, siendo responsable de más de 220 mil fallecimientos en 2021 \cite{SSFallecimientos}. Entre los factores de riesgo más importantes para estas patologías se encuentra la hipertensión arterial, conocida también como el ``asesino silencioso", ya que no presenta síntomas y puede pasar desapercibida durante años, hasta que desarrollan complicaciones graves como infartos o accidentes cerebrovasculares. Según la Encuesta Nacional de Salud y Nutrición (ENSANUT), cerca del 30\% de la población adulta en México padece hipertensión arterial \cite{ENSANUT}, pero una gran proporción de ellos no recibe un tratamiento adecuado o no se diagnostica a tiempo debido a la falta de acceso a un monitoreo continuo y preciso.
+
+Los métodos para la medición de la presión arterial, como el baumanómetro, son invasivos y requieren de personal capacitado, lo que limita su uso en el monitoreo continuo de la presión arterial. Esta limitación es crítica en un país como México, donde el sistema de salud puede ser limitado, especialmente en zonas rurales y marginadas. Por lo tanto, es necesario desarrollar dispositivos no invasivos y de bajo coste que permitan a las personas el monitorear su presión arterial de forma continua y precisa, para detectar y tratar a tiempo la hipertensión arterial y de esta forma prevenir complicaciones graves.
+
+Este proyecto tiene como objetivo desarrollar un sistema basado en sensores para la estimación de la presión arterial de forma no invasiva, que permita a las personas monitorear su presión arterial de forma continua y precisa, y enviar los datos a un dispositivo móvil para la visualización y el almacenamiento de los registros para llevar un control de su salud cardiovascular. Facilitando así la detección temprana de la hipertensión arterial y la prevención de complicaciones graves asociadas a esta enfermedad.
+
+El desarrollo de un sistema de monitoreo no invasivo de la presión arterial permitirá a las personas tener un mayor control de su salud cardiovascular, detectar a tiempo la hipertensión arterial y prevenir complicaciones graves asociadas a esta enfermedad, mejorando así su calidad de vida y reduciendo la carga de enfermedades cardiovasculares en México.
+
+
+\newpage
 \section{Objetivos}
     \subsection{Objetivo General}
     Desarrollar un dispositivo para estimar la presión arterial de forma no invasiva utilizando sensores.
@@ -47,13 +61,14 @@
         \item Visualizar los datos obtenidos en una aplicación android.
     \end{itemize}
 
+\newpage
 \section{Marco Teórico}
 
     \subsection{El sistema de conducción del corazón}
 
-    El corazón es un músculo que late y bombea continuamente sangre al resto del cuerpo. Lo que comúnmente llamamos latido cardíaco es en realidad la contracción rítmica de las cuatro cavidades del corazón. Cada latido cardíaco es estimulado por señales eléctricas que viajan a través de una vía específica del corazón. Estas señales se pueden registrar mediante un electrocardiograma, o ECG.
+    El corazón es un músculo que late y bombea continuamente sangre al resto del cuerpo. Lo que comúnmente llamamos latido cardíaco es en realidad la contracción rítmica de las cuatro cavidades del corazón. Cada latido cardíaco es estimulado por señales eléctricas que viajan a través de una vía específica del corazón. Estas señales se pueden registrar mediante un electrocardiograma (ECG).
 
-     Este proceso comienza en el nódulo senoauricular (nódulo SA), situado en la aurícula derecha. La señal eléctrica se propaga a las aurículas, provocando su contracción y el empuje de sangre hacia los ventrículos. Luego, la señal llega al nódulo auriculoventricular (nódulo AV) y se desplaza a través del haz de His, que se divide en ramas izquierda y derecha dentro de los ventrículos. Finalmente, la señal viaja por las fibras de Purkinje, que son fibras musculares especializadas que se encuentran en las paredes de los ventrículos, el cual provoca la contracción de los ventrículos, bombeando sangre a los pulmones y al resto del cuerpo. Este sistema actúa como el marcapasos natural del cuerpo, manteniendo un ritmo cardíaco normal de 60 a 100 latidos por minuto. Alteraciones en este sistema pueden resultar en ritmos cardíacos anormales y afectar el flujo sanguíneo al cerebro y otras partes del cuerpo \cite{SistemaConduccionMSD}.
+     Este proceso comienza en el nódulo senoauricular (nódulo SA), situado en la aurícula derecha. La señal eléctrica se propaga a las aurículas, provocando su contracción y el empuje de sangre hacia los ventrículos. Luego, la señal llega al nódulo auriculoventricular (nódulo AV) y se desplaza a través del haz de His, que se divide en ramas izquierda y derecha dentro de los ventrículos. Finalmente, la señal viaja por las fibras de Purkinje, que son fibras musculares especializadas que se encuentran en las paredes de los ventrículos, el cual provoca la contracción de los ventrículos, bombeando sangre a los pulmones y al resto del cuerpo. Este sistema actúa como el marcapasos natural del cuerpo, manteniendo un ritmo cardíaco normal de 60 a 100 latidos por minuto. Alteraciones en este sistema pueden resultar en ritmos cardíacos anormales y afectar el flujo sanguíneo del cerebro y otras partes del cuerpo \cite{SistemaConduccionMSD}.
 
     \begin{figure}[H]
         \centering
@@ -81,7 +96,7 @@
         \item \textbf{Intervalo QT}: Se extiende desde el comienzo del complejo QRS hasta el final de la onda T y representa la sístole eléctrica ventricular, o lo que es lo mismo, el conjunto de la despolarización y repolarización ventricular. La medida de este intervalo depende de la frecuencia cardiaca, de forma que el intervalo QT se acorta cuando la frecuencia cardiaca es alta, y se alarga cuando la frecuencia cardiaca es baja. Por lo anterior, cuando se mide, es necesario corregirlo de acuerdo con la frecuencia cardíaca utilizando la fórmula de Bazett
         \item \textbf{Onda T}: Es la onda que representa la repolarización ventricular.
         \item \textbf{Onda U}: Es una onda de escaso voltaje que puede o no estar presente en el trazado del electrocardiograma. Se debe a la repolarización de los músculos papilares
-        \item \textbf{Intervalo RR}: Es el intervalo que abarca desde una onda R, hasta la onda R de la siguiente despolarización, es decir dos ondas R sucesivas. En un paciente sin enfermedad, debe permanecer a un ritmo constante. La medida de este intervalo dependerá de la frecuencia cardiaca.
+        \item \textbf{Intervalo RR}: Es el intervalo que abarca desde una onda R, hasta la onda R de la siguiente despolarización, es decir dos ondas R sucesivas. En un paciente sano, debe permanecer a un ritmo constante. La medida de este intervalo dependerá de la frecuencia cardiaca.
     \end{itemize}
 
     \begin{figure}[H]
