@@ -109,7 +109,103 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
     El ECG tiene las características de baja frecuencia y concentración de energía, y la señal es débil, fácilmente perturbada por el ruido, como interferencias eléctricas, campos electromagnéticos externos, movimiento de electrodos (ruido instantáneo)  y el desplazamiento de la línea de base que es causado principalmente por la respiración. Estos ruidos dificultan el diagnóstico médico y pueden provocar errores en la identificación de enfermedades. Por ello, es esencial aplicar técnicas adecuadas para eliminar el ruido y mejorar la calidad de los datos de ECG muestreados. \cite{AlMahamdy_2014}
 
+    \subsection{Fotopletismografía (PPG)}
+        \subsubsection{Principios de la fotopletismografía}
+            La fotopletismografía (PPG, por sus siglas en inglés) es una técnica óptica que puede utilizarse para detectar cambios en el volumen sanguíneo \cite{Hertzman_1938}. Un PPG es un dispositivo simple que consta de una fuente de luz y un detector; se han desarrollado dispositivos PPG que utilizan luz de diferentes longitudes de onda e intensidades basadas en la tecnología de diodos emisores de luz (LED). La cantidad de energía transferida a la piel por la luz depende de su longitud de onda; por ejemplo, la luz verde se utiliza con frecuencia y tiene una buena relación señal-ruido \cite{Challoner_1979}. Además, las señales de luz roja, verde y azul (RGB) permiten determinar el pulso y las frecuencias respiratorias.
 
+            La función del fotodetector es detectar y cuantificar la luz absorbida durante el flujo pulsátil y no pulsátil. Durante el flujo pulsátil, la luz se absorbe por el cambio en el flujo sanguíneo dentro de las arterias, que es sincrónico con un latido del corazón. Durante el flujo no pulsátil, la luz se absorbe por los tejidos de fondo. Por lo tanto, un fotodetector detecta el cambio volumétrico en el flujo sanguíneo en las arterias al detectar la diferencia de intensidad de luz. La medición de este cambio en la intensidad de la luz ayuda a analizar la funcionalidad del corazón.
+
+            En los últimos treinta años, el número de artículos publicados sobre PPG ha aumentado significativamente, abarcando tanto la investigación básica como la aplicada. En todas estas publicaciones, la PPG ha sido elogiada como una técnica óptica no invasiva, de bajo costo y simple para medir parámetros fisiológicos aplicados en la superficie de la piel. \cite{PPG}.
+
+            La popularidad de este tema se puede atribuir a la comprensión de que la PPG tiene implicaciones importantes para una amplia gama de aplicaciones. Entre muchas, ayuda en la detección de oxígeno en sangre, la evaluación cardiovascular y el control de los signos vitales. Además, la importante contribución de la PPG en los dispositivos portátiles ha elevado exponencialmente la popularidad y la facilidad de uso de la PPG \cite{allen_2007}.
+
+        \subsubsection{Modos de medición}
+            La tecnología PPG mide los cambios en el volumen de sangre en los tejidos durante un ciclo cardíaco mediante una fuente de luz. Esta medición volumétrica proporciona información importante sobre el sistema cardiovascular. Un sensor PPG consta principalmente de dos componentes electrónicos: un emisor de luz y un detector de intensidad lumínica.
+
+            Generalmente, se utiliza un LED como emisor de luz y un fotodetector para captar los cambios en la intensidad lumínica. Un pulso PPG correspondiente a un latido del corazón que incluye las fases sistólica y diastólica. Durante la fase sistólica, el corazón se contrae y empuja la sangre rica en oxígeno hacia los tejidos y órganos, lo que incrementa el volumen de sangre en las arterias. Esto provoca que las células sanguíneas absorban más luz, por lo que la cantidad de luz detectada por el fotodetector es menor. En cambio, durante la fase diastólica, el corazón se relaja y la sangre regresa a él, disminuyendo el volumen sanguíneo en las arterias, como resultado, se absorbe menos luz y el fotodetector registra un aumento en la intensidad lumínica.\cite{Hiiberia_2023}.
+
+            Dependiendo de la aplicación y la ubicación del sensor, el PPG se puede usar en modo transmisivo o en modo de reflexión.
+
+            \begin{enumerate}
+                \item Cuando un fotodetector y un LED se colocan en lados opuestos de un dedo para detectar la luz transmitida, este arreglo se conoce como modo transmisivo. En este modo, la sonda está configurada de manera que el fotodetector y el LED se enfrentan con una capa de tejido entre ellos. La detección en modo transmisivo depende de la luz que atraviesa las partes del cuerpo, por lo que se prefieren estructuras delgadas como el lóbulo de la oreja y el dedo.
+                \item Cuando el fotodetector y el LED se colocan en el mismo lado de un dedo para detectar la luz reflejada, se utiliza el modo reflectivo. En este arreglo, ambos sensores se sitúan uno al lado del otro con una pequeña separación. Por lo tanto, el modo reflectivo puede emplearse en cualquier parte del cuerpo, como la frente o la muñeca.
+            \end{enumerate}
+
+            \begin{figure}[H]
+                \centering
+                \begin{subfigure}[b]{0.45\linewidth}
+                    \includegraphics[width=\linewidth]{img/PPG_transmisivo.png}
+                    \caption{Sensor PPG en modo de transmisión}
+                    \label{fig:PPG_transmisivo}
+                \end{subfigure}
+                \begin{subfigure}[b]{0.45\linewidth}
+                    \includegraphics[width=\linewidth]{img/PPG_reflexion.png}
+                    \caption{Sensor PPG en modo de reflexión}
+                    \label{fig:PPG_reflexion}
+                \end{subfigure}
+                \caption[Modos de medición de la fotopletismografía]{Modos de medición de la fotopletismografía\footnotemark}
+                \label{fig:modosMedicionPPG}
+            \end{figure}
+            \footnotetext{Muestra la posición de los sensores PPG en modo de transmisión y en modo de reflexión, los dos modo se utiliza para medir la fotopletismografía. Imagen tomada de aiva.hi. Fuente: \url{https://goo.su/pg8UGx}}
+
+            \subsubsection{Forma de onda de un PPG}
+
+            En la figura \ref{fig:PPG} se muestra la señal característica de un fotopletismógrado, la cual está directamente relacionada con la frecuencia cardíaca, donde cada periodo de la señal corresponde a una pulsación del corazon.
+
+            La señal representa dos picos por cada periodo, el pico mayor representa la presión sistólica, y el segundo pico representa el inicio de la presión diastólica cuyo valor es el mínimo de la curva \cite{Celi_2011}.
+
+            Para calcular la frecuencia cardíaca (FC) a partir de la señal PPG, se utiliza la ecuación~\ref{eq:FrecienciaCardiaca}, donde el intervalo entre pico a pico es el tiempo transcurrido entre dos pulsaciones del corazón.
+
+            \begin{equation}
+                \label{eq:FrecienciaCardiaca}
+                FC = \frac{60}{\textit{Intervalo entre picos}}
+            \end{equation}            
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.7\textwidth]{img/PPG_senial.png}
+                \caption[Modelo matemático de una señal pura de una fotopletismografía]{Modelo matemático de una señal pura de una fotopletismografía\footnotemark}
+                \label{fig:PPG}
+            \end{figure}
+            \footnotetext{Muestra una representación de una señal pura de una fotopletismografía, donde se observa la forma de onda de la señal con una frecuencia de 1.5 Hz, que representa 90 latidos por minuto. Imagen tomada del articulo ´´Body sensor network for mobile health monitoring, a diagnosis and anticipating system´´. Fuente: \url{https://doi.org/10.1109/jsen.2015.2464773}}
+
+        
+        \subsubsection{Componente AC y DC de la señal PPG}
+            La figura \ref{fig:PPG_AC_DC} muestra un ejemplo de una forma de onda fotopletismográfica, que tiene componentes de corriente continua (DC) y corriente alterna (AC). El componente DC de la forma de onda PPG corresponde a la señal óptica transmitida o reflejada del tejido y depende de la estructura del tejido y del volumen promedio de la sangre arterial y venosa. El componente DC cambia lentamente con la respiración, mientras que el componente AC fluctúa de acuerdo con los cambios en el volumen sanguíneo que ocurren entre las fases sistólica y diastólica del ciclo cardíaco \cite{Tamura_2019}.
+
+            Cuando el corazón bombea sangre durante la sístole, el aumento del volumen sanguíneo en los tejidos periféricos provoca una mayor absorción de la luz o una menor reflexión, lo que da lugar a una desviación hacia abajo en la forma de onda PPG. Durante la diástole, cuando el corazón se relaja, el volumen sanguíneo disminuye, lo que da lugar a una desviación hacia arriba en la forma de onda PPG. La tecnología basada en PPG calcula las mediciones en función de los cambios reflejados en la forma de onda \cite{Cabessa_2024}.
+
+            \begin{figure}[H]
+                \centering
+                \begin{subfigure}[b]{0.45\linewidth}
+                    \includegraphics[width=\linewidth]{img/PPG_AC_DC.png}
+                \end{subfigure}
+                \begin{subfigure}[b]{0.45\linewidth}
+                    \includegraphics[width=\linewidth]{img/PPG_Componente_AC_DC.png}
+                \end{subfigure}
+                \caption[Componente AC y DC de la señal PPG]{Componente AC y DC de la señal PPG\footnotemark}
+                \label{fig:PPG_AC_DC}
+            \end{figure}
+            \footnotetext{Muestra un ejemplo de forma de onda de la señal PPG, donde se observa el componente AC y DC de la señal. Imagen tomada del artículo ``Wearable Photoplethysmographic Sensors—Past and Present". Fuente: \url{https://doi.org/10.3390/electronics3020282}}
+
+        \subsubsection{Longitud de onda de la luz emitida}
+            La piel del cuerpo está compuesta principalmente por tres capas de tejido: la epidermis, la dermis y la hipodermis. Debido a la absorción, solo las ondas de luz con una longitud de onda mayor pueden penetrar a través de todas ellas. La hemoglobina oxigenada absorbe la luz infrarrojo (NIR), mientras que la hemoglobina desoxigenada absorbe luz en la longitud de onda roja. Como resultado, los PPG que emplean LED y fotodetectores con longitudes de onda NIR y roja se utilizan comúnmente en el control clínico para calcular la concentración de hemoglobina.
+
+            Sin embargo, el movimiento del paciente influye en la precisión de la medición y está relacionado con la longitud de onda de la luz utilizada. La luz de longitud de onda más larga, como el infrarrojo, se ve más afectada por el movimiento debido a que penetra profundamente en el tejido. Por otro lado, la luz de longitud de onda más corta (luz verde) generalmente está libre de los efectos del movimiento, ya que penetra menos en el tejido corporal. Por lo tanto, para mitigar el impacto del movimiento y la absorción de luz por los tejidos, se ha propuesto el uso de PPG basados en sensores ópticos de múltiples longitudes de onda para detectar variaciones en el flujo sanguíneo a diferentes profundidades de la piel. \cite{Hiiberia_2023}.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{img/PPG_luz.jpg}
+                \caption[Penetración de las longitudes de onda de la luz en la piel]{Penetración de las longitudes de onda de la luz en la piel\footnotemark}
+                \label{fig:PPG_longitud_onda}
+            \end{figure}
+            \footnotetext{Muestra la penetración de la luz en la piel, donde se observa que la luz de longitud de onda más larga (infrarroja) penetra más en la piel que la luz de longitud de onda más corta (Azul). Imagen tomada de Journal of Clinical Monitoring and Computing. Fuente: \url{https://goo.su/jnUP8yi}}
+
+            Dentro de la región visible, el pico de absorción dominante está en la región azul del espectro, seguido de la región verde-amarilla (500-600 nm), correspondiente a los glóbulos rojos. La luz de longitudes de onda más cortas es absorbida fuertemente por la melanina. El agua absorbe la luz en las regiones ultravioleta e infrarroja (IR) más largas. La luz roja (660 nm) e IR (940nm) pasa a través del tejido y la sangre. Por lo tanto, la luz IR se ha utilizado en sensores PPG.
+        
+            En la última década, la eficiencia de los LED ha aumentado y su voltaje directo ha disminuido, lo que resulta en un mayor número de lúmenes por watt. Gracias a la iluminación de alta potencia, la variación en el ciclo cardíaco entre las fases sistólica y diastólica es más pronunciada en la longitud de onda verde. Por ello, la luz verde se ha empleado en sensores PPG para medir la frecuencia cardíaca y la saturación de oxígeno en la sangre. \cite{Tamura_2019}.
+
+    
     \subsection{Presión Arterial}
     La presión arterial es la fuerza que ejerce la sangre contra las paredes de las arterias. La presión arterial se mide en milímetros de mercurio (mmHg) e incluye dos mediciones: la presión sistólica, que se mide durante el latido del corazón (momento de presión máxima), y la presión diastólica, que se mide durante el descanso entre dos latidos (momento de presión mínima) \cite{PresionArterialDefinicion}.
 

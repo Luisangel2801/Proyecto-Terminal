@@ -11,6 +11,7 @@
 \titleformat*{\subsection}{\normalsize\bfseries}
 \usepackage{palatino}
 \usepackage{caption}
+\usepackage{subcaption}
 \captionsetup[figure]{name={Figura },labelsep=period}
 \captionsetup[table]{name={Tabla },labelsep=period}
 \usepackage[spanish]{babel}
@@ -18,6 +19,7 @@
 \usepackage{imakeidx}
 \makeindex[columns=3, title=Alphabetical Index, intoc]
 \usepackage{float}
+\usepackage{amsmath} % Añade este paquete para poder utilizar la función \text{} en las ecuaciones
 
 %\renewcommand{\thesection}{\Roman{section}}
 %\renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
@@ -76,3 +78,4 @@
 
 \renewcommand{\lstlistingname}{Código}
 \renewcommand{\lstlistlistingname}{Lista de \lstlistingname s}
+\renewcommand{\theenumi}{\alph{enumi}}  % Cambia la numeración de los items de las listas a, b, c, ...
