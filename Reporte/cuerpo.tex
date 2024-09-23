@@ -159,7 +159,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \begin{equation}
                 \label{eq:FrecienciaCardiaca}
                 FC = \frac{60}{\textit{Intervalo entre picos}}
-            \end{equation}            
+            \end{equation}
 
             \begin{figure}[H]
                 \centering
@@ -210,3 +210,139 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     La presión arterial es la fuerza que ejerce la sangre contra las paredes de las arterias. La presión arterial se mide en milímetros de mercurio (mmHg) e incluye dos mediciones: la presión sistólica, que se mide durante el latido del corazón (momento de presión máxima), y la presión diastólica, que se mide durante el descanso entre dos latidos (momento de presión mínima) \cite{PresionArterialDefinicion}.
 
     La presión arterial normal es de 120/80 mmHg, la presión arterial alta (hipertensión) es de 140/90 mmHg o más y la presión arterial baja (hipotensión) es de 90/60 mmHg o menos \cite{DOF}.
+
+
+\newpage
+\section{Desarrollo del Proyecto}
+    \subsection{Desarrollo del circuito de ECG}
+        \subsubsection{Amplificadores}
+            La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ y para poder ser registradas y analizadas, es necesario amplificarlas. 
+
+        \subsubsection{Amplificador operacional}
+            Los amplificadores operacionales son dispositivos electrónicos que se utilizan para amplificar señales eléctricas. Estos dispositivos tienen dos entradas, una inversora y otra no inversora, y una salida; La salida del amplificador operacional es proporcional a la diferencia de voltaje entre las dos entradas multiplicada por un factor de ganancia. La ganancia de un amplificador operacional se puede ajustar mediante la selección de resistencias externas.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Operacional.png}
+                \caption[Terminales de entrada y salida de un amplificador operacional]{Terminales de entrada y salida de un amplificador operacional\footnotemark}
+                \label{fig:Amplificador_Operacional}
+            \end{figure}
+            \footnotetext{Muestra el símbolo electrónico de un amplificador operacional, con sus dos entradas y su salida.}
+
+            \paragraph{Amplificador Inversor}
+                Es una configuración en un amplificador operacional que se caracteriza principalmente porque su entrada, es decir, donde suministraremos un voltaje, se coloca en la terminal inversora del amplificador y la terminal no inversora se conecta a tierra. A la salida del amplificador obtendremos una señal amplificada e inversa (como su nombre lo indica) a su entrada. La ganancia de un amplificador inversor se puede calcular mediante la ecuación~\ref{eq:ganancia_inversor}.
+
+                \begin{equation}
+                    \label{eq:ganancia_inversor}
+                    G = -\frac{R_f}{R_i}
+                \end{equation}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Inversor.png}
+                    \caption[Amplificador inversor]{Amplificador inversor\footnotemark}
+                    \label{fig:Amplificador_Inversor}
+                \end{figure}
+                \footnotetext{Muestra el diagrama esquemático de un amplificador inversor, con una ganancia de $-\frac{R_f}{R_i}$.}
+
+            \paragraph{Amplificador No Inversor}
+                Este tipo de configuración se caracteriza por tener conectado la señal de entrada (voltaje) a la terminal no inversora, esto nos indica que la ganancia será positiva (al contrario del inversor). También tiene como característica una realimentación negativa (Rf).La ganancia de un amplificador no inversor se puede calcular mediante la ecuación~\ref{eq:ganancia_no_inversor}.
+
+                \begin{equation}
+                    \label{eq:ganancia_no_inversor}
+                    G = \frac{R_f}{R_i} + 1
+                \end{equation}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_No_Inversor.png}
+                    \caption[Amplificador no inversor]{Amplificador no inversor\footnotemark}
+                    \label{fig:Amplificador_No_Inversor}
+                \end{figure}
+                \footnotetext{Muestra el diagrama esquemático de un amplificador no inversor, con una ganancia de $1 + \frac{R_f}{R_i}$.}
+            
+            \paragraph{Amplificador Diferencial}
+                El amplificador diferencial es un tipo de amplificador operacional que amplifica la diferencia de voltaje entre dos entradas y suprime la señal común a ambas entradas. La ganancia de un amplificador diferencial se puede calcular mediante la ecuación~\ref{eq:ganancia_diferencial}.
+
+                \begin{equation}
+                    \label{eq:voltaje_diferencial}
+                    v_0 = 1 + \frac{R2}{R1} \cdot \frac{R3}{R3 + R4} \cdot v2 - \frac{R2}{R1} \cdot v1
+                \end{equation}
+
+                Si $R1 = R3$ y $R2 = R4$, la ecuación~\ref{eq:voltaje_diferencial} se simplifica a la ecuación~\ref{eq:voltaje_diferencial_simplificada}.
+
+                \begin{equation}
+                    \label{eq:voltaje_diferencial_simplificada}
+                    v_0 = \frac{R2}{R1} \cdot (v2 - v1)
+                \end{equation}
+
+                \begin{equation}
+                    \label{eq:ganancia_diferencial}
+                    G = \frac{R2}{R1}
+                \end{equation}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Diferencial.png}
+                    \caption[Amplificador diferencial]{Amplificador diferencial\footnotemark}
+                    \label{fig:Amplificador_Diferencial}
+                \end{figure}
+                \footnotetext{Muestra el diagrama esquemático de un amplificador diferencial, con una ganancia de $\frac{R2}{R1}$.}
+
+            \paragraph{Amplificador de Instrumentación}
+                Para amplificar señales bioeléctricas, como las del ECG, se requieren dos características en un amplificador: la primera es que presente una alta impedancia en sus termminales de entrada (elimina posibles caídas de voltaje de la señal cardiaca que den como resultado la reducción o anulación de su amplitud), y la segunda es que solamente amplifique la diferencia de voltaje existente entre dichas terminales. 
+                El amplificador que reúne las dos caracteríasticas mencionadas es el amplificador de instrumentación.
+
+                Para hacer posible lo anterior, todos los amplificadores de instrumentación se basan en el diseño mostrado en la figura~\ref{fig:Amplificador_Instrumentacion} que tiene una etapa con amplificadores no inversores (brindan alta impedancia) y enseguida una etapa de amplificación diferencial (casi siempre unitaria)\cite{Diaz_amplificacion_señales}.
+
+                La expresión para calcular la ganancia y el voltaje de un amplificador de instrumentación se muestra en la ecuación~\ref{eq:ganancia_amplificador_instrumentación}.
+
+                \begin{equation}
+                    \label{eq:voltaje_amplificador_instrumentación}
+                    v_0 = (1 + \frac{2R1}{RG}) \cdot (v2 - v1)
+                \end{equation}
+
+                \begin{equation}
+                    \label{eq:ganancia_amplificador_instrumentación}
+                    G = 1 + \frac{2R1}{RG}
+                \end{equation}
+
+                \begin{figure} [H]
+                    \centering
+                    \includegraphics[width=0.8\textwidth]{img/Desarrollo/Amplificador_Intrumentacion.png}
+                    \caption[Amplificador de Instrumentación]{Amplificador de Instrumentación\footnotemark}
+                    \label{fig:Amplificador_Instrumentacion}
+                \end{figure}
+                \footnotetext{Diagrama de los elementos básicos que conforman las dos etapas en un amplificador de instrumentación. Fuente: Figura basada en diagrama presentado por Berlín, Howard M. y Frank C Getz, 1990, \textit{Fundamentals of operational amplifiers and linear integrated circuits}, p. 34.}
+
+
+        \subsubsection{Amplificador de Instrumentación AD620}
+
+        Para realizar la adquisición de la señal de ECG, se utilizó el amplificador de instrumentación AD620, el cual es un amplificador de precisión de bajo costo y bajo consumo de energía fabricado por Analog Devices, que se utiliza para amplificar señales de baja amplitud y alta impedancia, como las señales de los sensores de ECG. \cite{AD620,AD620_DigiKey}.
+
+        Características Clave del AD620:
+        \begin{itemize}
+            \item \textbf{Ganancia configurable:} Ajustable de 1 a 10,000 mediante una resistencia externa.
+            \item \textbf{Bajo Nivel de Ruido:} Minimiza errores en la señal amplificada, asegurando una representación precisa de la actividad eléctrica cardíaca.
+            \item \textbf{Baja Corriente de Polarización de Entrada:} Con una tensión de polarización máxima de $50 \mu V$ y una deriva mínima de $0,6 \mu V / ^{\circ} C$.
+            \item \textbf{Bajo Consumo de Potencia:} Consume un máximo de $1,3 mA$, adecuado para dispositivos portátiles o alimentados por batería.
+            \item \textbf{Rango de Voltaje de Alimentación:} Funciona con voltajes de $\pm 2,3 V$ a $\pm 18 V$.
+        \end{itemize}
+
+        El AD620 es una gran alternativa al arreglo tradiccional de tres amplificadores operacionales, ya que ofrece una mayor precisión y estabilidad, y requiere menos componentes externos. 
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{img/Desarrollo/AD620.png}
+            \caption[Diagrama esquemático del amplificador de instrumentos AD620.]{Diagrama esquemático del amplificador de instrumentos AD620\footnotemark}
+            \label{fig:AD620}
+        \end{figure}
+        \footnotetext{Muestra que el amplificador de instrumentación AD620 es equivalente a un arreglo de 3 op-amps. Imagen tomada del artículo ``Axial and Lateral Small Strain Measurement of Soils in Compression Test using Local Deformation Transducer'' de la revista Journal of Engineering and Technological Sciences. Fuente: \url{https://goo.su/fHljmIK}}
+
+        \begin{equation}
+            \label{eq:ganancia}
+            G = 1 + \frac{49.4 k\Omega}{R_G}
+        \end{equation}
+
+
+        
