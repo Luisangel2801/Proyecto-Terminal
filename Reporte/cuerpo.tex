@@ -313,36 +313,83 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                     \caption[Amplificador de Instrumentación]{Amplificador de Instrumentación\footnotemark}
                     \label{fig:Amplificador_Instrumentacion}
                 \end{figure}
-                \footnotetext{Diagrama de los elementos básicos que conforman las dos etapas en un amplificador de instrumentación. Fuente: Figura basada en diagrama presentado por Berlín, Howard M. y Frank C Getz, 1990, \textit{Fundamentals of operational amplifiers and linear integrated circuits}, p. 34.}
-
+                \footnotetext{Diagrama de los elementos básicos que conforman las dos etapas en un amplificador de instrumentación. Imagen tomada de \textit{Fundamentals of operational amplifiers and linear integrated circuits}, p. 34.}
 
         \subsubsection{Amplificador de Instrumentación AD620}
+            Para realizar la adquisición de la señal de ECG, se utilizó el amplificador de instrumentación AD620, el cual es un amplificador de precisión de bajo costo y bajo consumo de energía fabricado por Analog Devices, que se utiliza para amplificar señales de baja amplitud y alta impedancia, como las señales ECG. \cite{AD620_AnalogDevices,AD620_DigiKey}.
 
-        Para realizar la adquisición de la señal de ECG, se utilizó el amplificador de instrumentación AD620, el cual es un amplificador de precisión de bajo costo y bajo consumo de energía fabricado por Analog Devices, que se utiliza para amplificar señales de baja amplitud y alta impedancia, como las señales de los sensores de ECG. \cite{AD620,AD620_DigiKey}.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{img/Desarrollo/AD620.png}
+                \caption[Diagrama esquemático del amplificador de instrumentos AD620.]{Diagrama esquemático del amplificador de instrumentos AD620\footnotemark}
+                \label{fig:AD620}
+            \end{figure}
+            \footnotetext{Muestra que el amplificador de instrumentación AD620 es equivalente a un amplificador diferencial conectado a dos amplificadores no inversores. Imagen tomada del artículo \textit{Axial and Lateral Small Strain Measurement of Soils in Compression Test using Local Deformation Transducer} de la revista \textit{Journal of Engineering and Technological Sciences}. Fuente: \url{https://goo.su/fHljmIK}}
 
-        Características Clave del AD620:
-        \begin{itemize}
-            \item \textbf{Ganancia configurable:} Ajustable de 1 a 10,000 mediante una resistencia externa.
-            \item \textbf{Bajo Nivel de Ruido:} Minimiza errores en la señal amplificada, asegurando una representación precisa de la actividad eléctrica cardíaca.
-            \item \textbf{Baja Corriente de Polarización de Entrada:} Con una tensión de polarización máxima de $50 \mu V$ y una deriva mínima de $0,6 \mu V / ^{\circ} C$.
-            \item \textbf{Bajo Consumo de Potencia:} Consume un máximo de $1,3 mA$, adecuado para dispositivos portátiles o alimentados por batería.
-            \item \textbf{Rango de Voltaje de Alimentación:} Funciona con voltajes de $\pm 2,3 V$ a $\pm 18 V$.
-        \end{itemize}
+            \hfill \break
+            Características Clave del AD620:
+            \begin{itemize}
+                \item \textbf{Ganancia configurable:} Ajustable de 1 a 10,000 mediante una resistencia externa.
+                \item \textbf{Bajo Nivel de Ruido:} Minimiza errores en la señal amplificada, asegurando una representación precisa de la actividad eléctrica cardíaca.
+                \item \textbf{Baja Corriente de Polarización de Entrada:} Con una tensión de polarización máxima de $50 \mu V$ y una deriva mínima de $0,6 \mu V / ^{\circ} C$.
+                \item \textbf{Bajo Consumo de Potencia:} Consume un máximo de $1,3 mA$, adecuado para dispositivos portátiles o alimentados por batería.
+                \item \textbf{Rango de Voltaje de Alimentación:} Funciona con voltajes de $\pm 2,3 V$ a $\pm 18 V$.
+            \end{itemize}
 
-        El AD620 es una gran alternativa al arreglo tradiccional de tres amplificadores operacionales, ya que ofrece una mayor precisión y estabilidad, y requiere menos componentes externos. 
+            El AD620 es una gran alternativa al arreglo tradiccional de tres amplificadores operacionales, ya que ofrece una mayor precisión y estabilidad, y requiere menos componentes externos. 
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=0.8\textwidth]{img/Desarrollo/AD620.png}
-            \caption[Diagrama esquemático del amplificador de instrumentos AD620.]{Diagrama esquemático del amplificador de instrumentos AD620\footnotemark}
-            \label{fig:AD620}
-        \end{figure}
-        \footnotetext{Muestra que el amplificador de instrumentación AD620 es equivalente a un arreglo de 3 op-amps. Imagen tomada del artículo ``Axial and Lateral Small Strain Measurement of Soils in Compression Test using Local Deformation Transducer'' de la revista Journal of Engineering and Technological Sciences. Fuente: \url{https://goo.su/fHljmIK}}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{img/Desarrollo/Amplificador_AD620_comparacion.png}
+                \caption[Comparación de la taza de error entre el AD620 y un arreglo de amplificadores de instrumentación.]{Comparación de la taza de error entre el AD620 y un arreglo de amplificadores de instrumentación\footnotemark}
+                \label{fig:Amplificador_AD620_comparacion}
+            \end{figure}
+            \footnotetext{Muestra la diferencia en la taza de error por corriente suministrada de un amplificador de instrumentación AD620 y un arreglo de amplificadores de instrumentación convencional. Imagen tomada del Datasheet del AD620. Fuente: \url{https://www.analog.com/media/en/technical-documentation/data-sheets/AD620.pdf}}
 
-        \begin{equation}
-            \label{eq:ganancia}
-            G = 1 + \frac{49.4 k\Omega}{R_G}
-        \end{equation}
+            El componente cuenta con una entrada inversora (pin 2), una no inversora (pin 3), dos fuentes de alimentación (pin 4 y 7), una referencia o polo a tierra (pin 5), y una salida de la señal amplificada (pin 6). La ganancia del AD620 se puede ajustar mediante una resistencia externa conectada entre el pin 1 y el pin 8.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{img/Desarrollo/AD620_Diagrama.png}
+                \caption[Esquema de conexión del amplificador de instrumentación AD620.]{Esquema de conexión del amplificador de instrumentación AD620\footnotemark}
+                \label{fig:AD620_pinout}
+            \end{figure}
+            \footnotetext{Muestra el esquema de conexión del amplificador de instrumentación AD620, con sus terminales de alimentación, entrada y salida. Imagen tomada del Datasheet del AD620. Fuente: \url{https://www.analog.com/media/en/technical-documentation/data-sheets/AD620.pdf}}
 
+            Resulta que, en el marco de operación de este amplificador de instrumentación, es posible determinar la ganancia saliente a partir de la resistencia conectada entre los pines 1 y 8 \cite{AD620_AnalogDevices}, mediante la ecuación~\ref{eq:ganancia}.
 
-        
+            \begin{equation}
+                \label{eq:ganancia}
+                G = 1 + \frac{49.4 k\Omega}{R_G}
+            \end{equation}
+
+            Donde $G$ es la ganancia del amplificador, $R_G$ es la resistencia conectada entre los pines 1 y 8 y la constante $49.4 k\Omega$ es el valor de la resistencia interna del AD620.
+
+            Buscamos obtener una ganancia igual a 21 porque la señal de ECG tiene una amplitud de $100 mV_{pp}$ y se requiere una amplitud de $2.1 V_{pp}$ para ser procesada por el microcontrolador. Despejando la ecuación~\ref{eq:ganancia} para $R_G$ se obtiene que la resistencia a utilizar es de $2.5 k\Omega$.
+
+            \begin{equation}
+                \label{eq:resistencia}
+                R_G = \frac{49.4 k\Omega}{G - 1} = \frac{49.4 k\Omega}{21 - 1} = 2470 \Omega \approx 2.5 k\Omega
+            \end{equation}
+
+            Teniendo de esta manera una ganancia teórica de 20.76.
+
+            \begin{equation}
+                \label{eq:ganancia_teorica}
+                G = 1 + \frac{49.4 k\Omega}{2.5 k\Omega} = 20.76
+            \end{equation}
+
+        \subsubsection{Filtro de Segundo Orden Sallen-Key Pasa Altas y Pasa Bajas.}
+            Fue necesario implementar un circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo Sallen-Key de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
+
+            \paragraph{Filtro Pasa Altas}
+                Un filtro pasa altas permite el paso de frecuencias superiores a una frecuencia de corte, mientras que atenúa las frecuencias inferiores a esta.
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.6\textwidth]{img/Desarrollo/Filtro_Pasa_Altas.png}
+                    \caption[Diagrama de un filtro pasa altas de segundo orden Sallen-Key.]{Diagrama de un filtro pasa altas de segundo orden Sallen-Key\footnotemark}
+                    \label{fig:Filtro_Pasa_Altas}
+                \end{figure}
+                \footnotetext{Muestra el diagrama de un filtro pasa altas de segundo orden Sallen-Key, con dos resistencias y dos capacitores.}
+
+                
