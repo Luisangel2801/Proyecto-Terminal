@@ -79,7 +79,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     \footnotetext{Localización de las células marcapasos dentro del sistema de conducción del corazón. Imagen tomada de lecturio.com. Fuente: \url{https://goo.su/MSZMxUj}}
 
     \subsection{Electrocardiograma (ECG)}
-    Un electrocardiograma (ECG) es un estudio que registra el voltaje generado por los vectores de despolarización y repolarización de las células cardiacas en relación con el tiempo, es una herramienta útil para evaluar la función cardíaca y detectar problemas cardíacos. \cite{ECG_Definicion}
+    Un electrocardiograma (ECG) es un estudio que registra el voltaje generado por los vectores de despolarización y repolarización de las células cardiacas en relación con el tiempo, es una herramienta útil para evaluar la función cardíaca y detectar problemas cardíacos \cite{ECG_Definicion}.
 
     Es una prueba no invasiva e indolora, que se realiza para detectar problemas cardíacos o controlar el estado del corazon. El ECG generalmente utiliza sensores (electrodos), colocados sobre la piel del pecho, pueden detectar señales eléctricas del corazón. Las señales de estos sensores se conectan a circuitos electrónicos simples con amplificadores, filtros y convertidores analógico-digitales, que registran la señal eléctrica y la muestran en un monitor o la imprimen para su posterior análisis.
 
@@ -107,7 +107,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     \end{figure}
     \footnotetext{Muestra el ciclo completo de un electrocardiograma, con las ondas P, Q, R, S, T y U, y los intervalos PR, QRS, ST y QT. Imagen tomada de encyclopedia.pub. Fuente: \url{https://encyclopedia.pub/entry/52174}}
 
-    El ECG tiene las características de baja frecuencia y concentración de energía, y la señal es débil, fácilmente perturbada por el ruido, como interferencias eléctricas, campos electromagnéticos externos, movimiento de electrodos (ruido instantáneo)  y el desplazamiento de la línea de base que es causado principalmente por la respiración. Estos ruidos dificultan el diagnóstico médico y pueden provocar errores en la identificación de enfermedades. Por ello, es esencial aplicar técnicas adecuadas para eliminar el ruido y mejorar la calidad de los datos de ECG muestreados. \cite{AlMahamdy_2014}
+    El ECG tiene las características de baja frecuencia y concentración de energía, y la señal es débil, fácilmente perturbada por el ruido, como interferencias eléctricas, campos electromagnéticos externos, movimiento de electrodos (ruido instantáneo)  y el desplazamiento de la línea de base que es causado principalmente por la respiración. Estos ruidos dificultan el diagnóstico médico y pueden provocar errores en la identificación de enfermedades. Por ello, es esencial aplicar técnicas adecuadas para eliminar el ruido y mejorar la calidad de los datos de ECG muestreados \cite{AlMahamdy_2014}.
 
     \subsection{Fotopletismografía (PPG)}
         \subsubsection{Principios de la fotopletismografía}
@@ -414,12 +414,12 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
                     \begin{equation}
                         \label{eq:funcion_transferencia_pasa_altos}
-                        \frac{v_0}{v_i}(S) = \frac{(1+\frac{R_b}{R_a}) \cdot s^2}{s^2 + s \cdot \frac{1}{C} \cdot (\frac{2}{R_2}- \frac{R_b}{R_1 \cdot R_a}) + \frac{1}{C^2 \cdot R_1 \cdot R_2}}
+                        \frac{v_o}{v_i}(S) = \frac{(1+\frac{R_b}{R_a}) \cdot s^2}{s^2 + s \cdot \frac{1}{C} \cdot (\frac{2}{R_2}- \frac{R_b}{R_1 \cdot R_a}) + \frac{1}{C^2 \cdot R_1 \cdot R_2}}
                     \end{equation}
 
                     Donde:
                     \begin{itemize}
-                        \item $V_0$: Es la tensión de salida del filtro.
+                        \item $V_o$: Es la tensión de salida del filtro.
                         \item $V_i$: Es la tensión de entrada del filtro.
                         \item $S$: Es la variable compleja en el dominiode de Laplace.
                         \item $R_1$ y $R_2$: Son las resistencias del circuito del filtro.
@@ -496,4 +496,116 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                         \label{eq:resistencia_R2_pasa_altos}
                         R_2 = \frac{R_1}{m^2} = \frac{2.2 k\Omega}{(0.7071)^2} \approx 4.4 k\Omega 
                     \end{equation}
-            
+
+            \paragraph{Filtro Activo Pasa Bajos.}
+                \subparagraph{Función de transferencia del filtro pasa bajos.}
+                    La función de transferencia de un filtro pasa bajos de segundo orden Sallen-Key se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_bajos}.
+
+                    \begin{equation}
+                        \label{eq:funcion_transferencia_pasa_bajos}
+                        \frac{v_o}{v_i}(S) = \frac{(1 + \frac{R_b}{R_a}) \cdot \frac{1}{R^2 \cdot C_1 \cdot C_2}}{s^2 + s \cdot \frac{1}{R} \cdot (\frac{2}{C_1} - \frac{R_b}{C_2 \cdot R_a}) + \frac{1}{R^2 \cdot C_1 \cdot C_2}}
+                    \end{equation}
+
+                    Donde:
+                    \begin{itemize}
+                        \item $V_o$: Es la tensión de salida del filtro.
+                        \item $V_i$: Es la tensión de entrada del filtro.
+                        \item $S$: Es la variable compleja en el dominiode de Laplace.
+                        \item $R_a$ y $R_b$: Son las resistencias asociadas a la ganancia del amplificador operacional.
+                        \item $R$: Es la resistencia del filtro.
+                        \item $C_1$ y $C_2$: Son las capacitancias del circuito del filtro.
+                    \end{itemize}
+                    
+                    En este diseño, al igual que con el filtro pasa altas, se busca mantener una ganancia unitaria para evitar amplificar la señal adicionalmente y minimizar la introducción de ruido. Por lo tanto, se establece $R_a = \infty$ (circuito abierto) y $R_b = 0$ (corto circuito), simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_bajos}.
+
+                    \begin{equation}
+                        \label{eq:funcion_amplificador_operacional_pasa_bajos}
+                        A = 1 + \frac{R_b}{R_a} = 1
+                    \end{equation}
+
+                \subparagraph{Cálculo de factor m}
+                    El factor $m$ es esencial para determinar la relación entre las capacitancias $C_1$ y $C_2$ y asegurar que el filtro tenga las caracteríasticas de frecuencia deseadas. Se calcula mediante la ecuación~\ref{eq:factor_m_pasa_bajos}.
+
+                    \begin{equation}
+                        \label{eq:factor_m_pasa_bajos}
+                        m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
+                    \end{equation}
+
+                    Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es:
+
+                    \begin{equation}
+                        Q = \frac{1}{\sqrt{2}} = 0.7071
+                    \end{equation}
+
+                    Sustituyendo el valor de $A = 1$ y $Q = 0.7071$ en la ecuación~\ref{eq:factor_m_pasa_bajos}, se obtiene el valor de $m$.
+
+                    \begin{equation}
+                        \label{eq:factor_m_pasa_bajos_valor}
+                        m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} = \frac{1 + \sqrt{1}}{2.8284}\approx 0.7071
+                    \end{equation}
+
+                    Este valor de m se utilizará para calcular las capacitancias del filtro.
+
+                \subparagraph{Frecuencia de corte}
+                    La frecuencia de corte del filtro se calcula con la siguiente ecuación~\ref{eq:frecuencia_corte_pasa_bajos}.
+
+                    \begin{equation}
+                        \label{eq:frecuencia_corte_pasa_bajos}
+                        f_c = \frac{1}{2\pi \cdot k \cdot R \cdot m \cdot C_1}
+                    \end{equation}
+
+                    Donde:
+                    \begin{itemize}
+                        \item $f_c$: Frecuencia de corte deseada.
+                        \item $k$: Factor que depende de la configuración del filtro (para sallen key estándar, $k = 1$).
+                        \item $R$: Resistencia seleccionada.
+                        \item $m$: Factor de ajuste.
+                        \item $C_1$: Capacitancia seleccionada.
+                    \end{itemize}
+
+                    Se seleccionaron valores prácticos y disponibles en el mercado para $R$ y $C_1$:
+
+                    \begin{itemize}
+                        \item $R = 2.7 k\Omega$
+                        \item $C_1 = 4.7 \mu F$
+                    \end{itemize}
+
+                    Sustituyendo estos valores en la ecuación~\ref{eq:frecuencia_corte_pasa_bajos}, se obtiene la frecuencia de corte del filtro pasa bajos.
+
+                    \begin{equation}
+                        \label{eq:frecuencia_corte_pasa_bajos_valor}
+                        f_c = \frac{1}{2\pi \cdot 1 \cdot 2.7 k\Omega \cdot 0.7071\cdot 4.7 \mu F} = \frac{1}{2\pi \cdot 2.7 x10^3 \cdot 0.7071\cdot 4.7 x10^{-6}} \approx 17.737 Hz
+                    \end{equation}
+
+                    Esta frecuencia de corte es adecuada para limitar las frecuencias a aproximadamente 17.7Hz, filtrando el ruido de alta frecuencia y preservando la información relevante de la señal ECG.
+
+                \subparagraph{Cálculo de la resistencia Ra}
+                    La resistencia $R_a$ se calcula para establecer la ganancia deseada del amplificador operacional y se obtiene mediante la ecuación~\ref{eq:resistencia_Ra_pasa_bajos}.
+
+                    \begin{equation}
+                        \label{eq:resistencia_Ra_pasa_bajos}
+                        R_a = \frac{2AR}{A-1}
+                    \end{equation}
+
+                    Sin embargo, dado que $A = 1$, el denominador se hace cero, lo que resulta en una resistencia infinita. 
+
+                    \begin{equation}
+                        \label{eq:resistencia_Ra_pasa_bajos_valor}
+                        R_a = \frac{2 \cdot 1 \cdot 2.7 k\Omega}{1 - 1} = \frac{5.4 k\Omega}{0} = \infty
+                    \end{equation}
+
+                    Esto indica que $R_a$ debe ser infinita, es decir, se elimina del circuito (circuito abierto), confirmado que la ganancia del amplificador operacional es unitaria.
+
+                \subparagraph{Cálculo de la capacitancia C2}
+                    La capacitancia $C_2$ se relaciona con la capacitancia $C_1$ mediante el factor $m$ y se calcula mediante la ecuación~\ref{eq:capacitancia_C2_pasa_bajos}.
+
+                    \begin{equation}
+                        \label{eq:capacitancia_C2_pasa_bajos}
+                        C_2 = m^2 \cdot C_1 = (0.7071)^2 \cdot 4.7 \mu F \approx 2.35 \mu F
+                    \end{equation}
+
+                    Para facilitar la implementación del circuito con componentes estándar, se seleccionó una capacitancia con un valor comercial cercano.
+
+                    \begin{equation}
+                        C_2 = 2.2 \mu F
+                    \end{equation}
