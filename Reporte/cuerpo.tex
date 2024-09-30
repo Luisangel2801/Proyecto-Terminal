@@ -609,3 +609,83 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                     \begin{equation}
                         C_2 = 2.2 \mu F
                     \end{equation}
+            
+            \paragraph{Filtro Notch Pasivo Rechaza Banda RC Twin-T}
+                En la etapa de acondicionamiento de la señal, se implementó un filtro notch pasivo RC tipo Twin-T para atenuar las interferencias de 60 Hz, comúnmente presentes debido al ruido de la red eléctrica. Este filtro es eficaz para eliminar una frecuencia específica sin afectar significativamente las demás componentes de la señal.
+
+                El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de "T" doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos. En otras palabras, si tenemos una frecuencia central de 100 Hz, el ancho de banda del filtro será de 200 Hz.
+
+                Para diseñar el filtro notch pasivo RC Twin-T centrado en $f_0 = 60 Hz$, se utilizaron las siguientes ecuaciones:
+
+                Seleccionamos los parámetros iniciales del filtro:
+                \begin{itemize}
+                    \item Frecuencia central $(f_0) = 60 Hz$
+                    \item Factor de calidad $(Q) = 0.25$
+                    \item Capacitancia base $(C_1) = 100 nF$
+                \end{itemize}
+
+                \subparagraph{Cálculo de la resistencia R1}
+                    La resistencia $R_1$ se calcula mediante la ecuación~\ref{eq:resistencia_R1_notch}.
+
+                    \begin{equation}
+                        \label{eq:resistencia_R1_notch}
+                        R_1 = \frac{1}{4\pi \cdot f_0 \cdot Q \cdot C_1}
+                    \end{equation}
+
+                    Sustituyendo los valores de $f_0 = 60 Hz$, $Q = 0.25$ y $C_1 = 100 nF$ en la ecuación~\ref{eq:resistencia_R1_notch}, se obtiene el valor de $R_1$.
+
+                    \begin{equation}
+                        R_1 = \frac{1}{4\pi \cdot 60 Hz \cdot 0.25 \cdot 100 nF} = 53051.6477 \Omega \approx 53 k\Omega
+                    \end{equation}
+
+                \subparagraph{Cálculo de la resistencia R2}
+                    La resistencia $R_2$ se calcula mediante la ecuación~\ref{eq:resistencia_R2_notch}.
+
+                    \begin{equation}
+                        \label{eq:resistencia_R2_notch}
+                        R_2 = \frac{1}{2\pi \cdot f_0 \cdot C_1}
+                    \end{equation}
+
+                    Sustituyendo los valores en la ecuación~\ref{eq:resistencia_R2_notch}, se obtiene el valor de $R_2$.
+
+                    \begin{equation}
+                        R_2 = \frac{1}{2\pi \cdot 60 Hz \cdot 100 nF} = 26.5258 k\Omega \approx 26 k\Omega
+                    \end{equation}
+
+                \subparagraph{Cálculo de la capacitancia C2}
+                    La capacitancia $C_2$ se calcula mediante la ecuación~\ref{eq:capacitancia_C2_notch}.
+
+                    \begin{equation}
+                        \label{eq:capacitancia_C2_notch}
+                        C_2 = 2Q \cdot C_1
+                    \end{equation}
+
+                    Sustituyendo el valor de $C_1 = 100 nF$ en la ecuación~\ref{eq:capacitancia_C2_notch}, se obtiene el valor de $C_2$.
+
+                    \begin{equation}
+                        C_2 = 2(0.25) \cdot 100 nF = 50 nF
+                    \end{equation}
+
+                \subparagraph{Cálculo de la capacitancia C3}
+                    La capacitancia $C_3$ se calcula mediante la ecuación~\ref{eq:capacitancia_C3_notch}.
+
+                    \begin{equation}
+                        \label{eq:capacitancia_C3_notch}
+                        C_3 = (1 - 2Q) \cdot C_1
+                    \end{equation}
+
+                    Sustituyendo los valores, tenemos que:
+
+                    \begin{equation}
+                        C_3 = (1 - 2(0.25)) \cdot 100 nF = 50 nF
+                    \end{equation}
+
+            \paragraph{Amplificador no Inversor}
+                Finalmente, para visualizar la señal, es necesario amplificar nuevamente la señal ya acondicionada antes de su observación en el osciloscopio. Para ello, un amplificador no inversor sencillo es adecuado para cumplir con esta tarea. A continuación se muestra la ecuación~\ref{eq:ganancia_amplificador_no_inversor} para calcular la ganancia del amplificador no inversor.
+
+                \begin{equation}
+                    \label{eq:ganancia_amplificador_no_inversor}
+                    A = 1 + \frac{R_F}{R_{1}} = 1 + \frac{1 M\Omega}{10 k\Omega} = 101
+                \end{equation}
+
+                Donde $R_f$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño asegura que la señal amplificada mantenga la fidelidad necesaria para una visualización precisa en el osciloscopio.
