@@ -361,7 +361,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
 
         \subsubsection{Filtro de Segundo Orden Sallen-Key Pasa Altas y Pasa Bajas.}
-            Fue necesario implementar un circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo Sallen-Key de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
+            Fue necesario implementar un circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo \textit{Sallen-Key} de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
 
             \paragraph{Filtro Pasa Altas}
                 Un filtro pasa altas permite el paso de frecuencias superiores a una frecuencia de corte, mientras que atenúa las frecuencias inferiores a esta.
@@ -369,10 +369,10 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=0.6\textwidth]{img/Desarrollo/Filtro_Pasa_Altas.png}
-                    \caption[Diagrama de un filtro pasa altas de segundo orden Sallen-Key.]{Diagrama de un filtro pasa altas de segundo orden Sallen-Key\footnotemark}
+                    \caption[Diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}.]{Diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}\footnotemark}
                     \label{fig:Filtro_Pasa_Altas}
                 \end{figure}
-                \footnotetext{Muestra el diagrama de un filtro pasa altas de segundo orden Sallen-Key, con dos resistencias y dos capacitores.}
+                \footnotetext{Muestra el diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}, con dos resistencias y dos capacitores.}
 
 
 \newpage
@@ -395,8 +395,18 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 G = 1 + \frac{49.4 k\Omega}{2.5 k\Omega} = 20.76
             \end{equation}
 
+            Se realizó la simulación del circuito en el software de diseño de circuitos Multisim.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/Desarrollo/multisim_AD620AN.png}
+                \caption[Simulación del amplificador de instrumentación AD620.]{Simulación del amplificador de instrumentación AD620\footnotemark}
+                \label{fig:Simulacion_AD620}
+            \end{figure}
+            \footnotetext{Muestra la simulación del amplificador de instrumentación AD620 en el software Multisim, con una ganancia de 20.76.}
+
         \subsubsection{Filtro de segundo orden Sallen-Key}
-            Para la siguiente etapa del circuito, fue necesario implementar un tipo de circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo Sallen-Key de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
+            Para la siguiente etapa del circuito, fue necesario implementar un tipo de circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo \textit{Sallen-Key} de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
 
             Esta configuración fue seleccionada debido a que, al ser un filtro activo, no presenta ningún tipo de atenuación en la señal, a diferencia de un filtro pasivo, que sí atenúa las señales al manejar frecuencias bajas. Además, se aprovechan las características eléctricas de un amplificador operacional (op-amp), como la alta impedancia de entrada y la baja impedancia de salida, lo cual es beneficioso para evitar cargas en las etapas previas y posteriores al filtro.
         
@@ -406,11 +416,11 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
             Dado que ya se amplificó la señal en la etapa anterior y que amplificar de esta manera podría introducir ruido al sistema, se optó por establecer una ganancia unitaria en el filtro, configurando $R_a$ como infinito y $R_b$ como cero.
 
-            Para eliminar el ruido de baja frecuencia presente en la señal de ECG, se implementó un filtro pasa altas de segundo orden Sallen-Key. Este filtro permite el paso de frecuencias superiores a una frecuencia de corte, mientras que atenúa las frecuencias inferiores a esta.
+            Para eliminar el ruido de baja frecuencia presente en la señal de ECG, se implementó un filtro pasa altas de segundo orden \textit{Sallen-Key}. Este filtro permite el paso de frecuencias superiores a una frecuencia de corte, mientras que atenúa las frecuencias inferiores a esta.
 
             \paragraph{Filtro Activo Pasa Altos.}
                 \subparagraph{Función de transferencia del filtro pasa altos.}
-                    La función de transferencia de un filtro pasa altos de segundo orden Sallen-Key se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_altos}.
+                    La función de transferencia de un filtro pasa altos de segundo orden \textit{Sallen-Key} se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_altos}.
 
                     \begin{equation}
                         \label{eq:funcion_transferencia_pasa_altos}
@@ -497,9 +507,19 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                         R_2 = \frac{R_1}{m^2} = \frac{2.2 k\Omega}{(0.7071)^2} \approx 4.4 k\Omega 
                     \end{equation}
 
+                    Se realizó la simulación del circuito en el software de diseño de circuitos Multisim.
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_pasaAltos.png}
+                        \caption[Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key}.]{Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key}\footnotemark}
+                        \label{fig:Simulacion_Filtro_Pasa_Altas}
+                    \end{figure}
+                    \footnotetext{Muestra la simulación del filtro pasa altas de segundo orden \textit{Sallen-Key} en el software Multisim, con una frecuencia de corte de 15.5 Hz.}
+
             \paragraph{Filtro Activo Pasa Bajos.}
                 \subparagraph{Función de transferencia del filtro pasa bajos.}
-                    La función de transferencia de un filtro pasa bajos de segundo orden Sallen-Key se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_bajos}.
+                    La función de transferencia de un filtro pasa bajos de segundo orden \textit{Sallen-Key} se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_bajos}.
 
                     \begin{equation}
                         \label{eq:funcion_transferencia_pasa_bajos}
