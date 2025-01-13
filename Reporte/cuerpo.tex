@@ -14,7 +14,7 @@
 
     \subsubsection*{An Arterial Compliance Sensor for Cuffless Blood Pressure Estimation Based on Piezoelectric and Optical Signals \cite{piezoelectric}.}
 
-    Este artículo propone el desarrollo de un pequeño sistema de monitoreo que integra una matriz de sensosres piezoeléctricos y un sensor óptico que monitorea las señales fisiológicas de la arteria radial. El sistema hace el cálculo del tiempo de tránsito del pulso (PTT) y correlaciona la ecuación de Moens-Korteweg con la velocidad de onda de pulso (PWV) para estimar la presión arterial sistólica (PAS) y diastólica (PAD).
+    Este artículo propone el desarrollo de un pequeño sistema de monitoreo que integra una matriz de sensores piezoeléctricos y un sensor óptico que monitorea las señales fisiológicas de la arteria radial. El sistema hace el cálculo del tiempo de tránsito del pulso (PTT) y correlaciona la ecuación de Moens-Korteweg con la velocidad de onda de pulso (PWV) para estimar la presión arterial sistólica (PAS) y diastólica (PAD).
 
     En un experimento con 20 participantes se compararon dos métodos de estimación de la presión arterial, el primero utilizando el modelo de regresión y el segundo modelo $P-\beta$ basado en la ecuación de Moens-Korteweg.
 
@@ -28,7 +28,7 @@
 
     \subsubsection*{Diseño de un sistema internet de las cosas (IoT) para el monitoreo de la presión arterial \cite{Estrada_2021}. }
 
-    En este artículo se presenta los procesos de diseño y construcción de un prototipo biomédico IoT para el monitoreo de la presión arterial de pacientes en su lugar de residencia. El sistema consta en colocar un brazalete al paciente a la altura del corazón, el cual se le conecta una bomba de aire el cual infla el brazalete y un sensor de presión diferencial MPX5050DP, se realiza una conversión análoga-digital con ayuda de un microcontrolador y se envía los datos meidante una API REST al servidor web IoT ThinkSpeak donde se almacenan y se pueden visualizar en tiempo real.
+    En este artículo se presenta los procesos de diseño y construcción de un prototipo biomédico IoT para el monitoreo de la presión arterial de pacientes en su lugar de residencia. El sistema consta en colocar un brazalete en el paciente a la altura del corazón, al cual se conecta una bomba de aire que infla el brazalete, junto con un sensor de presión diferencial MPX5050DP. Los datos obtenidos son convertidos de analógico a digital mediante un microcontrolador y enviados, a través de una API REST, al servidor web IoT ThinkSpeak, donde se almacenan y pueden visualizarse en tiempo real.
 
     \subsubsection*{Development of Real-Time Cuffless Blood Pressure Measurement Systems with ECG Electrodes and a Microphone Using Pulse Transit Time (PTT) \cite{Electrodes_Microphone}.}
 
@@ -42,7 +42,7 @@
 
 En México, las enfermedades cardiovasculares representan la primera causa de muerte, siendo responsable de más de 220 mil fallecimientos en 2021 \cite{SSFallecimientos}. Entre los factores de riesgo más importantes para estas patologías se encuentra la hipertensión arterial, conocida también como el ``asesino silencioso", ya que no presenta síntomas y puede pasar desapercibida durante años, hasta que desarrollan complicaciones graves como infartos o accidentes cerebrovasculares. Según la Encuesta Nacional de Salud y Nutrición (ENSANUT), cerca del 30\% de la población adulta en México padece hipertensión arterial \cite{ENSANUT}, pero una gran proporción de ellos no recibe un tratamiento adecuado o no se diagnostica a tiempo debido a la falta de acceso a un monitoreo continuo y preciso.
 
-Los métodos para la medición de la presión arterial, como el baumanómetro, son invasivos y requieren de personal capacitado, lo que limita su uso en el monitoreo continuo de la presión arterial. Esta limitación es crítica en un país como México, donde el sistema de salud puede ser limitado, especialmente en zonas rurales y marginadas. Por lo tanto, es necesario desarrollar dispositivos no invasivos y de bajo coste que permitan a las personas el monitorear su presión arterial de forma continua y precisa, para detectar y tratar a tiempo la hipertensión arterial y de esta forma prevenir complicaciones graves.
+Los métodos para la medición de la presión arterial, como el baumanómetro, son invasivos y requieren de personal capacitado, lo que limita su uso en el monitoreo continuo de la presión arterial. Esta limitación es crítica en un país como México, donde el sistema de salud puede ser limitado, especialmente en zonas rurales y marginadas. Por lo tanto, es necesario desarrollar dispositivos no invasivos y de bajo coste que permitan a las personas monitorear su presión arterial de forma continua y precisa, para detectar y tratar a tiempo la hipertensión arterial y de esta forma prevenir complicaciones graves.
 
 Este proyecto tiene como objetivo desarrollar un sistema basado en sensores para la estimación de la presión arterial de forma no invasiva, que permita a las personas monitorear su presión arterial de forma continua y precisa, y enviar los datos a un dispositivo móvil para la visualización y el almacenamiento de los registros para llevar un control de su salud cardiovascular. Facilitando así la detección temprana de la hipertensión arterial y la prevención de complicaciones graves asociadas a esta enfermedad.
 
@@ -57,7 +57,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     \begin{itemize}
         \item Diseñar un dispositivo utilizando sensores para la obtención de datos fisiológicos.
         \item Enviar los datos mediante Bluetooth a un dispositivo móvil.
-        \item Implementar un algoritmo de procesamiento de señales para la estimación de la presión arterial.
+        \item Procesar los datos obtenidos para la estimación de la presión arterial.
         \item Visualizar los datos obtenidos en una aplicación android.
     \end{itemize}
 
@@ -72,11 +72,11 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{img/sistemaConduccion.png}
+        \includegraphics[width=0.7\textwidth]{img/sistemaConduccion.png}
         \caption[Sistema de conducción cardíaca y tiempos de conducción de los respectivos segmentos]{Sistema de conducción cardíaca y tiempos de conducción de los respectivos segmentos\footnotemark}
         \label{fig:sistemaConduccion}
     \end{figure}
-    \footnotetext{Localización de las células marcapasos dentro del sistema de conducción del corazón. Imagen tomada de lecturio.com. Fuente: \url{https://goo.su/MSZMxUj}}
+    \footnotetext{Localización de las células marcapasos dentro del sistema de conducción del corazón. Imagen tomada de lecturio.com. [En línea]. Disponible en: \url{https://goo.su/MSZMxUj}}
 
     \subsection{Electrocardiograma (ECG)}
     Un electrocardiograma (ECG) es un estudio que registra el voltaje generado por los vectores de despolarización y repolarización de las células cardiacas en relación con el tiempo, es una herramienta útil para evaluar la función cardíaca y detectar problemas cardíacos \cite{ECG_Definicion}.
@@ -105,7 +105,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \caption[Ciclo completo de un electrocardiograma]{Ciclo completo de un electrocardiograma\footnotemark}
         \label{fig:ECG_ondas}
     \end{figure}
-    \footnotetext{Muestra el ciclo completo de un electrocardiograma, con las ondas P, Q, R, S, T y U, y los intervalos PR, QRS, ST y QT. Imagen tomada de encyclopedia.pub. Fuente: \url{https://encyclopedia.pub/entry/52174}}
+    \footnotetext{Muestra el ciclo completo de un electrocardiograma, con las ondas P, Q, R, S, T y U, y los intervalos PR, QRS, ST y QT. Imagen tomada de encyclopedia.pub. [En línea]. Disponible en: \url{https://encyclopedia.pub/entry/52174}}
 
     El ECG tiene las características de baja frecuencia y concentración de energía, y la señal es débil, fácilmente perturbada por el ruido, como interferencias eléctricas, campos electromagnéticos externos, movimiento de electrodos (ruido instantáneo)  y el desplazamiento de la línea de base que es causado principalmente por la respiración. Estos ruidos dificultan el diagnóstico médico y pueden provocar errores en la identificación de enfermedades. Por ello, es esencial aplicar técnicas adecuadas para eliminar el ruido y mejorar la calidad de los datos de ECG muestreados \cite{AlMahamdy_2014}.
 
@@ -127,8 +127,8 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             Dependiendo de la aplicación y la ubicación del sensor, el PPG se puede usar en modo transmisivo o en modo de reflexión.
 
             \begin{enumerate}
-                \item Cuando un fotodetector y un LED se colocan en lados opuestos de un dedo para detectar la luz transmitida, este arreglo se conoce como modo transmisivo. En este modo, la sonda está configurada de manera que el fotodetector y el LED se enfrentan con una capa de tejido entre ellos. La detección en modo transmisivo depende de la luz que atraviesa las partes del cuerpo, por lo que se prefieren estructuras delgadas como el lóbulo de la oreja y el dedo.
-                \item Cuando el fotodetector y el LED se colocan en el mismo lado de un dedo para detectar la luz reflejada, se utiliza el modo reflectivo. En este arreglo, ambos sensores se sitúan uno al lado del otro con una pequeña separación. Por lo tanto, el modo reflectivo puede emplearse en cualquier parte del cuerpo, como la frente o la muñeca.
+                \item [a] Cuando un fotodetector y un LED se colocan en lados opuestos de un dedo para detectar la luz transmitida, este arreglo se conoce como modo transmisivo. En este modo, la sonda está configurada de manera que el fotodetector y el LED se enfrentan con una capa de tejido entre ellos. La detección en modo transmisivo depende de la luz que atraviesa las partes del cuerpo, por lo que se prefieren estructuras delgadas como el lóbulo de la oreja y el dedo.
+                \item [b] Cuando el fotodetector y el LED se colocan en el mismo lado de un dedo para detectar la luz reflejada, se utiliza el modo reflectivo. En este arreglo, ambos sensores se sitúan uno al lado del otro con una pequeña separación. Por lo tanto, el modo reflectivo puede emplearse en cualquier parte del cuerpo, como la frente o la muñeca.
             \end{enumerate}
 
             \begin{figure}[H]
@@ -146,7 +146,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Modos de medición de la fotopletismografía]{Modos de medición de la fotopletismografía\footnotemark}
                 \label{fig:modosMedicionPPG}
             \end{figure}
-            \footnotetext{Muestra la posición de los sensores PPG en modo de transmisión y en modo de reflexión, los dos modo se utiliza para medir la fotopletismografía. Imagen tomada de aiva.hi. Fuente: \url{https://goo.su/pg8UGx}}
+            \footnotetext{Muestra la posición de los sensores PPG en modo de transmisión y en modo de reflexión, los dos modo se utiliza para medir la fotopletismografía. Imagen tomada de aiva.hi. [En línea]. Disponible en: \url{https://goo.su/pg8UGx}}
 
             \subsubsection{Forma de onda de un PPG}
 
@@ -167,7 +167,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Modelo matemático de una señal pura de una fotopletismografía]{Modelo matemático de una señal pura de una fotopletismografía\footnotemark}
                 \label{fig:PPG}
             \end{figure}
-            \footnotetext{Muestra una representación de una señal pura de una fotopletismografía, donde se observa la forma de onda de la señal con una frecuencia de 1.5 Hz, que representa 90 latidos por minuto. Imagen tomada del articulo ´´Body sensor network for mobile health monitoring, a diagnosis and anticipating system´´. Fuente: \url{https://doi.org/10.1109/jsen.2015.2464773}}
+            \footnotetext{Muestra una representación de una señal pura de una fotopletismografía, donde se observa la forma de onda de la señal con una frecuencia de 1.5 Hz, que representa 90 latidos por minuto. Imagen tomada del articulo ``Body sensor network for mobile health monitoring, a diagnosis and anticipating system´´. [En línea]. Disponible en: \url{https://doi.org/10.1109/jsen.2015.2464773}}
 
         
         \subsubsection{Componente AC y DC de la señal PPG}
@@ -186,7 +186,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Componente AC y DC de la señal PPG]{Componente AC y DC de la señal PPG\footnotemark}
                 \label{fig:PPG_AC_DC}
             \end{figure}
-            \footnotetext{Muestra un ejemplo de forma de onda de la señal PPG, donde se observa el componente AC y DC de la señal. Imagen tomada del artículo ``Wearable Photoplethysmographic Sensors—Past and Present". Fuente: \url{https://doi.org/10.3390/electronics3020282}}
+            \footnotetext{Muestra un ejemplo de forma de onda de la señal PPG, donde se observa el componente AC y DC de la señal. Imagen tomada del artículo ``Wearable Photoplethysmographic Sensors—Past and Present". [En línea]. Disponible en: \url{https://doi.org/10.3390/electronics3020282}}
 
         \subsubsection{Longitud de onda de la luz emitida}
             La piel del cuerpo está compuesta principalmente por tres capas de tejido: la epidermis, la dermis y la hipodermis. Debido a la absorción, solo las ondas de luz con una longitud de onda mayor pueden penetrar a través de todas ellas. La hemoglobina oxigenada absorbe la luz infrarrojo (NIR), mientras que la hemoglobina desoxigenada absorbe luz en la longitud de onda roja. Como resultado, los PPG que emplean LED y fotodetectores con longitudes de onda NIR y roja se utilizan comúnmente en el control clínico para calcular la concentración de hemoglobina.
@@ -199,7 +199,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Penetración de las longitudes de onda de la luz en la piel]{Penetración de las longitudes de onda de la luz en la piel\footnotemark}
                 \label{fig:PPG_longitud_onda}
             \end{figure}
-            \footnotetext{Muestra la penetración de la luz en la piel, donde se observa que la luz de longitud de onda más larga (infrarroja) penetra más en la piel que la luz de longitud de onda más corta (Azul). Imagen tomada de Journal of Clinical Monitoring and Computing. Fuente: \url{https://goo.su/jnUP8yi}}
+            \footnotetext{Muestra la penetración de la luz en la piel, donde se observa que la luz de longitud de onda más larga (infrarroja) penetra más en la piel que la luz de longitud de onda más corta (Azul). Imagen tomada de Journal of Clinical Monitoring and Computing. [En línea]. Disponible en: \url{https://goo.su/jnUP8yi}}
 
             Dentro de la región visible, el pico de absorción dominante está en la región azul del espectro, seguido de la región verde-amarilla (500-600 nm), correspondiente a los glóbulos rojos. La luz de longitudes de onda más cortas es absorbida fuertemente por la melanina. El agua absorbe la luz en las regiones ultravioleta e infrarroja (IR) más largas. La luz roja (660 nm) e IR (940nm) pasa a través del tejido y la sangre. Por lo tanto, la luz IR se ha utilizado en sensores PPG.
         
@@ -211,10 +211,10 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         La presión arterial normal es de 120/80 mmHg, la presión arterial alta (hipertensión) es de 140/90 mmHg o más y la presión arterial baja (hipotensión) es de 90/60 mmHg o menos \cite{DOF}.
 
     \subsection{Amplificadores}
-        La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ y para poder ser registradas y analizadas, es necesario amplificarlas.
+    La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ y para poder ser registradas y analizadas, es necesario amplificarlas \cite{Diaz_amplificacion_señales}.
 
         \subsubsection{Amplificador operacional}
-            Los amplificadores operacionales son dispositivos electrónicos que se utilizan para amplificar señales eléctricas. Estos dispositivos tienen dos entradas, una inversora y otra no inversora, y una salida; La salida del amplificador operacional es proporcional a la diferencia de voltaje entre las dos entradas multiplicada por un factor de ganancia. La ganancia de un amplificador operacional se puede ajustar mediante la selección de resistencias externas.
+            Los amplificadores operacionales\footnote{``Introducción al amplificador operacional (OpAmp) - Amplificadores operacionales", Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/zbbKl}} son dispositivos electrónicos que se utilizan para amplificar señales eléctricas. Estos dispositivos tienen dos entradas, una inversora y otra no inversora, y una salida. La salida del amplificador operacional es proporcional a la diferencia de voltaje entre las dos entradas multiplicada por un factor de ganancia. La ganancia de un amplificador operacional se puede ajustar mediante la selección de resistencias externas.
 
             \begin{figure}[H]
                 \centering
@@ -222,96 +222,128 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Terminales de entrada y salida de un amplificador operacional]{Terminales de entrada y salida de un amplificador operacional\footnotemark}
                 \label{fig:Amplificador_Operacional}
             \end{figure}
-            \footnotetext{Muestra el símbolo electrónico de un amplificador operacional, con sus dos entradas y su salida.}
+            \footnotetext{Muestra el símbolo electrónico de un amplificador operacional, con sus dos entradas, la ganancia de voltaje y la salida.}
 
-            \paragraph{Amplificador Inversor}
-                Es una configuración en un amplificador operacional que se caracteriza principalmente porque su entrada, es decir, donde suministraremos un voltaje, se coloca en la terminal inversora del amplificador y la terminal no inversora se conecta a tierra. A la salida del amplificador obtendremos una señal amplificada e inversa (como su nombre lo indica) a su entrada. La ganancia de un amplificador inversor se puede calcular mediante la ecuación~\ref{eq:ganancia_inversor}.
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{ c | l }
+                    Terminal & Descripción \\ \hline
+                    $V_+$ & Entrada no inversora \\
+                    $V_-$ & Entrada inversora \\
+                    $V_{S+}$ & Alimentación positiva \\
+                    $V_{S-}$ & Alimentación negativa \\
+                    $V_{out}$ & Salida \\
+                    $Gv_{in}$ & Ganancia de voltaje \\
+                \end{tabular}
+                \caption{Terminales del amplificador operacional}
+                \label{tab:terminales_amplificador}
+            \end{table}
 
-                \begin{equation}
-                    \label{eq:ganancia_inversor}
-                    G = -\frac{R_f}{R_i}
-                \end{equation}
+        \subsubsection{Amplificador Inversor}
+            El amplificador inversor \footnote{``Amplificador inversor - Amplificadores operacionales", Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/eJTCVj}} es una configuración de amplificador operacional en la que la señal de entrada se aplica a la terminal inversora. En esta configuración, la salida está desfasada 180 grados con respecto a la entrada.
 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Inversor.png}
-                    \caption[Amplificador inversor]{Amplificador inversor\footnotemark}
-                    \label{fig:Amplificador_Inversor}
-                \end{figure}
-                \footnotetext{Muestra el diagrama esquemático de un amplificador inversor, con una ganancia de $-\frac{R_f}{R_i}$.}
+            El amplificador inversor se configura conectando la señal de entrada a la terminal inversora mediante una resistencia $R_i$. La salida del amplificador operacional retroalimenta a la terminal inversora a través de una resistencia $R_f$, como se muestra en la figura~\ref{fig:Amplificador_Inversor}.
+            
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Inversor.png}
+                \caption[Amplificador inversor]{Amplificador inversor\footnotemark}
+                \label{fig:Amplificador_Inversor}
+            \end{figure}
+            \footnotetext{Muestra el diagrama esquemático de un amplificador inversor.}
 
-                \paragraph{Amplificador No Inversor}
-                Este tipo de configuración se caracteriza por tener conectado la señal de entrada (voltaje) a la terminal no inversora, esto nos indica que la ganancia será positiva (al contrario del inversor). También tiene como característica una realimentación negativa (Rf).La ganancia de un amplificador no inversor se puede calcular mediante la ecuación~\ref{eq:ganancia_no_inversor}.
+            La ganancia del amplificador inversor se puede calcular mediante la ecuación~\ref{eq:ganancia_inversor}.
 
-                \begin{equation}
-                    \label{eq:ganancia_no_inversor}
-                    G = \frac{R_f}{R_i} + 1
-                \end{equation}
+            \begin{equation}
+                \label{eq:ganancia_inversor}
+                G = -\frac{R_f}{R_i}
+            \end{equation}
 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_No_Inversor.png}
-                    \caption[Amplificador no inversor]{Amplificador no inversor\footnotemark}
-                    \label{fig:Amplificador_No_Inversor}
-                \end{figure}
-                \footnotetext{Muestra el diagrama esquemático de un amplificador no inversor, con una ganancia de $1 + \frac{R_f}{R_i}$.}
+            Donde $G$ es la ganancia del amplificador, $R_f$ es la resistencia de retroalimentación y $R_i$ es la resistencia de entrada.
 
-                \paragraph{Amplificador Diferencial}
-                El amplificador diferencial es un tipo de amplificador operacional que amplifica la diferencia de voltaje entre dos entradas y suprime la señal común a ambas entradas. La ganancia de un amplificador diferencial se puede calcular mediante la ecuación~\ref{eq:ganancia_diferencial}.
+        \subsubsection{Amplificador No Inversor}
+            El amplificador no inversor\footnote{``Amplificador No inversor - Amplificadores operacionales", Solución Ingenieril.[En línea]. Disponible en: \url{https://goo.su/8XuqHr}} es una configuración de amplificador operacional en la que la señal de entrada se aplica a la terminal no inversora. La salida de esta configuración está en fase con la entrada, y su amplitud es proporcional a la ganancia del amplificador.
 
-                \begin{equation}
-                    \label{eq:voltaje_diferencial}
-                    v_0 = 1 + \frac{R2}{R1} \cdot \frac{R3}{R3 + R4} \cdot v2 - \frac{R2}{R1} \cdot v1
-                \end{equation}
+            El amplificador no inversor se configura conectando la señal de entrada a la terminal no inversora, esto nos indica que la ganancia será positiva (al contrario del inversor). La salida del amplificador operacional se retroalimenta a la terminal inversora a través de una resistencia $R_f$, como se muestra en la figura~\ref{fig:Amplificador_No_Inversor}.
 
-                Si $R1 = R3$ y $R2 = R4$, la ecuación~\ref{eq:voltaje_diferencial} se simplifica a la ecuación~\ref{eq:voltaje_diferencial_simplificada}.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_No_Inversor.png}
+                \caption[Amplificador no inversor]{Amplificador no inversor\footnotemark}
+                \label{fig:Amplificador_No_Inversor}
+            \end{figure}
+            \footnotetext{Muestra el diagrama esquemático de un amplificador no inversor.}
 
-                \begin{equation}
-                    \label{eq:voltaje_diferencial_simplificada}
-                    v_0 = \frac{R2}{R1} \cdot (v2 - v1)
-                \end{equation}
+            La ganancia del amplificador no inversor se puede calcular mediante la ecuación~\ref{eq:ganancia_no_inversor}.
 
-                \begin{equation}
-                    \label{eq:ganancia_diferencial}
-                    G = \frac{R2}{R1}
-                \end{equation}
+            \begin{equation}
+                \label{eq:ganancia_no_inversor}
+                G = \frac{R_f}{R_i} + 1
+            \end{equation}
 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Diferencial.png}
-                    \caption[Amplificador diferencial]{Amplificador diferencial\footnotemark}
-                    \label{fig:Amplificador_Diferencial}
-                \end{figure}
-                \footnotetext{Muestra el diagrama esquemático de un amplificador diferencial, con una ganancia de $\frac{R2}{R1}$.}
+            Donde $G$ es la ganancia del amplificador, $R_f$ es la resistencia de retroalimentación y $R_i$ es la resistencia de entrada.
 
-                \paragraph{Amplificador de Instrumentación}
-                Para amplificar señales bioeléctricas, como las del ECG, se requieren dos características en un amplificador: la primera es que presente una alta impedancia en sus termminales de entrada (elimina posibles caídas de voltaje de la señal cardiaca que den como resultado la reducción o anulación de su amplitud), y la segunda es que solamente amplifique la diferencia de voltaje existente entre dichas terminales. 
-                El amplificador que reúne las dos caracteríasticas mencionadas es el amplificador de instrumentación.
+        \subsubsection{Amplificador Diferencial}
+            El amplificador diferencial\footnote{W. Storr, ``Differential amplifier - the voltage subtractor," Basic Electronics Tutorials. [En línea]. Disponible en: \url{https://goo.su/vDsY3K}} es un tipo de amplificador operacional cuya característica principal radica en su capacidad de amplificar la diferencia de voltaje entre sus dos entradas mientras rechaza las señales comunes presentes en ambas (CMRR, por sus siglas en inglés). En la figura~\ref{fig:Amplificador_Diferencial} se muestra el diagrama esquemático de un amplificador diferencial.
 
-                Para hacer posible lo anterior, todos los amplificadores de instrumentación se basan en el diseño mostrado en la figura~\ref{fig:Amplificador_Instrumentacion} que tiene una etapa con amplificadores no inversores (brindan alta impedancia) y enseguida una etapa de amplificación diferencial (casi siempre unitaria)\cite{Diaz_amplificacion_señales}.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Diferencial.png}
+                \caption[Amplificador diferencial]{Amplificador diferencial\footnotemark}
+                \label{fig:Amplificador_Diferencial}
+            \end{figure}
+            \footnotetext{Muestra el diagrama esquemático de un amplificador diferencial, con una ganancia de $\frac{R2}{R1}$.}
 
-                La expresión para calcular la ganancia y el voltaje de un amplificador de instrumentación se muestra en la ecuación~\ref{eq:ganancia_amplificador_instrumentación}.
+            El voltaje de salida ($v_0$) está determinado por la ecuación~\ref{eq:voltaje_diferencial}.
 
-                \begin{equation}
-                    \label{eq:voltaje_amplificador_instrumentación}
-                    v_0 = (1 + \frac{2R1}{RG}) \cdot (v2 - v1)
-                \end{equation}
+            \begin{equation}
+                \label{eq:voltaje_diferencial}
+                v_0 = (1 + \frac{R2}{R1}) \cdot \frac{R3}{R3 + R4} \cdot v2 - \frac{R2}{R1} \cdot v1
+            \end{equation}
 
-                \begin{equation}
-                    \label{eq:ganancia_amplificador_instrumentación}
-                    G = 1 + \frac{2R1}{RG}
-                \end{equation}
+            Para optimizar el rendimiento del amplificador, se suele implementar una configuración simétrica donde las resistencias cumplen la condición $R1 = R3$ y $R2 = R4$. De esta forma, la ecuación~\ref{eq:voltaje_diferencial} se simplifica a la ecuación~\ref{eq:voltaje_diferencial_simplificada}.
 
-                \begin{figure} [H]
-                    \centering
-                    \includegraphics[width=0.8\textwidth]{img/Desarrollo/Amplificador_Intrumentacion.png}
-                    \caption[Amplificador de Instrumentación]{Amplificador de Instrumentación\footnotemark}
-                    \label{fig:Amplificador_Instrumentacion}
-                \end{figure}
-                \footnotetext{Diagrama de los elementos básicos que conforman las dos etapas en un amplificador de instrumentación. Imagen tomada de \textit{Fundamentals of operational amplifiers and linear integrated circuits}, p. 34.}
+            \begin{equation}
+                \label{eq:voltaje_diferencial_simplificada}
+                v_0 = \frac{R2}{R1} \cdot (v2 - v1)
+            \end{equation}
+
+            La ganancia del amplificador diferencial se puede calcular mediante la ecuación~\ref{eq:ganancia_diferencial}.
+
+            \begin{equation}
+                \label{eq:ganancia_diferencial}
+                G = \frac{R2}{R1}
+            \end{equation}
+
+        \subsubsection{Amplificador de Instrumentación}
+            Para amplificar señales bioeléctricas, como las del ECG, se requieren dos características en un amplificador: la primera es que presente una alta impedancia en sus termminales de entrada (elimina posibles caídas de voltaje de la señal cardiaca que den como resultado la reducción o anulación de su amplitud), y la segunda es que solamente amplifique la diferencia de voltaje existente entre dichas terminales. 
+            
+            El amplificador que reúne las dos caracteríasticas mencionadas es el amplificador de instrumentación\footnote{``Práctica 4 - El amplificador de instrumentación básico'', Universidad Michoacana de San Nicolás de Hidalgo Facultad de Ingeniería Eléctrica. [En línea]. Disponible en: https://goo.su/n7zlBm}.
+
+            Para hacer posible lo anterior, todos los amplificadores de instrumentación se basan en el diseño mostrado en la figura~\ref{fig:Amplificador_Instrumentacion} que tiene una etapa con amplificadores no inversores (brindan alta impedancia) y enseguida una etapa de amplificación diferencial (casi siempre unitaria) \cite{Diaz_amplificacion_señales}.
+
+            La expresión para calcular la ganancia y el voltaje de un amplificador de instrumentación se muestra en la ecuación~\ref{eq:ganancia_amplificador_instrumentación}.
+
+            \begin{equation}
+                \label{eq:voltaje_amplificador_instrumentación}
+                v_0 = (1 + \frac{2R1}{RG}) \cdot (v2 - v1)
+            \end{equation}
+
+            \begin{equation}
+                \label{eq:ganancia_amplificador_instrumentación}
+                G = 1 + \frac{2R1}{RG}
+            \end{equation}
+
+            \begin{figure} [H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/Desarrollo/Amplificador_Intrumentacion.png}
+                \caption[Amplificador de Instrumentación]{Amplificador de Instrumentación\footnotemark}
+                \label{fig:Amplificador_Instrumentacion}
+            \end{figure}
+            \footnotetext{Diagrama de los elementos básicos que conforman las dos etapas en un amplificador de instrumentación. Imagen tomada de \textit{Fundamentals of operational amplifiers and linear integrated circuits}, p. 34.}
 
         \subsubsection{Amplificador de Intrumentación AD620}
-            El amplificador de instrumentación AD620, es un amplificador de precisión de bajo costo y bajo consumo de energía fabricado por Analog Devices, que se utiliza para amplificar señales de baja amplitud y alta impedancia, como las señales ECG. \cite{AD620_AnalogDevices,AD620_DigiKey}.
+            El amplificador de instrumentación AD620, es un amplificador de precisión de bajo costo y bajo consumo de energía fabricado por Analog Devices, que se utiliza para amplificar señales de baja amplitud y alta impedancia, como las señales ECG \cite{AD620_AnalogDevices,AD620_DigiKey}.
 
             \begin{figure}[H]
                 \centering
@@ -319,7 +351,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Diagrama esquemático del amplificador de instrumentos AD620.]{Diagrama esquemático del amplificador de instrumentos AD620\footnotemark}
                 \label{fig:AD620}
             \end{figure}
-            \footnotetext{Muestra que el amplificador de instrumentación AD620 es equivalente a un amplificador diferencial conectado a dos amplificadores no inversores. Imagen tomada del artículo \textit{Axial and Lateral Small Strain Measurement of Soils in Compression Test using Local Deformation Transducer} de la revista \textit{Journal of Engineering and Technological Sciences}. Fuente: \url{https://goo.su/fHljmIK}}
+            \footnotetext{Muestra que el amplificador de instrumentación AD620 es equivalente a un amplificador diferencial conectado a dos amplificadores no inversores. Imagen tomada del artículo \textit{Axial and Lateral Small Strain Measurement of Soils in Compression Test using Local Deformation Transducer} de la revista \textit{Journal of Engineering and Technological Sciences}. [En línea]. Disponible en: \url{https://goo.su/fHljmIK}}
 
             \hfill \break
             Características del AD620:
@@ -339,7 +371,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Comparación de la taza de error entre el AD620 y un arreglo de amplificadores de instrumentación.]{Comparación de la taza de error entre el AD620 y un arreglo de amplificadores de instrumentación\footnotemark}
                 \label{fig:Amplificador_AD620_comparacion}
             \end{figure}
-            \footnotetext{Muestra la diferencia en la taza de error por corriente suministrada de un amplificador de instrumentación AD620 y un arreglo de amplificadores de instrumentación convencional. Imagen tomada del Datasheet del AD620. Fuente: \url{https://www.analog.com/media/en/technical-documentation/data-sheets/AD620.pdf}}
+            \footnotetext{Muestra la diferencia en la taza de error por corriente suministrada de un amplificador de instrumentación AD620 y un arreglo de amplificadores de instrumentación convencional. Imagen tomada del Datasheet del AD620. [En línea]. Disponible en: \url{https://goo.su/ZhlyZ}}
 
             El componente cuenta con una entrada inversora (pin 2), una no inversora (pin 3), dos fuentes de alimentación (pin 4 y 7), una referencia o polo a tierra (pin 5), y una salida de la señal amplificada (pin 6). La ganancia del AD620 se puede ajustar mediante una resistencia externa conectada entre el pin 1 y el pin 8.
             \begin{figure}[H]
@@ -348,54 +380,192 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Esquema de conexión del amplificador de instrumentación AD620.]{Esquema de conexión del amplificador de instrumentación AD620\footnotemark}
                 \label{fig:AD620_pinout}
             \end{figure}
-            \footnotetext{Muestra el esquema de conexión del amplificador de instrumentación AD620, con sus terminales de alimentación, entrada y salida. Imagen tomada del Datasheet del AD620. Fuente: \url{https://www.analog.com/media/en/technical-documentation/data-sheets/AD620.pdf}}
+            \footnotetext{Muestra el esquema de conexión del amplificador de instrumentación AD620, con sus terminales de alimentación, entrada y salida. Imagen tomada del Datasheet del AD620. [En línea]. Disponible en: \url{https://www.analog.com/media/en/technical-documentation/data-sheets/AD620.pdf}}
 
-            Resulta que, en el marco de operación de este amplificador de instrumentación, es posible determinar la ganancia saliente a partir de la resistencia conectada entre los pines 1 y 8 \cite{AD620_AnalogDevices}, mediante la ecuación~\ref{eq:ganancia}.
+            Resulta que, en el marco de operación de este amplificador de instrumentación, es posible determinar la ganancia saliente a partir de la resistencia conectada entre los pines 1 y 8 \cite{AD620_AnalogDevices}, mediante la ecuación~\ref{eq:ganancia_AD620}.
 
             \begin{equation}
-                \label{eq:ganancia}
+                \label{eq:ganancia_AD620}
                 G = 1 + \frac{49.4 k\Omega}{R_G}
             \end{equation}
 
             Donde $G$ es la ganancia del amplificador, $R_G$ es la resistencia conectada entre los pines 1 y 8 y la constante $49.4 k\Omega$ es el valor de la resistencia interna del AD620.
 
+    \subsection{Filtros}
 
-        \subsubsection{Filtro de Segundo Orden Sallen-Key Pasa Altas y Pasa Bajas.}
-            Fue necesario implementar un circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo \textit{Sallen-Key} de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
+        Los filtros son circuitos electrónicos que permiten el paso de ciertas frecuencias de una señal eléctrica, mientras que atenúan o eliminan las frecuencias no deseadas. Los filtros se utilizan para eliminar el ruido, mejorar la calidad de la señal y extraer información relevante de una señal eléctrica. Los filtros se pueden clasificar en dos categorías principales: filtros pasivos y filtros activos.
 
-            \paragraph{Filtro Pasa Altas}
-                Un filtro pasa altas permite el paso de frecuencias superiores a una frecuencia de corte, mientras que atenúa las frecuencias inferiores a esta.
+        \subsubsection{Filtro Pasa Altas Activo de Segundo Orden Sallen-Key}
 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.6\textwidth]{img/Desarrollo/Filtro_Pasa_Altas.png}
-                    \caption[Diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}.]{Diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}\footnotemark}
-                    \label{fig:Filtro_Pasa_Altas}
-                \end{figure}
-                \footnotetext{Muestra el diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}, con dos resistencias y dos capacitores.}
+            Un filtro pasa altos activo de segundo orden \textit{Sallen-Key}\footnote{W. Laiton, «Filtro Pasa altos activo de 2do orden Sallen Key», Wilaeba Electronica, 26 de septiembre de 2018. [En línea]. Disponible en: \url{https://goo.su/5ChsR5h}} es un circuito que permite el paso de señales de alta frecuencia y atenúa las frecuencias bajas. Este filtro consta de dos resistencias y dos capacitores, y se puede configurar para diferentes aproximaciones de filtro, como Butterworth, Chebyshev y Bessel. Se conoce como activo por que tiene un elemento activo que es el amplificador operacional, es de segundo orden por que contiene dos elementos reactivos (dos capacitores), y se llama sallen key por la topología que tiene el circuito, y por el nombre de sus dos creadores R. P. Sallen y E. L. Key, ingenieros del laboratorio Lincoln del MIT. La figura~\ref{fig:Filtro_Pasa_Altas} muestra el diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}.
 
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{img/Desarrollo/Filtro_Pasa_Altas.png}
+                \caption[Diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}.]{Diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}}
+                \label{fig:Filtro_Pasa_Altas}
+            \end{figure}
+
+            El valor de la frecuencia de corte $fc$, el valor del capacitor $C$ y la aproximación que se vaya a usar son libres de elección,  además de que la ganancia $A$ de este filtro debe ser igual o mayor a 1. La función de transferencia de un filtro pasa altas de segundo orden \textit{Sallen-Key} se puede calcular mediante la ecuación~\ref{eq:transferencia_pasaAltas}.
+
+            \begin{equation}
+                \label{eq:transferencia_pasaAltas}
+                \frac{vo}{vi}(s) = \frac{(1 + \frac{R_b}{R_a})s^2}{s^2 + s\frac{1}{C}(\frac{2}{R_2} - \frac{R_b}{R_1R_a}) + \frac{1}{C^2R_1R_2}}
+            \end{equation}
+
+            Los valores de la constante $K$ y el factor de calidad $Q$ para diferentes aproximaciones de filtro se muestran en la tabla~\ref{tab:valores_filtro_pasa_altas}.
+                
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{ l | c | c }
+                    Aproximación & Factor de calidad $Q$ & Constante $K$ \\ \hline
+                    Butterworth & 0.7071 & 1.0000 \\
+                    Chebyshev (cresta de 0.01 db) & 0.7247 & 1.0231 \\
+                    Chebyshev (cresta de 0.1 db) & 0.7673 & 1.0674 \\
+                    Chebyshev (cresta de 0.25 db) & 0.8093 & 1.0991\\
+                    Chebyshev (cresta de 0.5 db) & 0.8638 & 1.1286\\
+                    Chebyshev (cresta de 1 db) & 0.9564 & 1.1596\\
+                    Bessel & 0.5771 & 0.7840\\
+                \end{tabular}
+                \caption{Valores de $Q$ y $K$ para diferentes aproximaciones de filtro pasa altas}
+                \label{tab:valores_filtro_pasa_altas}
+            \end{table}
+
+        \subsubsection{Filtro Pasa Bajas Activo de Segundo Orden Sallen-Key}
+
+            Un filtro pasa bajas activo de segundo orden \textit{Sallen-Key}\footnote{W. Laiton, «Filtro Pasa bajas activo de 2do orden Sallen Key», Wilaeba Electronica, 24 de septiembre de 2018. [En línea]. Disponible en: \url{https://goo.su/J29uz5x}} es un circuito que permite el paso de señales de baja frecuencia y atenúa las frecuencias altas. Este filtro consta de dos resistencias y dos capacitores, y se puede configurar para diferentes aproximaciones de filtro, como Butterworth, Chebyshev y Bessel. La figura~\ref{fig:Filtro_Pasa_Bajas} muestra el diagrama de un filtro pasa bajas de segundo orden \textit{Sallen-Key}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{img/Desarrollo/Filtro_pasa_bajas.png}
+                \caption[Diagrama de un filtro pasa bajas de segundo orden \textit{Sallen-Key}.]{Diagrama de un filtro pasa bajas de segundo orden \textit{Sallen-Key}}
+                \label{fig:Filtro_Pasa_Bajas}
+            \end{figure}
+
+            Los valores de la frecuencia de corte $f_c$, el capacitor $C_1$, y la aproximación que se desee utilizar son de libre elección. Además, la ganancia $A$ de este filtro debe ser igual o mayor a 1. La función de transferencia de un filtro pasa bajas de segundo orden \textit{Sallen-Key} se puede determinar utilizando la ecuación~\ref{eq:transferencia_pasaBajas}.
+
+            \begin{equation}
+                \label{eq:transferencia_pasaBajas}
+                \frac{vo}{vi}(s) = \frac{(1+\frac{R_b}{R_a}) \cdot \frac{1}{C_1C_2R^2}}{s^2 + s\frac{1}{R}(\frac{2}{C_1} - \frac{R_b}{C_2R_a}) + \frac{1}{C_1C_2R^2}}
+            \end{equation}
+
+            Los valores de la constante $K$ y el factor de calidad $Q$ para diferentes aproximaciones de filtro se muestran en la tabla~\ref{tab:valores_filtro_pasa_bajas}.
+
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{ l | c | c }
+                    Aproximación & Factor de calidad $Q$ & Constante $K$ \\ \hline
+                    Butterworth & 0.7071 & 1.0000 \\
+                    Chebyshev (cresta de 0.01 db) & 0.7247 & 0.9774 \\
+                    Chebyshev (cresta de 0.1 db) & 0.7673 & 0.9368 \\
+                    Chebyshev (cresta de 0.25 db) & 0.8093 & 0.9098\\
+                    Chebyshev (cresta de 0.5 db) & 0.8638 & 0.8860\\
+                    Chebyshev (cresta de 1 db) & 0.9564 & 0.8623\\
+                    Bessel & 0.5771 & 1.2754\\
+                \end{tabular}
+                \caption{Valores de $Q$ y $K$ para diferentes aproximaciones de filtro pasa bajas}
+                \label{tab:valores_filtro_pasa_bajas}
+            \end{table}
+
+        \subsubsection{Filtro Rechaza Banda Pasivo RC Twin-T}
+
+            Un filtro rechaza banda (Notch) pasivo RC Twin-T\footnote{W. Laiton, «Filtro Rechaza banda Pasivo RC Twin-T», Wilaeba Electronica, 28 de septiembre de 2018. [En línea]. Disponible en: \url{https://goo.su/mTgR92}} como su nombre lo dice elimina una determinada banda de frecuencias, y permite el paso de todas las demás. Está compuesto por seis elementos, tres resistencias y tres capacitores. La figura~\ref{fig:Filtro_Rechaza_Banda} muestra el diagrama de un filtro rechaza banda pasivo RC Twin-T.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{img/Desarrollo/Filtro_Rechaza_Banda.png}
+                \caption[Diagrama de un filtro rechaza banda pasivo RC Twin-T.]{Diagrama de un filtro rechaza banda pasivo RC Twin-T}
+                \label{fig:Filtro_Rechaza_Banda}
+            \end{figure}
+
+            El máximo valor del factor de calidad $Q$ para un filtro rechaza banda pasivo RC Twin-T es de 0.5. Este filtro se conoce con el nombre de filtro notch Twin-T debido que son dos redes en forma de T conectadas en paralelo.
+        
 
 \newpage
 \section{Desarrollo del Proyecto}
+    \subsection{Flujo de operación del sistema}
+    El sistema desarrollado cosnta de varios componentes que interactúan entre sí para capturar, procesar y transmitir datos fisiológicos, permitiendo al usuario visualizar información en tiempo real y estimar la presión arterial. El flujo de operación del sistema se muestra en la figura~\ref{fig:Flujo_Operacion}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{img/Desarrollo/flujo_operacion.png}
+        \caption[Flujo de operación del sistema.]{Flujo de operación del sistema}
+        \label{fig:Flujo_Operacion}
+    \end{figure}
+
+    En los siguientes apartados se describen las etapas del flujo de operación del sistema y el desarrollo de cada una de ellas.
+
+    \begin{enumerate}
+        \item \textbf{Captura de señales fisiológicas:}
+            \begin{itemize}
+                \item \textbf{Usuario:} El usuario se coloca los electrodos del ECG y el sensor PPG en los dedos correspondientes para capturar las señales fisiológicas.
+                \item \textbf{Electrodos y sensor PPG:} Los electrodos del ECG y el sensor PPG capturan las señales eléctricas y ópticas del cuerpo del usuario.
+            \end{itemize}
+        \item \textbf{Filtrado y Acondicionamiento de señales:}
+            \begin{itemize}
+                \item \textbf{ECG}
+                    \begin{itemize}
+                        \item La señal captada por los electrodos pasa por un amplificador de instrumentación AD620 para aumentar su amplitud.
+                        \item Posteriormente, la señal pasa a través de un filtro activo pasa altas y pasa bajas de segundo orden tipo Sallen-Key, el cual elimina el ruido y las frecuencias no deseadas.
+                        \item A continuación, se aplica un filtro pasabanda rechazante pasivo RC Twin-T para suprimir el ruido de 60 Hz.
+                        \item Finalmente, la señal se amplifica nuevamente mediante un amplificador no inversor, obteniendo así una señal de salida adecuada.
+                    \end{itemize}
+            \end{itemize}
+        \item \textbf{Conversión y Procesamiento Inicial}
+            \begin{itemize}
+                \item \textbf{ESP32}
+                    \begin{itemize}
+                        \item La señal del ECG se convierte de analógica a digital mediante un conversor analógico-digital (ADC) de 12 bits.
+                        \item La señal del PPG se procesa para eliminar el ruido y las interferencias, y posteriormente se convierte de analógica a digital mediante un ADC de 12 bits.
+                    \end{itemize}
+            \end{itemize}
+        \item \textbf{Transmisión de Datos}
+            \begin{itemize}
+                \item \textbf{Conectividad Bluetooth}
+                    \begin{itemize}
+                        \item Se realiza el emparejamiento entre el ESP32 y el teléfono móvil a través de Bluetooth.
+                        \item Se envian los datos fisiológicos capturados al teléfono móvil.
+                    \end{itemize}
+            \end{itemize}
+        \item \textbf{Visualización y Análisis en la Aplicación Android}
+            \begin{itemize}
+                \item \textbf{Recepción de Datos}
+                    \begin{itemize}
+                        \item La aplicación recibe los datos fisiológicos del ESP32 a través de Bluetooth.
+                    \end{itemize}
+                \item \textbf{Visualización de los Datos}
+                    \begin{itemize}
+                        \item Los datos del ECG y PPG se representan de forma gráfica en la interfaz de usuario, ofreciendo una visualización clara del electrocardiograma y del fotopletismograma.
+                    \end{itemize}
+                \item \textbf{Estimación de la Presión Arterial}
+                    \begin{itemize}
+                        \item La aplicación realiza un preprocesamiento para calcular el \textit{Pulse Transit Time (PTT)} utilizando la señal del ECG y del PPG.
+                        \item A partir del \textit{PTT}, la aplicación estima la presión arterial sistólica y diastólica del usuario.
+                    \end{itemize}
+            \end{itemize}
+    \end{enumerate}
+
+    En la figura~\ref{fig:Diagrama_Secuencia} se muestra el diagrama de secuencia del sistema, que ilustra la interacción entre los componentes del sistema durante la captura, procesamiento y transmisión de datos fisiológicos.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{img/Desarrollo/diagrama_secuencia.png}
+        \caption{Diagrama de secuencia del sistema}
+        \label{fig:Diagrama_Secuencia}
+    \end{figure}
+
     \subsection{Desarrollo del circuito de ECG}
         \subsubsection{Amplificador de Instrumentación AD620}
-            El AD620 es un amplificador diferencial de instrumentación de bajo costo y consumo, pero de una gran precisión y estabilidad de la compañía fabricante de semiconductores Analog Devices. Este amplificador es ideal para aplicaciones de bajo nivel de señal, como la adquisición de señales bioeléctricas, ya que ofrece una alta impedancia de entrada y una ganancia ajustable entre las terminales 1 y 8 del circuito integrado.
+            Para el desarrollo del sistema, comenzamos con el diseño del circuito de ECG utilizando un amplificador de instrumentación AD620, encargado de amplificar la señal captada por los electrodos del ECG. Mediante métodos de prueba y error, se determinó que una ganancia de 21 era necesaria para obtener una señal de salida adecuada.
 
-            Buscamos obtener una ganancia de 21, para esto se utilizó la ecuación~\ref{eq:ganancia} para calcular el valor de la resistencia $R_G$ que se conecta entre los pines 1 y 8 del AD620.
+            Con la ganancia deseada establecida, procedimos a calcular el valor de la resistencia $R_G$, la cual se conecta entre los pines 1 y 8 del AD620. Para ello, partimos de la ecuación~\ref{eq:ganancia_AD620}, que describe la relación entre la ganancia y la resistencia, y la despejamos para obtener la ecuación~\ref{eq:resistencia}, que nos permitió calcular el valor óptimo de $R_G$.
 
             \begin{equation}
                 \label{eq:resistencia}
                 R_G = \frac{49.4 k\Omega}{G - 1} = \frac{49.4 k\Omega}{21 - 1} = 2470 \Omega \approx 2.5 k\Omega
             \end{equation}
 
-            La resistencia $R_G$ se aproximó a $2.5 k\Omega$ y se conectó entre los pines 1 y 8 del AD620 para obtener una ganancia aproximada a lo deseado como se muestra en la ecuación~\ref{eq:ganancia_teorica}.
-
-            \begin{equation}
-                \label{eq:ganancia_teorica}
-                G = 1 + \frac{49.4 k\Omega}{2.5 k\Omega} = 20.76
-            \end{equation}
-
-            Se realizó la simulación del circuito en el software de diseño de circuitos Multisim.
+            Con la resistencia calculada, se procedió a simular el circuito en el software de diseño de circuitos Multisim, obteniendo una ganancia de 20.76, muy cercana a la deseada. La figura~\ref{fig:Simulacion_AD620} muestra la simulación del amplificador de instrumentación AD620 en Multisim.
 
             \begin{figure}[H]
                 \centering
@@ -405,232 +575,160 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \end{figure}
             \footnotetext{Muestra la simulación del amplificador de instrumentación AD620 en el software Multisim, con una ganancia de 20.76.}
 
-        \subsubsection{Filtro de segundo orden Sallen-Key}
-            Para la siguiente etapa del circuito, fue necesario implementar un tipo de circuito capaz de acondicionar las señales previamente adquiridas y amplificadas. Para ello, se utilizó un filtro activo \textit{Sallen-Key} de segundo orden, reconocido por su simplicidad y su capacidad para ofrecer una respuesta de frecuencia precisa. Este filtro puede configurarse como pasa altas o pasa bajas, ajustando los valores de resistencias y capacitores según los requisitos específicos de la aplicación.
+        \subsubsection{Filtro Activo Pasa Altas}
+            Para eliminar el ruido de baja frecuencia presente en la señal de ECG, se implementó un filtro pasa altas de segundo orden tipo \textit{Sallen-Key}. Este filtro permite el paso de frecuencias superiores a una frecuencia de corte, mientras atenúa las frecuencias inferiores a esta.
 
-            Esta configuración fue seleccionada debido a que, al ser un filtro activo, no presenta ningún tipo de atenuación en la señal, a diferencia de un filtro pasivo, que sí atenúa las señales al manejar frecuencias bajas. Además, se aprovechan las características eléctricas de un amplificador operacional (op-amp), como la alta impedancia de entrada y la baja impedancia de salida, lo cual es beneficioso para evitar cargas en las etapas previas y posteriores al filtro.
-        
-            Existen tres tipos de aproximaciones para este tipo de filtro: Butterworth, Chebyshev y Bessel, cada una con sus propias características y aplicaciones. En este caso, se utilizó la aproximación de Butterworth, ya que presenta una respuesta de frecuencia más plana en la banda de paso, lo que significa que no hay sobrepicos en dicha banda y que la caída de la respuesta en la banda de rechazo es más suave. Esto contrasta con la aproximación de Chebyshev, que presenta sobrepicos en la banda de paso y una caída más abrupta en la banda de rechazo, o con la aproximación de Bessel, que ofrece una fase lineal.
+            En el diseño de este filtro, se utilizó una aproximación de Butterworth debido a su respuesta de frecuencia más plana en la banda de paso, lo que implica la ausencia de sobrepicos en dicha banda y una caída más gradual en la banda de rechazo. Esto contrasta con la aproximación de Chebyshev, que presenta sobrepicos en la banda de paso y una caída más abrupta en la banda de rechazo, o con la aproximación de Bessel,que  ofrece una fase lineal. Los valores de $Q$ y $K$ se obtuvieron de la Tabla~\ref{tab:valores_filtro_pasa_altas}, que presenta los parámetros correspondientes a dicha aproximación.
 
-            Al ser filtros activos, estos tienen la capacidad de amplificar la señal filtrada mediante una retroalimentación negativa en el op-amp, realizada a través de un divisor de tensión entre la terminal de salida y la entrada no inversora del op-amp, utilizando las resistencias denominadas $R_a$ y $R_b$.
+            \paragraph{Ganancia del Amplificador Operacional}
+            Dado que la señal ya fue amplificada en la etapa anterior, se decidió establecer una ganancia unitaria. Por lo tanto, se estableció $R_a$ como infinito (circuito abierto) y $R_b$ como cero (corto circuito), resultando en la Ecuación~\ref{eq:funcion_amplificador_operacional_pasa_altos} para la ganancia del amplificador operacional.
 
-            Dado que ya se amplificó la señal en la etapa anterior y que amplificar de esta manera podría introducir ruido al sistema, se optó por establecer una ganancia unitaria en el filtro, configurando $R_a$ como infinito y $R_b$ como cero.
+            \begin{equation}
+                \label{eq:funcion_amplificador_operacional_pasa_altos}
+                A = 1 + \frac{R_b}{R_a} = 1
+            \end{equation}
 
-            Para eliminar el ruido de baja frecuencia presente en la señal de ECG, se implementó un filtro pasa altas de segundo orden \textit{Sallen-Key}. Este filtro permite el paso de frecuencias superiores a una frecuencia de corte, mientras que atenúa las frecuencias inferiores a esta.
+            \paragraph{Cálculo de factor m}
+            El factor $m$ es crucial para determinar las resistencias del filtro pasa altos. Se calcula mediante la Ecuación~\ref{eq:factor_m_pasa_altos}.
 
-            \paragraph{Filtro Activo Pasa Altos.}
-                \subparagraph{Función de transferencia del filtro pasa altos.}
-                    La función de transferencia de un filtro pasa altos de segundo orden \textit{Sallen-Key} se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_altos}.
+            \begin{equation}
+                \label{eq:factor_m_pasa_altos}
+                m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
+            \end{equation}
 
-                    \begin{equation}
-                        \label{eq:funcion_transferencia_pasa_altos}
-                        \frac{v_o}{v_i}(S) = \frac{(1+\frac{R_b}{R_a}) \cdot s^2}{s^2 + s \cdot \frac{1}{C} \cdot (\frac{2}{R_2}- \frac{R_b}{R_1 \cdot R_a}) + \frac{1}{C^2 \cdot R_1 \cdot R_2}}
-                    \end{equation}
+            Donde:
+            \begin{itemize}
+                \item $A$: Ganancia del amplificador operacional.
+                \item $Q$: Factor de calidad del filtro.
+            \end{itemize}
 
-                    Donde:
-                    \begin{itemize}
-                        \item $V_o$: Es la tensión de salida del filtro.
-                        \item $V_i$: Es la tensión de entrada del filtro.
-                        \item $S$: Es la variable compleja en el dominiode de Laplace.
-                        \item $R_1$ y $R_2$: Son las resistencias del circuito del filtro.
-                        \item $R_a$ y $R_b$: Son las resistencias asociadas a la ganancia del amplificador operacional.
-                        \item $C$: Es la capacitancia del circuito del filtro.
-                    \end{itemize}
+            Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es igual 0.7071. Sustituyendo los valores de $A = 1$ de la Ecuación~\ref{eq:funcion_amplificador_operacional_pasa_altos} y $Q = 0.7071$ en la Ecuación~\ref{eq:factor_m_pasa_altos}, se obtiene el valor de $m$.
 
-                    En este diseño, se buscó mantener una ganancia unitaria en el filtro para evitar la amplificación adicional de la señal y minimizar la introducción de ruido. Por lo tanto, se estableció $R_a$ como infinito (circuito abierto) y $R_b$ como cero (corto circuito), simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_altos}.
+            \begin{equation}
+                \label{eq:factor_m_pasa_altos_valor}
+                m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} = \frac{1 + \sqrt{1}}{2.8284}\approx 0.7071
+            \end{equation}
 
-                    \begin{equation}
-                        \label{eq:funcion_amplificador_operacional_pasa_altos}
-                        A = 1 + \frac{R_b}{R_a} = 1
-                    \end{equation}
+            \paragraph{Frecuencia de corte}
+            La frecuencia de corte $f_c$ el cual es el punto en el que la señal de salida se atenúa en $-3 dB$, se calcula mediante la Ecuación~\ref{eq:frecuencia_corte_pasa_altos}.
+            \begin{equation}
+                \label{eq:frecuencia_corte_pasa_altos}
+                f_c = \frac{m}{2\pi \cdot k \cdot R_1 \cdot C}
+            \end{equation}
 
-                \subparagraph{Cálculo de factor m}
-                    El factor $m$ es crucial para determinar la relación entre las resistencias $R_1$ y $R_2$ del filtro pasa altos. Se calcula mediante la ecuación~\ref{eq:factor_m_pasa_altos}.
+            Donde:
 
-                    \begin{equation}
-                        \label{eq:factor_m_pasa_altos}
-                        m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
-                    \end{equation}
+            \begin{itemize}
+                \item $k$: Constante de la aproximación del filtro.
+                \item $R_1$: Resistencia seleccionada.
+                \item $C$: Capacitor seleccionada.
+            \end{itemize}
 
-                    Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es:
+            Seleccionamos un valor de $R_1 = 2.2 k\Omega$ y $C = 3.3 \mu F$. Además de que la constante $k$ para una aproximación de Butterworth es 1. Sustituyendo estos valores en la Ecuación~\ref{eq:frecuencia_corte_pasa_altos}, se obtiene la frecuencia de corte del filtro pasa altos.
 
-                    \begin{equation}
-                        \label{eq:factor_calidad}
-                        Q = \frac{1}{\sqrt{2}} = 0.7071
-                    \end{equation}
-                
-                    Sustituyendo el valor de $A = 1$ y $Q = 0.7071$ en la ecuación~\ref{eq:factor_m_pasa_altos}, se obtiene el valor de $m$.
+            \begin{equation}
+                \label{eq:frecuencia_corte_pasa_altos_valor}
+                f_c = \frac{0.7071}{2\pi \cdot 1 \cdot 2.2 k\Omega \cdot 3.3 \mu F} \approx 15.5 Hz
+            \end{equation}
 
-                    \begin{equation}
-                        \label{eq:factor_m_pasa_altos_valor}
-                        m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} \approx 0.7071
-                    \end{equation}
+            Esta frecuencia de corte es adecuada para eliminar el ruido de baja frecuencia presente en la señal de ECG.
 
-                    Este valor de $m$ se utilizará para calcular las resistencias del filtro pasa altos.
+            \paragraph{Selección de resistencias $R_2$}
+            La resistencia $R_2$ se calcula mediante la ecuación~\ref{eq:resistencia_R2_pasa_altos}.
 
-                \subparagraph{Frecuencia de corte}
-                    La frecuencia de corte $f_c$ se calcula con la ecuación~\ref{eq:frecuencia_corte_pasa_altos}.
+            \begin{equation}
+                \label{eq:resistencia_R2_pasa_altos}
+                R_2 = \frac{R_1}{m^2} = \frac{2.2 k\Omega}{(0.7071)^2} \approx 4.4 k\Omega 
+            \end{equation}
 
-                    \begin{equation}
-                        \label{eq:frecuencia_corte_pasa_altos}
-                        f_c = \frac{m}{2\pi \cdot k \cdot R_1 \cdot C}
-                    \end{equation}
+            Se llevó a cabo la simulación del filtro paso alto de segundo orden tipo \textit{Sallen-Key} en Multisim. La Figura~\ref{fig:Simulacion_Filtro_Pasa_Altas} presenta la simulación del filtro en Multisim, utilizando las resistencias y el capacitor seleccionados.
 
-                    Donde:
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_pasaAltos.png}
+                \caption[Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key}.]{Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key}\footnotemark}
+                \label{fig:Simulacion_Filtro_Pasa_Altas}
+            \end{figure}
+            \footnotetext{Muestra la simulación del filtro pasa altas de segundo orden \textit{Sallen-Key} en el software Multisim, con una frecuencia de corte de 15.5 Hz.}
 
-                    \begin{itemize}
-                        \item $f_c$: Frecuencia de corte deseada.
-                        \item $k$: Factor que depende de la configuración del filtro (para sallen key estándar, $k = 1$).
-                        \item $R_1$: Resistencia seleccionada.
-                        \item $C$: Capacitancia seleccionada.
-                    \end{itemize}
+        \subsubsection{Filtro Activo Pasa Bajos.}
 
-                    Seleccionamos valores prácticos y disponibles en el mercado para $R_1$ y $C$:
-                    \begin{itemize}
-                        \item $R_1 = 2.2 k\Omega$
-                        \item $C = 3.3 \mu F$
-                    \end{itemize}
+            Para eliminar el ruido de alta frecuencia presente en la señal de ECG, se implementó un filtro pasa bajas de segundo orden tipo \textit{Sallen-Key}. Este filtro permite el paso de frecuencias inferiores a una frecuencia de corte, mientras atenúa las frecuencias superiores a esta.
 
-                    Sustituyendo estos valores en la ecuación~\ref{eq:frecuencia_corte_pasa_altos}, se obtiene la frecuencia de corte del filtro pasa altos.
+            En el diseño de este filtro, se utilizó una aproximación de Butterworth y los valores de $Q$ y $K$ se obtuvieron de la Tabla~\ref{tab:valores_filtro_pasa_bajas}, que presenta los parámetros correspondientes a dicha aproximación.
 
-                    \begin{equation}
-                        \label{eq:frecuencia_corte_pasa_altos_valor}
-                        f_c = \frac{0.7071}{2\pi \cdot 1 \cdot 2.2 k\Omega \cdot 3.3 \mu F} \approx 15.5 Hz
-                    \end{equation}
+            \paragraph{Ganancia del Amplificador Operacional}
+            En este diseño, al igual que con el filtro pasa altas, se busca mantener una ganancia unitaria para evitar amplificar la señal y minimizar la introducción de ruido. Por lo tanto, se establece $R_a = \infty$ (circuito abierto) y $R_b = 0$ (corto circuito), simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_bajos}.
 
-                    Esta frecuencia de corte es adecuada para eliminar componentes de baja frecuencia no deseadas, como el ruido de línea y otras interferencias presentes en señales ECG.
+            \begin{equation}
+                \label{eq:funcion_amplificador_operacional_pasa_bajos}
+                A = 1 + \frac{R_b}{R_a} = 1
+            \end{equation}
 
-                \subparagraph{Selección de resistencias $R_2$}
-                    La resistencia $R_2$ se calcula mediante la ecuación~\ref{eq:resistencia_R2_pasa_altos}.
-                    \begin{equation}
-                        \label{eq:resistencia_R2_pasa_altos}
-                        R_2 = \frac{R_1}{m^2} = \frac{2.2 k\Omega}{(0.7071)^2} \approx 4.4 k\Omega 
-                    \end{equation}
+            \paragraph{Cálculo de factor m}
+            El factor $m$ es crucial para determinar las capacitancias del filtro pasa bajas. Se calcula mediante la ecuación~\ref{eq:factor_m_pasa_bajos}.
 
-                    Se realizó la simulación del circuito en el software de diseño de circuitos Multisim.
+            \begin{equation}
+                \label{eq:factor_m_pasa_bajos}
+                m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
+            \end{equation}
 
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_pasaAltos.png}
-                        \caption[Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key}.]{Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key}\footnotemark}
-                        \label{fig:Simulacion_Filtro_Pasa_Altas}
-                    \end{figure}
-                    \footnotetext{Muestra la simulación del filtro pasa altas de segundo orden \textit{Sallen-Key} en el software Multisim, con una frecuencia de corte de 15.5 Hz.}
+            Donde:
 
-            \paragraph{Filtro Activo Pasa Bajos.}
-                \subparagraph{Función de transferencia del filtro pasa bajos.}
-                    La función de transferencia de un filtro pasa bajos de segundo orden \textit{Sallen-Key} se puede calcular mediante la ecuación~\ref{eq:funcion_transferencia_pasa_bajos}.
+            \begin{itemize}
+                \item $A$: Ganancia del amplificador operacional.
+                \item $Q$: Factor de calidad del filtro.
+            \end{itemize}
 
-                    \begin{equation}
-                        \label{eq:funcion_transferencia_pasa_bajos}
-                        \frac{v_o}{v_i}(S) = \frac{(1 + \frac{R_b}{R_a}) \cdot \frac{1}{R^2 \cdot C_1 \cdot C_2}}{s^2 + s \cdot \frac{1}{R} \cdot (\frac{2}{C_1} - \frac{R_b}{C_2 \cdot R_a}) + \frac{1}{R^2 \cdot C_1 \cdot C_2}}
-                    \end{equation}
+            Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es igual 0.7071. Sustituyendo los valores de $A = 1$ y $Q = 0.7071$ en la ecuación~\ref{eq:factor_m_pasa_bajos}, se obtiene el valor de $m$.
 
-                    Donde:
-                    \begin{itemize}
-                        \item $V_o$: Es la tensión de salida del filtro.
-                        \item $V_i$: Es la tensión de entrada del filtro.
-                        \item $S$: Es la variable compleja en el dominiode de Laplace.
-                        \item $R_a$ y $R_b$: Son las resistencias asociadas a la ganancia del amplificador operacional.
-                        \item $R$: Es la resistencia del filtro.
-                        \item $C_1$ y $C_2$: Son las capacitancias del circuito del filtro.
-                    \end{itemize}
-                    
-                    En este diseño, al igual que con el filtro pasa altas, se busca mantener una ganancia unitaria para evitar amplificar la señal adicionalmente y minimizar la introducción de ruido. Por lo tanto, se establece $R_a = \infty$ (circuito abierto) y $R_b = 0$ (corto circuito), simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_bajos}.
+            \begin{equation}
+                \label{eq:factor_m_pasa_bajos_valor}
+                m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} = \frac{1 + \sqrt{1}}{2.8284}\approx 0.7071
+            \end{equation}
 
-                    \begin{equation}
-                        \label{eq:funcion_amplificador_operacional_pasa_bajos}
-                        A = 1 + \frac{R_b}{R_a} = 1
-                    \end{equation}
+            \paragraph{Frecuencia de corte}
+            La frecuencia de corte $f_c$ el cual es el punto en el que la señal de salida se atenúa en $-3 dB$, se calcula mediante la ecuación~\ref{eq:frecuencia_corte_pasa_bajos}.
 
-                \subparagraph{Cálculo de factor m}
-                    El factor $m$ es esencial para determinar la relación entre las capacitancias $C_1$ y $C_2$ y asegurar que el filtro tenga las caracteríasticas de frecuencia deseadas. Se calcula mediante la ecuación~\ref{eq:factor_m_pasa_bajos}.
+            \begin{equation}
+                \label{eq:frecuencia_corte_pasa_bajos}
+                f_c = \frac{1}{2\pi \cdot k \cdot R \cdot m \cdot C_1}
+            \end{equation}
 
-                    \begin{equation}
-                        \label{eq:factor_m_pasa_bajos}
-                        m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
-                    \end{equation}
+            Donde:
+            \begin{itemize}
+                \item $k$: Constante de la aproximación del filtro.
+                \item $R$: Resistencia seleccionada.
+                \item $C_1$: Capacitancia seleccionada.
+            \end{itemize}
 
-                    Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es:
+            Seleccionamos un valor de $R = 2.7 k\Omega$ y $C_1 = 4.7 \mu F$. Además de que la constante $k$ para una aproximación de Butterworth es 1. Sustituyendo estos valores en la ecuación~\ref{eq:frecuencia_corte_pasa_bajos}, se obtiene la frecuencia de corte del filtro pasa bajos.
 
-                    \begin{equation}
-                        Q = \frac{1}{\sqrt{2}} = 0.7071
-                    \end{equation}
+            \begin{equation}
+                \label{eq:frecuencia_corte_pasa_bajos_valor}
+                f_c = \frac{1}{2\pi \cdot 1 \cdot 2.7 k\Omega \cdot 0.7071\cdot 4.7 \mu F} = \frac{1}{2\pi \cdot 2.7 x10^3 \cdot 0.7071\cdot 4.7 x10^{-6}} \approx 17.737 Hz
+            \end{equation}
 
-                    Sustituyendo el valor de $A = 1$ y $Q = 0.7071$ en la ecuación~\ref{eq:factor_m_pasa_bajos}, se obtiene el valor de $m$.
+            Esta frecuencia de corte es adecuada para eliminar el ruido de alta frecuencia presente en la señal de ECG.
 
-                    \begin{equation}
-                        \label{eq:factor_m_pasa_bajos_valor}
-                        m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} = \frac{1 + \sqrt{1}}{2.8284}\approx 0.7071
-                    \end{equation}
+            \paragraph{Cálculo de la capacitancia C2}
+            La capacitancia $C_2$ se calcula mediante la ecuación~\ref{eq:capacitancia_C2_pasa_bajos}.
 
-                    Este valor de m se utilizará para calcular las capacitancias del filtro.
+            \begin{equation}
+                \label{eq:capacitancia_C2_pasa_bajos}
+                C_2 = m^2 \cdot C_1 = (0.7071)^2 \cdot 4.7 \mu F \approx 2.35 \mu F
+            \end{equation}
 
-                \subparagraph{Frecuencia de corte}
-                    La frecuencia de corte del filtro se calcula con la siguiente ecuación~\ref{eq:frecuencia_corte_pasa_bajos}.
+            Se seleccionó un valor de $C_2 = 2.2 \mu F$, ya que es el valor comercial más cercano al calculado.
 
-                    \begin{equation}
-                        \label{eq:frecuencia_corte_pasa_bajos}
-                        f_c = \frac{1}{2\pi \cdot k \cdot R \cdot m \cdot C_1}
-                    \end{equation}
+            \begin{equation}
+                C_2 = 2.2 \mu F
+            \end{equation}
 
-                    Donde:
-                    \begin{itemize}
-                        \item $f_c$: Frecuencia de corte deseada.
-                        \item $k$: Factor que depende de la configuración del filtro (para sallen key estándar, $k = 1$).
-                        \item $R$: Resistencia seleccionada.
-                        \item $m$: Factor de ajuste.
-                        \item $C_1$: Capacitancia seleccionada.
-                    \end{itemize}
-
-                    Se seleccionaron valores prácticos y disponibles en el mercado para $R$ y $C_1$:
-
-                    \begin{itemize}
-                        \item $R = 2.7 k\Omega$
-                        \item $C_1 = 4.7 \mu F$
-                    \end{itemize}
-
-                    Sustituyendo estos valores en la ecuación~\ref{eq:frecuencia_corte_pasa_bajos}, se obtiene la frecuencia de corte del filtro pasa bajos.
-
-                    \begin{equation}
-                        \label{eq:frecuencia_corte_pasa_bajos_valor}
-                        f_c = \frac{1}{2\pi \cdot 1 \cdot 2.7 k\Omega \cdot 0.7071\cdot 4.7 \mu F} = \frac{1}{2\pi \cdot 2.7 x10^3 \cdot 0.7071\cdot 4.7 x10^{-6}} \approx 17.737 Hz
-                    \end{equation}
-
-                    Esta frecuencia de corte es adecuada para limitar las frecuencias a aproximadamente 17.7Hz, filtrando el ruido de alta frecuencia y preservando la información relevante de la señal ECG.
-
-                \subparagraph{Cálculo de la resistencia Ra}
-                    La resistencia $R_a$ se calcula para establecer la ganancia deseada del amplificador operacional y se obtiene mediante la ecuación~\ref{eq:resistencia_Ra_pasa_bajos}.
-
-                    \begin{equation}
-                        \label{eq:resistencia_Ra_pasa_bajos}
-                        R_a = \frac{2AR}{A-1}
-                    \end{equation}
-
-                    Sin embargo, dado que $A = 1$, el denominador se hace cero, lo que resulta en una resistencia infinita. 
-
-                    \begin{equation}
-                        \label{eq:resistencia_Ra_pasa_bajos_valor}
-                        R_a = \frac{2 \cdot 1 \cdot 2.7 k\Omega}{1 - 1} = \frac{5.4 k\Omega}{0} = \infty
-                    \end{equation}
-
-                    Esto indica que $R_a$ debe ser infinita, es decir, se elimina del circuito (circuito abierto), confirmado que la ganancia del amplificador operacional es unitaria.
-
-                \subparagraph{Cálculo de la capacitancia C2}
-                    La capacitancia $C_2$ se relaciona con la capacitancia $C_1$ mediante el factor $m$ y se calcula mediante la ecuación~\ref{eq:capacitancia_C2_pasa_bajos}.
-
-                    \begin{equation}
-                        \label{eq:capacitancia_C2_pasa_bajos}
-                        C_2 = m^2 \cdot C_1 = (0.7071)^2 \cdot 4.7 \mu F \approx 2.35 \mu F
-                    \end{equation}
-
-                    Para facilitar la implementación del circuito con componentes estándar, se seleccionó una capacitancia con un valor comercial cercano.
-
-                    \begin{equation}
-                        C_2 = 2.2 \mu F
-                    \end{equation}
+            Se llevó a cabo la simulación del filtro pasa bajas de segundo orden tipo \textit{Sallen-Key} en Multisim. 
+            %La Figura~\ref{fig:Simulacion_Filtro_Pasa_Bajas} presenta la simulación del filtro en Multisim, utilizando las resistencias y los capacitores seleccionados.
             
-            \paragraph{Filtro Notch Pasivo Rechaza Banda RC Twin-T}
+        \subsubsection{Filtro Notch Pasivo Rechaza Banda RC Twin-T}
                 En la etapa de acondicionamiento de la señal, se implementó un filtro notch pasivo RC tipo Twin-T para atenuar las interferencias de 60 Hz, comúnmente presentes debido al ruido de la red eléctrica. Este filtro es eficaz para eliminar una frecuencia específica sin afectar significativamente las demás componentes de la señal.
 
                 El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de "T" doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos. En otras palabras, si tenemos una frecuencia central de 100 Hz, el ancho de banda del filtro será de 200 Hz.
@@ -709,3 +807,6 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \end{equation}
 
                 Donde $R_f$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño asegura que la señal amplificada mantenga la fidelidad necesaria para una visualización precisa en el osciloscopio.
+
+
+            
