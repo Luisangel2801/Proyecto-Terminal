@@ -206,9 +206,21 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             En la última década, la eficiencia de los LED ha aumentado y su voltaje directo ha disminuido, lo que resulta en un mayor número de lúmenes por watt. Gracias a la iluminación de alta potencia, la variación en el ciclo cardíaco entre las fases sistólica y diastólica es más pronunciada en la longitud de onda verde. Por ello, la luz verde se ha empleado en sensores PPG para medir la frecuencia cardíaca y la saturación de oxígeno en la sangre. \cite{Tamura_2019}.
 
     \subsection{Presión Arterial}
-        La presión arterial es la fuerza que ejerce la sangre contra las paredes de las arterias. La presión arterial se mide en milímetros de mercurio (mmHg) e incluye dos mediciones: la presión sistólica, que se mide durante el latido del corazón (momento de presión máxima), y la presión diastólica, que se mide durante el descanso entre dos latidos (momento de presión mínima) \cite{PresionArterialDefinicion}.
+    La presión arterial es la fuerza que ejerce la sangre contra las paredes de las arterias. Se mide en milímetros de mercurio (mmHg) y se expresa mediante dos valores: la presión sistólica y la presión diastólica. Esta medición se realiza con un baumanómetro \cite{PresionArterialDefinicion}.
 
-        La presión arterial normal es de 120/80 mmHg, la presión arterial alta (hipertensión) es de 140/90 mmHg o más y la presión arterial baja (hipotensión) es de 90/60 mmHg o menos \cite{DOF}.
+    La presión sistólica, se produce cuando el corazón se contrae, impulsando la sangre y aumentando la presión sobre las arterias. La presión diastólica, se registra durante la fase de relajación del corazón, cuando la presión sobre las arterias disminuye \cite{fernandez_presion}.
+    
+    Se considera que una presión arterial normal es de 120/80 mmHg. La hipertensión se define con valores de 140/90 mmHg o superiores, mientras que la hipotensión se establece en 90/60 mmHg o inferiores \cite{DOF}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Marco/PA_categoria.jpg}
+        \caption[Cátegorias de la presión arterial]{Cátegorias de la presión arterial\footnotemark}
+        \label{fig:PA_categoria}
+    \end{figure}
+    \footnotetext{Muestra las categorías de la presión arterial, donde se observa la presión arterial normal, elevada, hipertensión etapa 1, hipertensión etapa 2 y crisis hipertensiva. Imagen tomada de \textit{American Heart Association}. [En línea]. Disponible en: \url{https://goo.su/tBpC}}
+
+    La hipertensión arterial, conocida como el ``asesino silencioso'' por ser asintomática en sus primeras etapas, suele pasar desapercibida hasta que se presentan complicaciones graves. Es la enfermedad de mayor prevalencia a nivel mundial y aumenta significativamente el riesgo cardiovascular. Un diagnóstico temprano, junto con el cumplimiento de las metas terapéuticas, es fundamental para reducir de forma importante el riesgo de complicaciones.
 
     \subsection{Amplificadores}
     La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ y para poder ser registradas y analizadas, es necesario amplificarlas \cite{Diaz_amplificacion_señales}.
@@ -809,4 +821,3 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 Donde $R_f$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño asegura que la señal amplificada mantenga la fidelidad necesaria para una visualización precisa en el osciloscopio.
 
 
-            
