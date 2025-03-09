@@ -72,7 +72,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth]{img/sistemaConduccion.png}
+        \includegraphics[width=0.7\textwidth]{img/Marco/sistemaConduccion.png}
         \caption[Sistema de conducción cardíaca y tiempos de conducción de los respectivos segmentos]{Sistema de conducción cardíaca y tiempos de conducción de los respectivos segmentos\footnotemark}
         \label{fig:sistemaConduccion}
     \end{figure}
@@ -101,7 +101,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{img/ECG_ondas.png}
+        \includegraphics[width=0.8\textwidth]{img/Marco/ECG_ondas.png}
         \caption[Ciclo completo de un electrocardiograma]{Ciclo completo de un electrocardiograma\footnotemark}
         \label{fig:ECG_ondas}
     \end{figure}
@@ -134,12 +134,12 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \begin{figure}[H]
                 \centering
                 \begin{subfigure}[b]{0.45\linewidth}
-                    \includegraphics[width=\linewidth]{img/PPG_transmisivo.png}
+                    \includegraphics[width=\linewidth]{img/Marco/PPG_transmisivo.png}
                     \caption{Sensor PPG en modo de transmisión}
                     \label{fig:PPG_transmisivo}
                 \end{subfigure}
                 \begin{subfigure}[b]{0.45\linewidth}
-                    \includegraphics[width=\linewidth]{img/PPG_reflexion.png}
+                    \includegraphics[width=\linewidth]{img/Marco/PPG_reflexion.png}
                     \caption{Sensor PPG en modo de reflexión}
                     \label{fig:PPG_reflexion}
                 \end{subfigure}
@@ -163,7 +163,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.7\textwidth]{img/PPG_senial.png}
+                \includegraphics[width=0.7\textwidth]{img/Marco/PPG_senial.png}
                 \caption[Modelo matemático de una señal pura de una fotopletismografía]{Modelo matemático de una señal pura de una fotopletismografía\footnotemark}
                 \label{fig:PPG}
             \end{figure}
@@ -178,10 +178,10 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \begin{figure}[H]
                 \centering
                 \begin{subfigure}[b]{0.45\linewidth}
-                    \includegraphics[width=\linewidth]{img/PPG_AC_DC.png}
+                    \includegraphics[width=\linewidth]{img/Marco/PPG_AC_DC.png}
                 \end{subfigure}
                 \begin{subfigure}[b]{0.45\linewidth}
-                    \includegraphics[width=\linewidth]{img/PPG_Componente_AC_DC.png}
+                    \includegraphics[width=\linewidth]{img/Marco/PPG_Componente_AC_DC.png}
                 \end{subfigure}
                 \caption[Componente AC y DC de la señal PPG]{Componente AC y DC de la señal PPG\footnotemark}
                 \label{fig:PPG_AC_DC}
@@ -195,7 +195,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.8\textwidth]{img/PPG_luz.jpg}
+                \includegraphics[width=0.8\textwidth]{img/Marco/PPG_luz.jpg}
                 \caption[Penetración de las longitudes de onda de la luz en la piel]{Penetración de las longitudes de onda de la luz en la piel\footnotemark}
                 \label{fig:PPG_longitud_onda}
             \end{figure}
@@ -221,6 +221,42 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     \footnotetext{Muestra las categorías de la presión arterial, donde se observa la presión arterial normal, elevada, hipertensión etapa 1, hipertensión etapa 2 y crisis hipertensiva. Imagen tomada de \textit{American Heart Association}. [En línea]. Disponible en: \url{https://goo.su/tBpC}}
 
     La hipertensión arterial, conocida como el ``asesino silencioso'' por ser asintomática en sus primeras etapas, suele pasar desapercibida hasta que se presentan complicaciones graves. Es la enfermedad de mayor prevalencia a nivel mundial y aumenta significativamente el riesgo cardiovascular. Un diagnóstico temprano, junto con el cumplimiento de las metas terapéuticas, es fundamental para reducir de forma importante el riesgo de complicaciones \cite{archivosCardiologia_2016}.
+
+        \subsubsection{Medción de la presión arterial}
+        La presión arterial, también conocida como tensión arterial, se mide habitualmente de forma no invasiva mediante un dispositivo llamado esfigmomanómetro. Este instrumento consta de un brazalete inflable, generalmente colocado en el brazo a la altura del corazón, conectado a un manómetro que registra la presión.
+
+        El brazalete se utiliza para ocluir temporalmente el flujo sanguíneo en la arteria braquial, mientras que el manómetro indica la presión necesaria para lograr esta oclusión. Con este dispositivo se obtienen dos valores clave de la presión arterial:
+
+        \begin{itemize}
+            \item \textbf{Presión sistólica} (la más alta), que corresponde a la fuerza con la que el corazón impulsa la sangre durante la sístole.
+            \item \textbf{Presión diastólica} (la más baja), que refleja la presión en las arterias cuando el corazón está en reposo, permitiendo el retorno de la sangre.
+        \end{itemize}
+
+        Ambos valores se expresan en milímetros de mercurio (mmHg) y se presentan en formato “Presión Sistólica / Presión Diastólica”.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{img/Marco/medirPA.png}
+            \caption[Principio de medición de la presión arterial]{Principio de medición de la presión arterial\footnotemark}
+            \label{fig:medirPA}
+        \end{figure}
+        \footnotetext{Muestra el principio de medición de la presión arterial, donde se observa como el brazalete inflable es colocado en el brazo y el manómetro registra la presión.}
+
+        La medición con un esfigmomanómetro analógico sigue un método conocido como \textbf{auscultatorio}, que consiste en inflar el brazalete por encima de la presión arterial del paciente para detener temporalmente el flujo sanguíneo en las arterias del brazo. Posteriormente, se libera gradualmente la presión del brazalete mientras se escuchan los \textbf{sonidos de Korotkoff} mediante un estetoscopio colocado sobre la arteria braquial \cite{Gill_2018}.
+
+        \subsubsection{Sonidos de Korotkoff}
+        Los sonidos de Korotkoff son ruidos generados por el flujo sanguíneo al restablecerse gradualmente tras liberar la presión del brazalete. Estos sonidos se dividen en cinco fases características: 
+
+        \begin{enumerate}
+            \item \textbf{Fase I}: Aparición de los primeros ruidos, que aumentan progresivamente en intensidad.
+            \item \textbf{Fase II}: Los ruidos adquieren un carácter soplante y pueden disminuir en intensidad o desaparecer brevemente.
+            \item \textbf{Fase III}: Los ruidos se vuelven claros y alcanzan su máxima intensidad.
+            \item \textbf{Fase IV}: Los ruidos disminuyen bruscamente en intensidad y se tornan más graves o soplantes.
+            \item \textbf{Fase V}: Es el momento en que desaparece completamente cualquier sonido; este nivel marca el valor de la presión diastólica.
+        \end{enumerate}
+
+        El primer sonido de Korotkoff (Fase I) señala el valor de la presión sistólica, mientras que el momento en que desaparecen el último sonido (Fase V) indica la presión diastólica \cite{Gill_2018}. 
+
 
     \subsection{Amplificadores}
     La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ y para poder ser registradas y analizadas, es necesario amplificarlas \cite{Diaz_amplificacion_señales}.
