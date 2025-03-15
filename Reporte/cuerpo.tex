@@ -70,6 +70,8 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
      Este proceso comienza en el nódulo senoauricular (nódulo SA), situado en la aurícula derecha. La señal eléctrica se propaga a las aurículas, provocando su contracción y el empuje de sangre hacia los ventrículos. Luego, la señal llega al nódulo auriculoventricular (nódulo AV) y se desplaza a través del haz de His, que se divide en ramas izquierda y derecha dentro de los ventrículos. Finalmente, la señal viaja por las fibras de Purkinje, que son fibras musculares especializadas que se encuentran en las paredes de los ventrículos, el cual provoca la contracción de los ventrículos, bombeando sangre a los pulmones y al resto del cuerpo. Este sistema actúa como el marcapasos natural del cuerpo, manteniendo un ritmo cardíaco normal de 60 a 100 latidos por minuto. Alteraciones en este sistema pueden resultar en ritmos cardíacos anormales y afectar el flujo sanguíneo del cerebro y otras partes del cuerpo \cite{SistemaConduccionMSD}.
 
+     En la figura \ref{fig:sistemaConduccion} se muestra el sistema de conducción del corazón y los tiempos de conducción de los respectivos segmentos.
+
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{img/Marco/sistemaConduccion.png}
@@ -98,6 +100,8 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \item \textbf{Onda U}: Es una onda de escaso voltaje que puede o no estar presente en el trazado del electrocardiograma. Se debe a la repolarización de los músculos papilares
         \item \textbf{Intervalo RR}: Es el intervalo que abarca desde una onda R, hasta la onda R de la siguiente despolarización, es decir dos ondas R sucesivas. En un paciente sano, debe permanecer a un ritmo constante. La medida de este intervalo dependerá de la frecuencia cardiaca.
     \end{itemize}
+
+    En la figura \ref{fig:ECG_ondas} se muestra el ciclo completo de un electrocardiograma, con las ondas P, Q, R, S, T y U, y los intervalos PR, QRS, ST y QT.
 
     \begin{figure}[H]
         \centering
@@ -161,13 +165,15 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 FC = \frac{60}{\textit{Intervalo entre picos}}
             \end{equation}
 
+            En la figura \ref{fig:PPG} se observa que la señal tiene una frecuencia de 1.5 Hz, lo que corresponde a 90 latidos por minuto.
+
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{img/Marco/PPG_senial.png}
                 \caption[Modelo matemático de una señal pura de una fotopletismografía]{Modelo matemático de una señal pura de una fotopletismografía\footnotemark}
                 \label{fig:PPG}
             \end{figure}
-            \footnotetext{Muestra una representación de una señal pura de una fotopletismografía, donde se observa la forma de onda de la señal con una frecuencia de 1.5 Hz, que representa 90 latidos por minuto. Imagen tomada del articulo ``Body sensor network for mobile health monitoring, a diagnosis and anticipating system´´. [En línea]. Disponible en: \url{https://doi.org/10.1109/jsen.2015.2464773}}
+            \footnotetext{Muestra una representación de una señal pura de una fotopletismografía, donde se observa la forma de onda de la señal con una frecuencia de 1.5 Hz, que representa 90 latidos por minuto. Imagen tomada del articulo ``Body sensor network for mobile health monitoring, a diagnosis and anticipating system''. [En línea]. Disponible en: \url{https://doi.org/10.1109/jsen.2015.2464773}}
 
         
         \subsubsection{Componente AC y DC de la señal PPG}
@@ -259,10 +265,12 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
 
     \subsection{Amplificadores}
-    La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ y para poder ser registradas y analizadas, es necesario amplificarlas \cite{Diaz_amplificacion_señales}.
+    La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ (milivolts pico a pico) y para poder ser registradas y analizadas, es necesario amplificarlas \cite{Diaz_amplificacion_señales}.
 
         \subsubsection{Amplificador operacional}
             Los amplificadores operacionales\footnote{``Introducción al amplificador operacional (OpAmp) - Amplificadores operacionales", Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/zbbKl}} son dispositivos electrónicos que se utilizan para amplificar señales eléctricas. Estos dispositivos tienen dos entradas, una inversora y otra no inversora, y una salida. La salida del amplificador operacional es proporcional a la diferencia de voltaje entre las dos entradas multiplicada por un factor de ganancia. La ganancia de un amplificador operacional se puede ajustar mediante la selección de resistencias externas.
+
+            En la figura \ref{fig:Amplificador_Operacional} se observa el contenido de un amplificador operacional, con sus dos entradas, la ganancia de voltaje y la salida.
 
             \begin{figure}[H]
                 \centering
@@ -445,7 +453,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
         \subsubsection{Filtro Pasa Altas Activo de Segundo Orden Sallen-Key}
 
-            Un filtro pasa altos activo de segundo orden \textit{Sallen-Key}\footnote{W. Laiton, «Filtro Pasa altos activo de 2do orden Sallen Key», Wilaeba Electronica, 26 de septiembre de 2018. [En línea]. Disponible en: \url{https://goo.su/5ChsR5h}} es un circuito que permite el paso de señales de alta frecuencia y atenúa las frecuencias bajas. Este filtro consta de dos resistencias y dos capacitores, y se puede configurar para diferentes aproximaciones de filtro, como Butterworth, Chebyshev y Bessel. Se conoce como activo por que tiene un elemento activo que es el amplificador operacional, es de segundo orden por que contiene dos elementos reactivos (dos capacitores), y se llama sallen key por la topología que tiene el circuito, y por el nombre de sus dos creadores R. P. Sallen y E. L. Key, ingenieros del laboratorio Lincoln del MIT. La figura~\ref{fig:Filtro_Pasa_Altas} muestra el diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}.
+            Un filtro pasa altos activo de segundo orden \textit{Sallen-Key}\footnote{W. Laiton, «Filtro Pasa altos activo de 2do orden Sallen Key», Wilaeba Electronica, 26 de septiembre de 2018. [En línea]. Disponible en: \url{https://goo.su/5ChsR5h}} es un circuito que permite el paso de señales de alta frecuencia y atenúa las frecuencias bajas. Este filtro consta de dos resistencias y dos capacitores, y se puede configurar para diferentes aproximaciones de filtro, como Butterworth, Chebyshev y Bessel. Se conoce como activo por que tiene un elemento activo que es el amplificador operacional, es de segundo orden por que contiene dos elementos reactivos (dos capacitores), y se llama \texttt{Sallen Key} por la topología que tiene el circuito, y por el nombre de sus dos creadores R. P. Sallen y E. L. Key, ingenieros del laboratorio Lincoln del MIT. La figura~\ref{fig:Filtro_Pasa_Altas} muestra el diagrama de un filtro pasa altas de segundo orden \textit{Sallen-Key}.
 
             \begin{figure}[H]
                 \centering
@@ -461,7 +469,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \frac{vo}{vi}(s) = \frac{(1 + \frac{R_b}{R_a})s^2}{s^2 + s\frac{1}{C}(\frac{2}{R_2} - \frac{R_b}{R_1R_a}) + \frac{1}{C^2R_1R_2}}
             \end{equation}
 
-            Los valores de la constante $K$ y el factor de calidad $Q$ para diferentes aproximaciones de filtro se muestran en la tabla~\ref{tab:valores_filtro_pasa_altas}.
+            Los valores de la constante $K$, que representa un parámetro para determinar la amplificación del filtro en la frecuencia central, y de $Q$, que corresponde al factor de calidad, para las diferentes aproximaciones del filtro se muestran en la tabla~\ref{tab:valores_filtro_pasa_altas}.
                 
             \begin{table}[H]
                 \centering
@@ -497,7 +505,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \frac{vo}{vi}(s) = \frac{(1+\frac{R_b}{R_a}) \cdot \frac{1}{C_1C_2R^2}}{s^2 + s\frac{1}{R}(\frac{2}{C_1} - \frac{R_b}{C_2R_a}) + \frac{1}{C_1C_2R^2}}
             \end{equation}
 
-            Los valores de la constante $K$ y el factor de calidad $Q$ para diferentes aproximaciones de filtro se muestran en la tabla~\ref{tab:valores_filtro_pasa_bajas}.
+            Los valores de la constante $K$, que representa un parámetro para determinar la amplificación del filtro en la frecuencia central, y de $Q$, que corresponde al factor de calidad, para las diferentes aproximaciones del filtro se muestran en la tabla~\ref{tab:valores_filtro_pasa_bajas}.
 
             \begin{table}[H]
                 \centering
