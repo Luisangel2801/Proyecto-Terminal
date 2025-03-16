@@ -950,6 +950,274 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \label{fig:Pinzas_ECG}
     \end{figure}
 
-        
+    \subsection{Visualización de la señal de ECG en el osciloscopio}
+
+    En la Figura~\ref{fig:ECG_Osciloscopio} se muestra la señal de ECG acondicionada en el osciloscopio, la cual se visualiza de forma clara y precisa, lista para ser transmitida al ESP32 para su procesamiento y análisis.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Desarrollo/electro_osciloscopio.png}
+        \caption{Señal de ECG acondicionada.}
+        \label{fig:ECG_Osciloscopio}
+    \end{figure}
+
+    \subsection{Desarrollo del filtro para el sensor PPG}
+    El sensor de fotopletismografía (PPG) es un método no invasivo para medir la frecuencia cardíaca y la saturación de oxígeno en la sangre. Debido a que su salida es una señal analógica susceptible a ruido eléctrico y artefactos de movimiento, es necesario incorporar filtros. Para ello, se implementaron filtros activos de segundo orden tipo \textit{Sallen-Key} para eliminar, respectivamente, el ruido de alta y baja frecuencia, junto con un filtro pasa bandas destinado a suprimir la interferencia de 60 Hz.
+
+        \subsubsection{Filtro Activo Pasa Bajas}
+        Para el sensor PPG, se implementó un filtro pasa bajas de segundo orden tipo \textit{Sallen-Key}
+        para eliminar el ruido de alta frecuencia presente en la señal. Este filtro permite el paso de frecuencias inferiores a una frecuencia de corte, mientras atenúa las frecuencias superiores a esta.
+
+        En el diseño de este filtro, se utilizó una aproximación de Butterworth y los valores de $Q$ y $K$ se obtuvieron de la Tabla~\ref{tab:valores_filtro_pasa_bajas}, que presenta los parámetros correspondientes a dicha aproximación.
+
+        \paragraph{Ganancia del Amplificador Operacional}
+        En este diseño, al igual que con el filtro pasa bajas del ECG, se busca mantener una ganancia unitaria para evitar amplificar la señal y minimizar la introducción de ruido. Esto configura el amplificador operacional como un seguidor de voltaje conectando su salida directamente a la entrada inversora, lo que elimina las resistencias $RA$ y $RB$, simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_bajos_ppg}.
+
+        \begin{equation}
+            \label{eq:funcion_amplificador_operacional_pasa_bajos_ppg}
+            A = 1 + \frac{R_b}{R_a} = 1
+        \end{equation}
+
+        \paragraph{Cálculo de factor m}
+        El factor $m$ es crucial para determinar las capacitancias del filtro pasa bajas. Se calcula mediante la ecuación~\ref{eq:factor_m_pasa_bajos_ppg}.
+
+        \begin{equation}
+            \label{eq:factor_m_pasa_bajos_ppg}
+            m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
+        \end{equation}
+
+        Donde:
+
+        \begin{itemize}
+            \item $A$: Ganancia del amplificador operacional.
+            \item $Q$: Factor de calidad del filtro.
+        \end{itemize}
+
+        Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es igual $0.7071$. Sustituyendo los valores de $A = 1$ y $Q = 0.7071$ en la ecuación~\ref{eq:factor_m_pasa_bajos_ppg}, se obtiene el valor de $m$.
+
+        \begin{equation}
+            \label{eq:factor_m_pasa_bajos_ppg_valor}
+            m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} = \frac{1 + \sqrt{1}}{2.8284}\approx 0.7071
+        \end{equation}
+
+        \paragraph{Frecuencia de corte}
+        El ruido eléctrico, interferencias electromagnéticas y artefactos de movimiento pueden introducir frecuencias más altas. Por lo tanto, se seleccionó una frecuencia de corte de $10 Hz$ para eliminar el ruido de alta frecuencia presente en la señal de PPG.
+
+        \paragraph{Cálculo de la resistencia R}
+        Para obtener el valor de la resistencia $R$, necesitamos escoger un valor para la capacitancia $C_1$. Se seleccionó un valor de $C_1 = 1 \mu F$. La resistencia $R$ se calcula mediante la ecuación~\ref{eq:resistencia_R_pasa_bajas_ppg}.
+
+        \begin{equation}
+            \label{eq:resistencia_R_pasa_bajas_ppg}
+            R = \frac{1}{2\pi \cdot K \cdot f_c \cdot m \cdot C_1} = \frac{1}{2\pi \cdot 1 \cdot 10 Hz \cdot 0.7071 \cdot 1 \mu F} = 22508.1238 \approx 22 k\Omega
+        \end{equation}
+
+        \paragraph{Cálculo de la capacitancia C2}
+        La capacitancia $C_2$ se calcula mediante la ecuación~\ref{eq:capacitancia_C2_pasa_bajas_ppg}.
+
+        \begin{equation}
+            \label{eq:capacitancia_C2_pasa_bajas_ppg}
+            C_2 = m^2 \cdot C_1 = (0.7071)^2 \cdot 1 \mu F \approx 500 nF
+        \end{equation}
+
+        Se seleccionó un valor de $C_2 = 470 nF$, ya que es el valor comercial más cercano al calculado.
+
+        \begin{equation}
+            C_2 = 470 nF
+        \end{equation}
+
+        En la figura~\ref{fig:Simulacion_Filtro_Pasa_Bajas_PPG} se muestra el filtro pasa bajas de segundo orden tipo \textit{Sallen-Key} utilizando las resistencias y los capacitores seleccionados.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_pasaBajos_ppg.png}
+            \caption[Simulación del filtro pasa bajas de segundo orden \textit{Sallen-Key} para el sensor PPG.]{Simulación del filtro pasa bajas de segundo orden \textit{Sallen-Key} para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Filtro_Pasa_Bajas_PPG}
+        \end{figure}
+        \footnotetext{Muestra la simulación del filtro pasa bajas de segundo orden \textit{Sallen-Key}
+        en el software Multisim, con una frecuencia de corte de 10 Hz.}
+
+        \subsubsection{Filtro Activo Pasa Altas}
+        Para el sensor PPG, se implementó un filtro pasa altas de segundo orden tipo \textit{Sallen-Key} para eliminar el ruido de baja frecuencia presente en la señal. Este filtro permite el paso de frecuencias superiores a una frecuencia de corte, mientras atenúa las frecuencias inferiores a esta.
+
+        En el diseño de este filtro, se utilizó una aproximación de Butterworth y los valores de $Q$ y $K$ se obtuvieron de la Tabla~\ref{tab:valores_filtro_pasa_altas}, que presenta los parámetros correspondientes a dicha aproximación.
+
+        \paragraph{Ganancia del Amplificador Operacional}
+        En este diseño, al igual que con el filtro pasa altas del ECG, se busca mantener una ganancia unitaria para evitar amplificar la señal y minimizar la introducción de ruido. Esto configura el amplificador operacional como un seguidor de voltaje conectando su salida directamente a la entrada inversora, lo que elimina las resistencias $RA$ y $RB$, simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_altas_ppg}.
+
+        \begin{equation}
+            \label{eq:funcion_amplificador_operacional_pasa_altas_ppg}
+            A = 1 + \frac{R_b}{R_a} = 1
+        \end{equation}
+
+        \paragraph{Cálculo de factor m}
+        El factor $m$ es crucial para determinar las resistencias del filtro pasa altas. Se calcula mediante la ecuación~\ref{eq:factor_m_pasa_altas_ppg}.
+        \begin{equation}
+            \label{eq:factor_m_pasa_altas_ppg}
+            m = \frac{1+\sqrt{1+8Q^2(A-1)}}{4Q}
+        \end{equation}
+
+        Donde:
+
+        \begin{itemize}
+            \item $A$: Ganancia del amplificador operacional.
+            \item $Q$: Factor de calidad del filtro.
+        \end{itemize}
+
+        Para un filtro Butterworth de segundo orden, que ofrece una respuesta en frecuencia plana en la banda de paso, el factor de calidad $Q$ es igual 0.7071. Sustituyendo los valores de $A = 1$ y $Q = 0.7071$ en la ecuación~\ref{eq:factor_m_pasa_altas_ppg}, se obtiene el valor de $m$.
+
+        \begin{equation}
+            \label{eq:factor_m_pasa_altas_ppg_valor}
+            m = \frac{1+\sqrt{1+8(0.7071)^2(1-1)}}{4(0.7071)} = \frac{1 + \sqrt{1}}{2.8284}\approx 0.7071
+        \end{equation}
+
+        \paragraph{Frecuencia de corte}
+        Se seleccionó una frecuencia de corte de $0.5 Hz$ para eliminar el ruido de baja frecuencia presente en la señal de PPG.
+
+        \paragraph{Selección de resistencias $R_1$}
+        Para obtener el valor de la resistencia $R_1$, necesitamos escoger un valor para la capacitancia $C$. Se seleccionó un valor de $C = 10 \mu F$. La resistencia $R_1$ se calcula mediante la ecuación~\ref{eq:resistencia_R1_pasa_altas_ppg}.
+
+        \begin{equation}
+            \label{eq:resistencia_R1_pasa_altas_ppg}
+            R_1 = \frac{m}{2\pi \cdot K \cdot f_c \cdot \cdot C} = \frac{0.7071}{2\pi \cdot 1 \cdot 0.5 Hz \cdot 10 \mu F} = 22507.6920 \Omega \approx 22 k\Omega
+        \end{equation}
+
+        \paragraph{Selección de resistencias $R_2$}
+        La resistencia $R_2$ se calcula mediante la ecuación~\ref{eq:resistencia_R2_pasa_altas_ppg}.
+
+        \begin{equation}
+            \label{eq:resistencia_R2_pasa_altas_ppg}
+            R_2 = \frac{R_1}{m^2} = \frac{22.5 k\Omega}{(0.7071)^2} \approx 45 k\Omega
+        \end{equation}
+
+        Se utilizó un valor de $R_2 = 47 k\Omega$, ya que es el valor comercial más cercano al calculado.
 
 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_pasaAltos_ppg.png}
+            \caption[Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key} para el sensor PPG.]{Simulación del filtro pasa altas de segundo orden \textit{Sallen-Key} para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Filtro_Pasa_Altas_PPG}
+        \end{figure}
+        \footnotetext{Muestra el filtro pasa altas de segundo orden \textit{Sallen-Key} en el software Multisim, con una frecuencia de corte de 0.5 Hz.}
+
+        \subsubsection{Filtro Notch Pasivo Rechaza Banda RC Twin-T}
+
+        Para el sensor PPG, se implementó un filtro notch pasivo RC tipo Twin-T para atenuar las interferencias de 60 Hz, comúnmente presentes debido al ruido de la red eléctrica. Este filtro es eficaz para eliminar una frecuencia específica sin afectar significativamente las demás componentes de la señal.
+
+        El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de "T" doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos.
+
+        Para diseñar el filtro notch pasivo RC Twin-T centrado en $f_0 = 60 Hz$, se utilizaron las siguientes ecuaciones:
+
+        Seleccionamos los parámetros iniciales del filtro:
+        \begin{itemize}
+            \item Frecuencia central $(f_0) = 60 Hz$
+            \item Factor de calidad $(Q) = 0.25$
+            \item Capacitancia base $(C_1) = 100 nF$
+        \end{itemize}
+
+        \paragraph{Cálculo de la resistencia R1}
+        La resistencia $R_1$ se calcula mediante la ecuación~\ref{eq:resistencia_R1_notch_ppg}.
+
+        \begin{equation}
+            \label{eq:resistencia_R1_notch_ppg}
+            R_1 = \frac{1}{4\pi \cdot f_0 \cdot Q \cdot C_1}
+        \end{equation}
+
+        Sustituyendo los valores de $f_0 = 60 Hz$, $Q = 0.25$ y $C_1 = 100 nF$ en la ecuación~\ref{eq:resistencia_R1_notch_ppg}, se obtiene el valor de $R_1$.
+
+        \begin{equation}
+            R_1 = \frac{1}{4\pi \cdot 60 Hz \cdot 0.25 \cdot 100 nF} = 53051.6477 \Omega \approx 53 k\Omega
+        \end{equation}
+
+        \paragraph{Cálculo de la resistencia R2}
+        La resistencia $R_2$ se calcula mediante la ecuación~\ref{eq:resistencia_R2_notch_ppg}.
+
+        \begin{equation}
+            \label{eq:resistencia_R2_notch_ppg}
+            R_2 = \frac{1}{2\pi \cdot f_0 (1 - 2Q) \cdot C_1}
+        \end{equation}
+
+        Sustituyendo los valores en la ecuación~\ref{eq:resistencia_R2_notch_ppg}, se obtiene el valor de $R_2$.
+
+        \begin{equation}
+            R_2 = \frac{1}{2\pi \cdot 60 Hz(1 - 2(0.25)) \cdot 100 nF} = 53051.6477 \Omega \approx 53 k\Omega
+        \end{equation}
+
+        \paragraph{Cálculo de la resistencia R3}
+        La resistencia $R_3$ se calcula mediante la ecuación~\ref{eq:resistencia_R3_notch_ppg}.
+
+        \begin{equation}
+            \label{eq:resistencia_R3_notch_ppg}
+            R_3 = \frac{1}{2\pi \cdot f_0 \cdot C_1}
+        \end{equation}
+
+        Sustituyendo los valores en la ecuación~\ref{eq:resistencia_R3_notch_ppg}, se obtiene el valor de $R_3$.
+
+        \begin{equation}
+            R_3 = \frac{1}{2\pi \cdot 60 Hz \cdot 100 nF} = 26525.824 \Omega \approx 26.5 k\Omega
+        \end{equation}
+
+        \paragraph{Cálculo de la capacitancia C2}
+        La capacitancia $C_2$ se calcula mediante la ecuación~\ref{eq:capacitancia_C2_notch_ppg}.
+
+        \begin{equation}
+            \label{eq:capacitancia_C2_notch_ppg}
+            C_2 = 2Q \cdot C_1
+        \end{equation}
+
+        Sustituyendo el valor de $C_1 = 100 nF$ en la ecuación~\ref{eq:capacitancia_C2_notch_ppg}, se obtiene el valor de $C_2$.
+
+        \begin{equation}
+            C_2 = 2(0.25) \cdot 100 nF = 50 nF
+        \end{equation}
+
+        \paragraph{Cálculo de la capacitancia C3}
+
+        La capacitancia $C_3$ se calcula mediante la ecuación~\ref{eq:capacitancia_C3_notch_ppg}.
+
+        \begin{equation}
+            \label{eq:capacitancia_C3_notch_ppg}
+            C_3 = (1 - 2Q) \cdot C_1
+        \end{equation}
+
+        Sustituyendo los valores, tenemos que:
+
+        \begin{equation}
+            C_3 = (1 - 2(0.25)) \cdot 100 nF = 50 nF
+        \end{equation}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{img/Desarrollo/multisim_rechazaBandas.png}
+            \caption[Simulación del filtro rechaza banda pasivo RC Twin-T para el sensor PPG.]{Simulación del filtro rechaza banda pasivo RC Twin-T para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Filtro_Rechaza_Banda_PPG}
+        \end{figure}
+        \footnotetext{Filtro rechaza banda pasivo RC Twin-T en el software Multisim, centrado en 60 Hz.}
+
+        \subsubsection{Amplificador no Inversor}
+        Finalmente, para visualizar la señal, es necesario amplificar nuevamente la señal ya acondicionada antes de su observación en el osciloscopio. Para ello, un amplificador no inversor sencillo es adecuado para cumplir con esta tarea. A continuación se muestra la ecuación~\ref{eq:ganancia_amplificador_no_inversor_ppg} para calcular la ganancia del amplificador no inversor.
+
+        \begin{equation}
+            \label{eq:ganancia_amplificador_no_inversor_ppg}
+            A = 1 + \frac{R_F}{R_{1}} = 1 + \frac{1 M\Omega}{10 k\Omega} = 101
+        \end{equation}
+
+        Donde $R_f$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño asegura que la señal amplificada mantenga la fidelidad necesaria para una visualización precisa en el osciloscopio.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.4\textwidth]{img/Desarrollo/multisim_AmpNoInversor.png}
+            \caption[Simulación del amplificador no inversor para el sensor PPG.]{Simulación del amplificador no inversor para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Amplificador_No_Inversor_PPG}
+        \end{figure}
+        \footnotetext{Muestra la simulación del amplificador no inversor en el software Multisim conectado a un osciloscopio.}
+
+    \subsection{Visualización de la señal de PPG en el osciloscopio}
+    En la Figura~\ref{fig:PPG_Osciloscopio} se muestra la señal de PPG acondicionada en el osciloscopio, la cual se visualiza de forma clara y precisa, lista para ser transmitida al ESP32 para su procesamiento y análisis.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Desarrollo/ppg_osciloscopio.png}
+        \caption{Señal de PPG acondicionada.}
+        \label{fig:PPG_Osciloscopio}
+    \end{figure}
