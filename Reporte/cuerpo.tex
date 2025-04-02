@@ -66,7 +66,17 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
     \subsection{El sistema de conducción del corazón}
 
-    El corazón es un músculo que late y bombea continuamente sangre al resto del cuerpo. Lo que comúnmente llamamos latido cardíaco es en realidad la contracción rítmica de las cuatro cavidades del corazón. Cada latido cardíaco es estimulado por señales eléctricas que viajan a través de una vía específica del corazón. Estas señales se pueden registrar mediante un electrocardiograma (ECG).
+    El corazón es un órgano muscular que late de manera continua, bombeando sangre al resto del cuerpo. Lo que comúnmente conocemos como latido cardíaco es, en realidad, la contracción rítmica de las cuatro cavidades del corazón. Cada latido es generado por señales eléctricas que viajan a través de una vía específica dentro del corazón, lo que se puede registrar mediante un electrocardiograma (ECG). Este órgano está compuesto por cuatro cavidades: dos aurículas en la parte superior y dos ventrículos en la parte inferior. Estas cavidades están separadas por los septos interauricular e interventricular, que, en condiciones normales, impiden la mezcla de la sangre entre los lados derecho e izquierdo del corazón \cite{tresguerres_2005}.
+
+    En la figura \ref{fig:corazon} se muestra la anatomía del corazón, donde se observan las cuatro cavidades del corazón y las válvulas. La sangre fluye a través de estas cavidades en un ciclo continuo, comenzando en la aurícula derecha, pasando al ventrículo derecho, luego a los pulmones para oxigenarse, regresando a la aurícula izquierda, pasando al ventrículo izquierdo y finalmente siendo bombeada al resto del cuerpo.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{img/Marco/corazon.jpg}
+        \caption[Anatomía del corazón]{Anatomía del corazón\footnotemark}
+        \label{fig:corazon}
+    \end{figure}
+    \footnotetext{Muestra la anatomía del corazón, donde se observan las cuatro cavidades del corazón y las válvulas. Imagen tomada de \texttt{The Texas Heart Institute}. [En línea]. Disponible en: \url{https://goo.su/uncyl}}
 
      Este proceso comienza en el nódulo senoauricular (nódulo SA), situado en la aurícula derecha. La señal eléctrica se propaga a las aurículas, provocando su contracción y el empuje de sangre hacia los ventrículos. Luego, la señal llega al nódulo auriculoventricular (nódulo AV) y se desplaza a través del haz de His, que se divide en ramas izquierda y derecha dentro de los ventrículos. Finalmente, la señal viaja por las fibras de Purkinje, que son fibras musculares especializadas que se encuentran en las paredes de los ventrículos, el cual provoca la contracción de los ventrículos, bombeando sangre a los pulmones y al resto del cuerpo. Este sistema actúa como el marcapasos natural del cuerpo, manteniendo un ritmo cardíaco normal de 60 a 100 latidos por minuto. Alteraciones en este sistema pueden resultar en ritmos cardíacos anormales y afectar el flujo sanguíneo del cerebro y otras partes del cuerpo \cite{SistemaConduccionMSD}.
 
@@ -112,6 +122,23 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     \footnotetext{Muestra el ciclo completo de un electrocardiograma, con las ondas P, Q, R, S, T y U, y los intervalos PR, QRS, ST y QT. Imagen tomada de encyclopedia.pub. [En línea]. Disponible en: \url{https://encyclopedia.pub/entry/52174}}
 
     El ECG tiene las características de baja frecuencia y concentración de energía, y la señal es débil, fácilmente perturbada por el ruido, como interferencias eléctricas, campos electromagnéticos externos, movimiento de electrodos (ruido instantáneo)  y el desplazamiento de la línea de base que es causado principalmente por la respiración. Estos ruidos dificultan el diagnóstico médico y pueden provocar errores en la identificación de enfermedades. Por ello, es esencial aplicar técnicas adecuadas para eliminar el ruido y mejorar la calidad de los datos de ECG muestreados \cite{AlMahamdy_2014}.
+
+        \subsubsection{Derivaciones electrocardiográficas}
+        Una derivación electrocardiográfica es una representación de la actividad eléctrica del corazón, que se obtiene al colocar electrodos en diferentes puntos del cuerpo. Estos electrodos detectan las variaciones de potencial eléctrico generadas por la despolarización y repolarización de las células cardíacas durante el ciclo cardíaco. La señal registrada por cada derivación proporciona información sobre la actividad eléctrica en diferentes regiones del corazón y permite identificar posibles anomalías o trastornos cardíacos.
+
+        Existen dos tipos de derivaciones: unipolares y bipolares. Las derivaciones unipolares registran la diferencia de potencial entre un punto del cuerpo y un punto de referencia conocido como centro eléctrico, mientras que las derivaciones bipolares registran el potencial entre dos puntos específicos del cuerpo.
+
+        En el plano frontal, todas las derivaciones pueden representarse mediante el triángulo de Einthoven, un triángulo equilátero que tiene como vértices los electrodos de las derivaciones estándar (I, II y III). Este triángulo se utiliza para describir la relación geométrica entre las derivaciones, y en su centro se encuentra el cero eléctrico, que representa un punto de referencia común para todas las derivaciones. Este modelo permite comprender cómo se registran las señales eléctricas en diferentes puntos del cuerpo y facilita la interpretación del electrocardiograma \cite{mauricio_2008}.
+
+        En la figura \ref{fig:triangulo_Einthoven} se muestra el triángulo de Einthoven, que representa las derivaciones I, II y III, así como las derivaciones unipolares aVF, aVL y aVR. La posición de los electrodos en el triángulo de Einthoven es fundamental para la correcta interpretación del electrocardiograma, ya que cada derivación proporciona información específica sobre la actividad eléctrica del corazón en diferentes regiones.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{img/Marco/triangulo.png}
+            \caption[Representación gráfica del triángulo de Einthoven]{Representación gráfica del triángulo de Einthoven\footnotemark}
+            \label{fig:triangulo_Einthoven}
+        \end{figure}
+        \footnotetext{Muestra la representación gráfica del triángulo de Einthoven, donde se observan las derivaciones I, II, III, aVF, aVL y aVR. Imagen tomada de \texttt{Wikipedia.org}. [En línea]. Disponible en: \url{https://goo.su/PfQb}}
 
     \subsection{Fotopletismografía (PPG)}
         \subsubsection{Principios de la fotopletismografía}
@@ -201,7 +228,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.8\textwidth]{img/Marco/PPG_luz.jpg}
+                \includegraphics[width=0.6\textwidth]{img/Marco/PPG_luz.jpg}
                 \caption[Penetración de las longitudes de onda de la luz en la piel]{Penetración de las longitudes de onda de la luz en la piel\footnotemark}
                 \label{fig:PPG_longitud_onda}
             \end{figure}
@@ -536,6 +563,25 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
             El máximo valor del factor de calidad $Q$ para un filtro rechaza banda pasivo RC Twin-T es de 0.5. Este filtro se conoce con el nombre de filtro notch Twin-T debido que son dos redes en forma de T conectadas en paralelo.
         
+    \subsection{Sensor Piezoeléctrico}
+    
+    El efecto piezoeléctrico es un fenómeno físico que se presenta en ciertos materiales, conocidos como materiales piezoeléctricos. Este efecto consiste en la generación de una carga eléctrica cuando se aplica una tensión mecánica a estos materiales.
+    
+    En términos sencillos, cuando un material piezoeléctrico es sometido a una tensión mecánica, sus átomos experimentan un ligero desplazamiento, lo que provoca una polarización eléctrica y, como resultado, se genera una diferencia de potencial eléctrico.
+
+    En su estado normal, cuando el material no está sometido a ningún tipo de estrés externo, las cargas eléctricas dentro de las moléculas del material se distribuyen de manera uniforme. Sin embargo, cuando el material, como el cuarzo, es estirado o comprimido, la estructura atómica del cristal se altera ligeramente. Este cambio provoca que las cargas negativas se acumulen en un lado del cristal y las cargas positivas en el lado opuesto. Si se conecta un circuito entre los extremos del cristal, esta diferencia de potencial puede utilizarse para generar una corriente eléctrica. Cuanto mayor sea la compresión o tensión aplicada al cristal, mayor será la corriente eléctrica generada. A la inversa, al enviar una corriente eléctrica a través del cristal, su forma se modifica, lo que demuestra la interacción bidireccional del efecto piezoeléctrico \footnote{información tomada de \textit{NanoDays}. [En línea]. Disponible en: \url{https://goo.su/AYuZXwF}}.
+
+    En la figura~\ref{fig:sensor_piezoelectrico} se muestra un sensor las partes que componen un sensor piezoeléctrico. Este sensor está compuesto por un cristal piezoeléctrico, un electrodo positivo y un electrodo negativo. El cristal piezoeléctrico es el material que genera la carga eléctrica cuando se aplica una tensión mecánica. Los electrodos son los conductores que permiten la conexión del sensor a un circuito eléctrico.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/Marco/piezoelectrico.png}
+        \caption[Sensor piezoeléctrico.]{Sensor piezoeléctrico\footnotemark}
+        \label{fig:sensor_piezoelectrico}
+        \footnotetext{Partes de un sensor piezoeléctrico.}
+        
+    \end{figure}
+
 
 \newpage
 \section{Desarrollo del Proyecto}
