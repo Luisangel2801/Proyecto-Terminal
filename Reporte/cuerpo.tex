@@ -245,13 +245,22 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     
     Se considera que una presión arterial normal es de 120/80 mmHg. La hipertensión se define con valores de 140/90 mmHg o superiores, mientras que la hipotensión se establece en 90/60 mmHg o inferiores \cite{DOF}.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{img/Marco/PA_categoria.jpg}
-        \caption[Cátegorias de la presión arterial]{Cátegorias de la presión arterial\footnotemark}
-        \label{fig:PA_categoria}
-    \end{figure}
-    \footnotetext{Muestra las categorías de la presión arterial, donde se observa la presión arterial normal, elevada, hipertensión etapa 1, hipertensión etapa 2 y crisis hipertensiva. Imagen tomada de \textit{American Heart Association}. [En línea]. Disponible en: \url{https://goo.su/tBpC}}
+    En la tabla~\ref{tab:PA_categoria} se presentan las categorías de presión arterial según la clasificación de la American Heart Association (AHA) \footnote{Muestra las categorías de la presión arterial, donde se observa la presión arterial normal, elevada, hipertensión grado 1, hipertensión grado 2 y crisis hipertensiva. Información tomada de \textit{American Heart Association}. [En línea]. Disponible en: \url{https://goo.su/tBpC}}.
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}c | c | c | c}
+                \textbf{Categoría de la Presión Arterial} & \textbf{Sistólica (mm Hg)} & \textbf{y/o} & \textbf{Diastólica (mm Hg)}\\ \hline
+                Normal & Menos de 120 & y & Menos de 80 \\
+                Elevada & 120-129 & y & Menos de 80 \\
+                Hipertensión Grado 1 & 130-139 & o & 80-89 \\
+                Hipertensión Grado 2 & 140 o más & o & 90 o más \\
+                Crisis hipertensiva & Más de 180 & y/o & Más de 120 \\
+            \end{tabularx}
+            \caption{Categorías de presión arterial}
+            \label{tab:PA_categoria}
+        \end{center}
+    \end{table}
 
     La hipertensión arterial, conocida como el ``asesino silencioso'' por ser asintomática en sus primeras etapas, suele pasar desapercibida hasta que se presentan complicaciones graves. Es la enfermedad de mayor prevalencia a nivel mundial y aumenta significativamente el riesgo cardiovascular. Un diagnóstico temprano, junto con el cumplimiento de las metas terapéuticas, es fundamental para reducir de forma importante el riesgo de complicaciones \cite{archivosCardiologia_2016}.
 
@@ -581,6 +590,36 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \footnotetext{Partes de un sensor piezoeléctrico.}
         
     \end{figure}
+
+    \subsection{Tiempo de Tránsito del Pulso}
+
+    El tiempo de tránsito del pulso, o \textit{PTT} (por sus siglas en inglés) es el tiempo que tarda un pulso de presión arterial en viajar desde el corazón hasta un punto específico del cuerpo, como un dedo o una muñeca. Este tiempo se puede medir utilizando diferentes métodos, como la fotopletismografía (PPG) y el electrocardiograma (ECG). La relación entre el PTT y la presión arterial se basa en el principio de que a medida que aumenta la presión arterial, la velocidad de propagación del pulso también aumenta, lo que resulta en un PTT más corto. Por lo tanto, al medir el PTT y correlacionarlo con la presión arterial, es posible estimar la presión arterial sistólica y diastólica de una persona \cite{NOX_medical}.
+
+    En la figura~\ref{fig:ptt} se muestra un ejemplo de la relación entre el tiempo de tránsito del pulso y la presión arterial. En este gráfico, se observa que se toma los picos de la onda R del ECG y la onda PPG, y se mide el tiempo que transcurre entre estos dos eventos. A medida que la presión arterial aumenta, el tiempo de tránsito del pulso disminuye, lo que indica una relación inversa entre estas dos variables.
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/Marco/ptt.jpeg}
+        \caption[Tiempo de tránsito del pulso.]{Tiempo de tránsito del pulso\footnotemark}
+        \label{fig:ptt}
+    \end{figure}
+    \footnotetext{Ejemplo de la relación entre el tiempo de tránsito del pulso y la presión arterial. Imagen tomada del artículo \textit{Can Pulse Transit Time Be Useful for Detecting Hypertension in Patients in a Sleep Unit?} [En línea]. Disponible en: \url{https://goo.su/HaXVdrs}}
+
+    Para estimar la presión arterial a partir del PTT, se utiliza una ecuación de regresión lineal que relaciona el PTT con la presión arterial. Esta ecuación se puede expresar de la siguiente manera \cite{Gao_2016}:
+
+    \begin{equation}
+        \label{eq:BP1}
+        BP = A \cdot In(PTT) + B
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:BP2}
+        BP = \frac{A}{PTT} + B
+    \end{equation}
+
+    Las ecuaciones \ref{eq:BP1} y \ref{eq:BP2} son ejemplos de cómo se puede modelar la relación entre el PTT y la presión arterial. En estas ecuaciones, $BP$ representa la presión arterial, $PTT$ es el tiempo de tránsito del pulso, y $A$ y $B$ son constantes que se determinan a partir de datos experimentales. La elección de la ecuación depende del modelo específico utilizado para estimar la presión arterial a partir del PTT.
+
 
 
 \newpage
@@ -1240,21 +1279,56 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \end{figure}
         \footnotetext{Filtro rechaza banda pasivo RC Twin-T en el software Multisim, centrado en 60 Hz.}
 
-        \subsubsection{Amplificador no Inversor}
-        Finalmente, para visualizar la señal, es necesario amplificar nuevamente la señal ya acondicionada antes de su observación en el osciloscopio. Para ello, un amplificador no inversor sencillo es adecuado para cumplir con esta tarea. A continuación se muestra la ecuación~\ref{eq:ganancia_amplificador_no_inversor_ppg} para calcular la ganancia del amplificador no inversor.
+        \subsubsection{Amplificador Inversor con fuente única}
+        Finalmente, para ajustar la señal al rango de voltaje adecuado para el puerto ADC del ESP32, se utilizó un amplificador inversor con fuente única. Este amplificador permite ajustar la señal de PPG, de modo que oscile entre 0 y 3.3 V, lo que resulta ideal para el ADC del ESP32. La ganancia del amplificador inversor se calcula utilizando la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}.
 
         \begin{equation}
-            \label{eq:ganancia_amplificador_no_inversor_ppg}
-            A = 1 + \frac{R_F}{R_{1}} = 1 + \frac{1 M\Omega}{10 k\Omega} = 101
+            \label{eq:ganancia_amplificador_inversor_ppg}
+            V_o = - \frac{R_2}{R_1} \cdot V_i
         \end{equation}
 
-        Donde $R_f$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño asegura que la señal amplificada mantenga la fidelidad necesaria para una visualización precisa en el osciloscopio.
+        Primero, amplificaremos la señal filtrada del PPG para mejorar su visualización. Para ello, utilizaremos los siguientes valores de resistencia: $R2 = 100k\Omega$ y $R1 = 1k\Omega$. La ganancia del amplificador inversor se calcula de la siguiente manera:
+
+        \begin{equation}
+            \label{eq:ganancia_amplificador_inversor_ppg_valor}
+            V_o = - \frac{100k\Omega}{1k\Omega} \cdot V_i = -100 \cdot V_i
+        \end{equation}
+
+        Lo que significa que la señal de salida será 100 veces mayor que la señal de entrada. Sin embargo, como el ESP32 tiene un rango de voltaje de 0 a 3.3 V, es necesario ajustar la señal para que oscile entre 0 y 3.3 V. Para agregar un desplazamiento de 1.5 V a la señal, se utiliza un divisor de voltaje con dos resistencias de $56 K\Omega $ y $47 K\Omega$. La salida del divisor de voltaje se conecta a la entrada no inversora del amplificador operacional, lo que permite desplazar la señal de salida a un rango de 0 a 3.3 V se utiliza la siguiente ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}.
+
+        \begin{equation}
+            \label{eq:desplazamiento_amplificador_inversor_ppg}
+            V_{offset} = \frac{Rb}{Ra + Rb} \cdot VCC
+        \end{equation}
+
+        Donde $V_{offset}$ es el voltaje de desplazamiento, $R_a = 56k\Omega$ y $R_b = 47k\Omega$ y $VCC$ es el voltaje de alimentación del amplificador operacional, que en este caso es de 3.3 V. Sustituyendo los valores en la ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}, se obtiene el valor de $V_{offset}$.
+
+        \begin{equation}
+            V_{offset} = \frac{47k\Omega}{56k\Omega + 47k\Omega} \cdot 3.3 V = \frac{47k\Omega}{103k\Omega} \cdot 3.3 V = 0.456 \cdot 3.3 V = 1.5058 V
+        \end{equation}
+
+        El valor de $V_{offset}$ es aproximadamente 1.5 V, lo que provoca que la señal de salida se desplace a 1.5 V. Esto permite que la señal oscile entre 0 y 3.3 V, lo cual es adecuado para el ADC del ESP32.
+        
+        Para obtener el capacitor $C_1$ se utiliza la siguiente ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}.
+        \begin{equation}
+            \label{eq:capacitancia_C1_amplificador_inversor_ppg}
+            C_1 \geq \frac{50}{\pi \cdot f \cdot R_1}
+        \end{equation}
+
+        Donde $f$ es la frecuencia de la señal de entrada. En este caso, se seleccionó una frecuencia de 15 Hz. Sustituyendo los valores en la ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}, se obtiene el valor de $C_1$.
+        \begin{equation}
+            C_1 \geq \frac{50}{\pi \cdot 15 Hz \cdot 1k\Omega} = \frac{50}{47.1239} = 1.06 \mu F
+        \end{equation}
+        
+        Se seleccionó un valor de $C_1 = 1 \mu F$, ya que es el valor comercial más cercano al calculado.
+
+        Para filtrar el ruido de alta frecuencia, se empleó un capacitor de $1 \mu F$ en paralelo con la resistencia $R_b$, lo que contribuye a estabilizar la señal y reducir el ruido. La Figura~\ref{fig:Simulacion_Amplificador_Inversor_PPG} muestra la simulación del amplificador inversor con desplazamiento de voltaje para el sensor PPG.
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.4\textwidth]{img/Desarrollo/multisim_AmpNoInversor.png}
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_AmpInversor_ppg.png}
             \caption[Simulación del amplificador no inversor para el sensor PPG.]{Simulación del amplificador no inversor para el sensor PPG\footnotemark}
-            \label{fig:Simulacion_Amplificador_No_Inversor_PPG}
+            \label{fig:Simulacion_Amplificador_Inversor_PPG}
         \end{figure}
         \footnotetext{Muestra la simulación del amplificador no inversor en el software Multisim conectado a un osciloscopio.}
 
