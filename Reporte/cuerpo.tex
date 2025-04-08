@@ -245,7 +245,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     
     Se considera que una presión arterial normal es de 120/80 mmHg. La hipertensión se define con valores de 140/90 mmHg o superiores, mientras que la hipotensión se establece en 90/60 mmHg o inferiores \cite{DOF}.
 
-    En la tabla~\ref{tab:PA_categoria} se presentan las categorías de presión arterial según la clasificación de la American Heart Association (AHA) \footnote{Muestra las categorías de la presión arterial, donde se observa la presión arterial normal, elevada, hipertensión grado 1, hipertensión grado 2 y crisis hipertensiva. Información tomada de \textit{American Heart Association}. [En línea]. Disponible en: \url{https://goo.su/tBpC}}.
+    En la tabla~\ref{tab:PA_categoria} se presentan las categorías de presión arterial según la clasificación de la \textit{American Heart Association (AHA)} \footnote{Muestra las categorías de la presión arterial, donde se observa la presión arterial normal, elevada, hipertensión grado 1, hipertensión grado 2 y crisis hipertensiva. Información tomada de \textit{American Heart Association}. [En línea]. Disponible en: \url{https://goo.su/tBpC}}.
 
     \begin{table}[H]
         \begin{center}
@@ -1280,47 +1280,58 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \footnotetext{Filtro rechaza banda pasivo RC Twin-T en el software Multisim, centrado en 60 Hz.}
 
         \subsubsection{Amplificador Inversor con fuente única}
-        Finalmente, para ajustar la señal al rango de voltaje adecuado para el puerto ADC del ESP32, se utilizó un amplificador inversor con fuente única. Este amplificador permite ajustar la señal de PPG, de modo que oscile entre 0 y 3.3 V, lo que resulta ideal para el ADC del ESP32. La ganancia del amplificador inversor se calcula utilizando la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}.
+        \paragraph{Ganancia del amplificador inversor}
+        Para amplificar la señal del sensor PPG, se utilizó un amplificador inversor. La ganancia del amplificador inversor se calcula mediante la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}.
 
         \begin{equation}
             \label{eq:ganancia_amplificador_inversor_ppg}
             V_o = - \frac{R_2}{R_1} \cdot V_i
         \end{equation}
 
-        Primero, amplificaremos la señal filtrada del PPG para mejorar su visualización. Para ello, utilizaremos los siguientes valores de resistencia: $R2 = 100k\Omega$ y $R1 = 1k\Omega$. La ganancia del amplificador inversor se calcula de la siguiente manera:
+        Donde $V_o$ es la señal de salida, $V_i$ es la señal de entrada. En este caso, se seleccionaron los valores de $R_1 = 1 k\Omega$ y $R_2 = 100 k\Omega$. Sustituyendo los valores en la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}, se obtiene el valor de $V_o$.
 
         \begin{equation}
             \label{eq:ganancia_amplificador_inversor_ppg_valor}
             V_o = - \frac{100k\Omega}{1k\Omega} \cdot V_i = -100 \cdot V_i
         \end{equation}
 
-        Lo que significa que la señal de salida será 100 veces mayor que la señal de entrada. Sin embargo, como el ESP32 tiene un rango de voltaje de 0 a 3.3 V, es necesario ajustar la señal para que oscile entre 0 y 3.3 V. Para agregar un desplazamiento de 1.5 V a la señal, se utiliza un divisor de voltaje con dos resistencias de $56 K\Omega $ y $47 K\Omega$. La salida del divisor de voltaje se conecta a la entrada no inversora del amplificador operacional, lo que permite desplazar la señal de salida a un rango de 0 a 3.3 V se utiliza la siguiente ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}.
+        Lo que significa que la señal de salida será 100 veces mayor que la señal de entrada. Esto es útil para amplificar la señal del sensor PPG, que generalmente tiene un voltaje de salida bajo.
+
+        \paragraph{Desplazamiento de Voltaje}  
+        La señal de salida del amplificador inversor oscila entre $-V_{offset}$ y $V_{offset}$. Para que la señal de salida sea compatible con el ADC del ESP32, se necesita que oscile entre 0 y 3.3 V. Esto requiere un desplazamiento de voltaje de aproximadamente 1.5 V. Para lograr este desplazamiento, se utiliza un amplificador operacional en una configuración de desplazamiento de voltaje. 
+
+        El desplazamiento de 1.5 V se consigue mediante un divisor de voltaje compuesto por dos resistencias, $R_a = 56k\Omega$ y $R_b = 47k\Omega$. La salida del divisor de voltaje se conecta a la entrada no inversora del amplificador operacional, lo que ajusta el rango de la señal de salida a 0-3.3 V. El voltaje de desplazamiento se calcula utilizando la siguiente ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}:
 
         \begin{equation}
             \label{eq:desplazamiento_amplificador_inversor_ppg}
-            V_{offset} = \frac{Rb}{Ra + Rb} \cdot VCC
+            V_{offset} = \frac{R_b}{R_a + R_b} \cdot V_{CC}
         \end{equation}
 
-        Donde $V_{offset}$ es el voltaje de desplazamiento, $R_a = 56k\Omega$ y $R_b = 47k\Omega$ y $VCC$ es el voltaje de alimentación del amplificador operacional, que en este caso es de 3.3 V. Sustituyendo los valores en la ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}, se obtiene el valor de $V_{offset}$.
+        Donde $V_{offset}$ es el voltaje de desplazamiento, $V_{CC}$ es la tensión de alimentación del amplificador operacional, y $R_a$ y $R_b$ son las resistencias del divisor de voltaje. Al sustituir los valores en la ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}, obtenemos el valor de $V_{offset}$:
 
         \begin{equation}
             V_{offset} = \frac{47k\Omega}{56k\Omega + 47k\Omega} \cdot 3.3 V = \frac{47k\Omega}{103k\Omega} \cdot 3.3 V = 0.456 \cdot 3.3 V = 1.5058 V
         \end{equation}
 
-        El valor de $V_{offset}$ es aproximadamente 1.5 V, lo que provoca que la señal de salida se desplace a 1.5 V. Esto permite que la señal oscile entre 0 y 3.3 V, lo cual es adecuado para el ADC del ESP32.
-        
-        Para obtener el capacitor $C_1$ se utiliza la siguiente ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}.
+        El valor de $V_{offset}$ es aproximadamente 1.5 V, lo que provoca que la señal de salida se desplace hacia 1.5 V. Esto permite que la señal oscile dentro del rango adecuado de 0 a 3.3 V, lo cual es ideal para el ADC del ESP32.
+
+        \paragraph{Cálculo de la capacitancia C1}
+        Para calcular el valor de $C_1$, se utiliza la siguiente ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}:
+
         \begin{equation}
             \label{eq:capacitancia_C1_amplificador_inversor_ppg}
             C_1 \geq \frac{50}{\pi \cdot f \cdot R_1}
         \end{equation}
 
         Donde $f$ es la frecuencia de la señal de entrada. En este caso, se seleccionó una frecuencia de 15 Hz. Sustituyendo los valores en la ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}, se obtiene el valor de $C_1$.
+
         \begin{equation}
             C_1 \geq \frac{50}{\pi \cdot 15 Hz \cdot 1k\Omega} = \frac{50}{47.1239} = 1.06 \mu F
         \end{equation}
-        
+
         Se seleccionó un valor de $C_1 = 1 \mu F$, ya que es el valor comercial más cercano al calculado.
+
+        \paragraph{Cálculo de la capacitancia C2}
 
         Para filtrar el ruido de alta frecuencia, se empleó un capacitor de $1 \mu F$ en paralelo con la resistencia $R_b$, lo que contribuye a estabilizar la señal y reducir el ruido. La Figura~\ref{fig:Simulacion_Amplificador_Inversor_PPG} muestra la simulación del amplificador inversor con desplazamiento de voltaje para el sensor PPG.
 
