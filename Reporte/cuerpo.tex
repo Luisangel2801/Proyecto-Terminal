@@ -1,8 +1,29 @@
 \setcounter{page}{1} % Iniciar la numeración de las páginas en este punto
 
+\section{Resumen}
+
+    La hipertensión arterial es una condición prevalente en México que requiere un monitoreo constante para prevenir complicaciones graves. Este proyecto presenta el desarrollo de un sistema no invasivo para la estimación de la presión arterial basado en el cálculo del Tiempo de Transmisión del Pulso (PTT), utilizando señales fisiológicas capturadas mediante sensores de electrocardiograma (ECG) y fotopletismografía (PPG).
+
+    El sistema integra un dispositivo de adquisición de señales con ESP32, procesamiento y análisis de las señales para detectar eventos relevantes (picos R del ECG y picos y valles del pulso), cálculo de la presión arterial estimada y almacenamiento en la nube mediante Firebase. Se desarrolló también una aplicación móvil para que el usuario pueda visualizar y registrar sus mediciones de manera sencilla y accesible.
+
+    Durante las pruebas, se identificó que el principal desafío fue la alta presencia de ruido en las señales analógicas, lo que afectó la precisión del cálculo de la presión arterial, con un margen de error estimado en $\pm30\%$. A pesar de ello, el proyecto demostró la viabilidad conceptual del método y estableció una base para futuras mejoras técnicas, como la implementación de circuitos en placas PCB, uso de componentes SMD y técnicas avanzadas de filtrado para mejorar la calidad de las señales.
+
+    Este trabajo contribuye a la innovación en tecnologías biomédicas accesibles, proponiendo una alternativa para el monitoreo continuo y no invasivo de la presión arterial, con potencial para facilitar el autocuidado y mejorar la salud cardiovascular en poblaciones con acceso limitado a servicios médicos tradicionales.
+
+\newpage
 \section{Introducción}
 
+    La hipertensión arterial representa un problema de salud pública en México debido a su alta prevalencia y a las graves complicaciones que puede ocasionar, como enfermedades cardiovasculares y accidentes cerebrovasculares. La medición y monitoreo constante de la presión arterial son fundamentales para la prevención y control de esta enfermedad, permitiendo detectar cambios a tiempo y facilitar intervenciones médicas oportunas.
 
+    Sin embargo, los métodos tradicionales para medir la presión arterial requieren equipo especializado y personal capacitado, lo que limita la frecuencia y accesibilidad del monitoreo para muchas personas. Por ello, surge la necesidad de desarrollar alternativas no invasivas, portátiles y de bajo costo que permitan a los usuarios realizar un seguimiento continuo y cómodo de su salud cardiovascular.
+
+    El presente proyecto propone una solución basada en la estimación de la presión arterial mediante el cálculo del Tiempo de Transmisión del Pulso (PTT) a partir de señales fisiológicas obtenidas con sensores de electrocardiograma (ECG) y fotopletismografía (PPG). Esta metodología permite medir la presión arterial de forma indirecta, facilitando un monitoreo con más frecuencia sin necesidad de equipo clínico tradicional.
+
+    Además, se desarrolló una aplicación móvil que integra la adquisición, procesamiento y visualización de datos, así como el almacenamiento seguro de las mediciones en la nube mediante Firebase, lo que permite al usuario consultar su historial en cualquier momento y lugar.
+
+    Con este proyecto se busca impulsar el uso de tecnologías accesibles para la salud digital, aportando una solución que podría ampliar el acceso al monitoreo cardiovascular continuo, reducir costos y mejorar la calidad de vida de las personas en México y en otros contextos con necesidades similares.
+
+\newpage
 \section{Antecedentes}
 
     \subsubsection*{A chest-based continuous cuffless blood pressure method: Estimation and evaluation using multiple body sensors \cite{bodySensor}.}
@@ -30,7 +51,7 @@
 
     En este artículo se presenta los procesos de diseño y construcción de un prototipo biomédico IoT para el monitoreo de la presión arterial de pacientes en su lugar de residencia. El sistema consta en colocar un brazalete en el paciente a la altura del corazón, al cual se conecta una bomba de aire que infla el brazalete, junto con un sensor de presión diferencial MPX5050DP. Los datos obtenidos son convertidos de analógico a digital mediante un microcontrolador y enviados, a través de una API REST, al servidor web IoT ThinkSpeak, donde se almacenan y pueden visualizarse en tiempo real.
 
-    \subsubsection*{Development of Real-Time Cuffless Blood Pressure Measurement Systems with ECG Electrodes and a Microphone Using Pulse Transit Time (PTT) \cite{Electrodes_Microphone}.}
+    \subsubsection*{Development of Real-Time Cuffless Blood Pressure Measurement Systems with ECG Electrodes and a Microphone Using \textit{Pulse Transit Time} (PTT) \cite{Electrodes_Microphone}.}
 
     El estudio habla sobre el desarrollo de un sistema de medición de la presión arterial en tiempo real sin uso de un baumanómetro, utilizando electrodos de ECG y un micrófono en lugar de un sensor de fotopletismografía (PPG). El sistema mide la onda de pulso sanguíneo en la arteria radial de la muñeca, calculando la presión arterial sistólica (SBP) y diastólica (DBP) mediante el tiempo de tránsito del pulso (PTT) entre el pico R del ECG y puntos característicos de la onda de pulso.
     
@@ -40,7 +61,7 @@
 \newpage
 \section{Justificación}
 
-En México, las enfermedades cardiovasculares representan la primera causa de muerte, siendo responsable de más de 220 mil fallecimientos en 2021 \cite{SSFallecimientos}. Entre los factores de riesgo más importantes para estas patologías se encuentra la hipertensión arterial, conocida también como el ``asesino silencioso", ya que no presenta síntomas y puede pasar desapercibida durante años, hasta que desarrollan complicaciones graves como infartos o accidentes cerebrovasculares. Según la Encuesta Nacional de Salud y Nutrición (ENSANUT), cerca del 30\% de la población adulta en México padece hipertensión arterial \cite{ENSANUT}, pero una gran proporción de ellos no recibe un tratamiento adecuado o no se diagnostica a tiempo debido a la falta de acceso a un monitoreo continuo y preciso.
+En México, las enfermedades cardiovasculares representan la primera causa de muerte, siendo responsable de más de 220 mil fallecimientos en 2021 \cite{SSFallecimientos}. Entre los factores de riesgo más importantes para estas patologías se encuentra la hipertensión arterial, conocida también como el ``asesino silencioso'', ya que no presenta síntomas y puede pasar desapercibida durante años, hasta que desarrollan complicaciones graves como infartos o accidentes cerebrovasculares. Según la Encuesta Nacional de Salud y Nutrición (ENSANUT), cerca del 30\% de la población adulta en México padece hipertensión arterial \cite{ENSANUT}, pero una gran proporción de ellos no recibe un tratamiento adecuado o no se diagnostica a tiempo debido a la falta de acceso a un monitoreo continuo y preciso.
 
 Los métodos para la medición de la presión arterial, como el baumanómetro, son invasivos y requieren de personal capacitado, lo que limita su uso en el monitoreo continuo de la presión arterial. Esta limitación es crítica en un país como México, donde el sistema de salud puede ser limitado, especialmente en zonas rurales y marginadas. Por lo tanto, es necesario desarrollar dispositivos no invasivos y de bajo coste que permitan a las personas monitorear su presión arterial de forma continua y precisa, para detectar y tratar a tiempo la hipertensión arterial y de esta forma prevenir complicaciones graves.
 
@@ -219,7 +240,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                 \caption[Componente AC y DC de la señal PPG]{Componente AC y DC de la señal PPG\footnotemark}
                 \label{fig:PPG_AC_DC}
             \end{figure}
-            \footnotetext{Muestra un ejemplo de forma de onda de la señal PPG, donde se observa el componente AC y DC de la señal. Imagen tomada del artículo ``Wearable Photoplethysmographic Sensors—Past and Present". [En línea]. Disponible en: \url{https://doi.org/10.3390/electronics3020282}}
+            \footnotetext{Muestra un ejemplo de forma de onda de la señal PPG, donde se observa el componente AC y DC de la señal. Imagen tomada del artículo ``Wearable Photoplethysmographic Sensors—Past and Present''. [En línea]. Disponible en: \url{https://doi.org/10.3390/electronics3020282}}
 
         \subsubsection{Longitud de onda de la luz emitida}
             La piel del cuerpo está compuesta principalmente por tres capas de tejido: la epidermis, la dermis y la hipodermis. Debido a la absorción, solo las ondas de luz con una longitud de onda mayor pueden penetrar a través de todas ellas. La hemoglobina oxigenada absorbe la luz infrarrojo (NIR), mientras que la hemoglobina desoxigenada absorbe luz en la longitud de onda roja. Como resultado, los PPG que emplean LED y fotodetectores con longitudes de onda NIR y roja se utilizan comúnmente en el control clínico para calcular la concentración de hemoglobina.
@@ -264,7 +285,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
     La hipertensión arterial, conocida como el ``asesino silencioso'' por ser asintomática en sus primeras etapas, suele pasar desapercibida hasta que se presentan complicaciones graves. Es la enfermedad de mayor prevalencia a nivel mundial y aumenta significativamente el riesgo cardiovascular. Un diagnóstico temprano, junto con el cumplimiento de las metas terapéuticas, es fundamental para reducir de forma importante el riesgo de complicaciones \cite{archivosCardiologia_2016}.
 
-        \subsubsection{Medción de la presión arterial}
+        \subsubsection{Medición de la presión arterial}
         La presión arterial, también conocida como tensión arterial, se mide habitualmente de forma no invasiva mediante un dispositivo llamado esfigmomanómetro. Este instrumento consta de un brazalete inflable, generalmente colocado en el brazo a la altura del corazón, conectado a un manómetro que registra la presión.
 
         El brazalete se utiliza para ocluir temporalmente el flujo sanguíneo en la arteria braquial, mientras que el manómetro indica la presión necesaria para lograr esta oclusión. Con este dispositivo se obtienen dos valores clave de la presión arterial:
@@ -304,7 +325,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
     La mayoría de las señales bioeléctricas del cuerpo humano son señales con una magnitud del orden de máximo $5 mV_{pp}$ (milivolts pico a pico) y para poder ser registradas y analizadas, es necesario amplificarlas \cite{Diaz_amplificacion_señales}.
 
         \subsubsection{Amplificador operacional}
-            Los amplificadores operacionales\footnote{``Introducción al amplificador operacional (OpAmp) - Amplificadores operacionales", Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/zbbKl}} son dispositivos electrónicos que se utilizan para amplificar señales eléctricas. Estos dispositivos tienen dos entradas, una inversora y otra no inversora, y una salida. La salida del amplificador operacional es proporcional a la diferencia de voltaje entre las dos entradas multiplicada por un factor de ganancia. La ganancia de un amplificador operacional se puede ajustar mediante la selección de resistencias externas.
+            Los amplificadores operacionales\footnote{``Introducción al amplificador operacional (OpAmp) - Amplificadores operacionales'', Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/zbbKl}} son dispositivos electrónicos que se utilizan para amplificar señales eléctricas. Estos dispositivos tienen dos entradas, una inversora y otra no inversora, y una salida. La salida del amplificador operacional es proporcional a la diferencia de voltaje entre las dos entradas multiplicada por un factor de ganancia. La ganancia de un amplificador operacional se puede ajustar mediante la selección de resistencias externas.
 
             En la figura \ref{fig:Amplificador_Operacional} se observa el contenido de un amplificador operacional, con sus dos entradas, la ganancia de voltaje y la salida.
 
@@ -332,7 +353,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \end{table}
 
         \subsubsection{Amplificador Inversor}
-            El amplificador inversor \footnote{``Amplificador inversor - Amplificadores operacionales", Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/eJTCVj}} es una configuración de amplificador operacional en la que la señal de entrada se aplica a la terminal inversora. En esta configuración, la salida está desfasada 180 grados con respecto a la entrada.
+            El amplificador inversor \footnote{``Amplificador inversor - Amplificadores operacionales'', Solución Ingenieril. [En línea]. Disponible en: \url{https://goo.su/eJTCVj}} es una configuración de amplificador operacional en la que la señal de entrada se aplica a la terminal inversora. En esta configuración, la salida está desfasada 180 grados con respecto a la entrada.
 
             El amplificador inversor se configura conectando la señal de entrada a la terminal inversora mediante una resistencia $R_i$. La salida del amplificador operacional retroalimenta a la terminal inversora a través de una resistencia $R_f$, como se muestra en la figura~\ref{fig:Amplificador_Inversor}.
             
@@ -354,7 +375,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             Donde $G$ es la ganancia del amplificador, $R_f$ es la resistencia de retroalimentación y $R_i$ es la resistencia de entrada.
 
         \subsubsection{Amplificador No Inversor}
-            El amplificador no inversor\footnote{``Amplificador No inversor - Amplificadores operacionales", Solución Ingenieril.[En línea]. Disponible en: \url{https://goo.su/8XuqHr}} es una configuración de amplificador operacional en la que la señal de entrada se aplica a la terminal no inversora. La salida de esta configuración está en fase con la entrada, y su amplitud es proporcional a la ganancia del amplificador.
+            El amplificador no inversor\footnote{``Amplificador No inversor - Amplificadores operacionales'', Solución Ingenieril.[En línea]. Disponible en: \url{https://goo.su/8XuqHr}} es una configuración de amplificador operacional en la que la señal de entrada se aplica a la terminal no inversora. La salida de esta configuración está en fase con la entrada, y su amplitud es proporcional a la ganancia del amplificador.
 
             El amplificador no inversor se configura conectando la señal de entrada a la terminal no inversora, esto nos indica que la ganancia será positiva (al contrario del inversor). La salida del amplificador operacional se retroalimenta a la terminal inversora a través de una resistencia $R_f$, como se muestra en la figura~\ref{fig:Amplificador_No_Inversor}.
 
@@ -376,7 +397,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             Donde $G$ es la ganancia del amplificador, $R_f$ es la resistencia de retroalimentación y $R_i$ es la resistencia de entrada.
 
         \subsubsection{Amplificador Diferencial}
-            El amplificador diferencial\footnote{W. Storr, ``Differential amplifier - the voltage subtractor," Basic Electronics Tutorials. [En línea]. Disponible en: \url{https://goo.su/vDsY3K}} es un tipo de amplificador operacional cuya característica principal radica en su capacidad de amplificar la diferencia de voltaje entre sus dos entradas mientras rechaza las señales comunes presentes en ambas (CMRR, por sus siglas en inglés). En la figura~\ref{fig:Amplificador_Diferencial} se muestra el diagrama esquemático de un amplificador diferencial.
+            El amplificador diferencial\footnote{W. Storr, ``Differential amplifier - the voltage subtractor'', Basic Electronics Tutorials. [En línea]. Disponible en: \url{https://goo.su/vDsY3K}} es un tipo de amplificador operacional cuya característica principal radica en su capacidad de amplificar la diferencia de voltaje entre sus dos entradas mientras rechaza las señales comunes presentes en ambas (CMRR, por sus siglas en inglés). En la figura~\ref{fig:Amplificador_Diferencial} se muestra el diagrama esquemático de un amplificador diferencial.
 
             \begin{figure}[H]
                 \centering
@@ -408,7 +429,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \end{equation}
 
         \subsubsection{Amplificador de Instrumentación}
-            Para amplificar señales bioeléctricas, como las del ECG, se requieren dos características en un amplificador: la primera es que presente una alta impedancia en sus termminales de entrada (elimina posibles caídas de voltaje de la señal cardiaca que den como resultado la reducción o anulación de su amplitud), y la segunda es que solamente amplifique la diferencia de voltaje existente entre dichas terminales. 
+            Para amplificar señales bioeléctricas, como las del ECG, se requieren dos características en un amplificador: la primera es que presente una alta impedancia en sus terminales de entrada (elimina posibles caídas de voltaje de la señal cardiaca que den como resultado la reducción o anulación de su amplitud), y la segunda es que solamente amplifique la diferencia de voltaje existente entre dichas terminales. 
             
             El amplificador que reúne las dos caracteríasticas mencionadas es el amplificador de instrumentación\footnote{``Práctica 4 - El amplificador de instrumentación básico'', Universidad Michoacana de San Nicolás de Hidalgo Facultad de Ingeniería Eléctrica. [En línea]. Disponible en: https://goo.su/n7zlBm}.
 
@@ -646,18 +667,28 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             \begin{itemize}
                 \item \textbf{ECG}
                     \begin{itemize}
-                        \item La señal captada por los electrodos pasa por un amplificador de instrumentación AD620 para aumentar su amplitud.
-                        \item Posteriormente, la señal pasa a través de un filtro activo pasa altas y pasa bajas de segundo orden tipo Sallen-Key, el cual elimina el ruido y las frecuencias no deseadas.
-                        \item A continuación, se aplica un filtro pasabanda rechazante pasivo RC Twin-T para suprimir el ruido de 60 Hz.
-                        \item Finalmente, la señal se amplifica nuevamente mediante un amplificador no inversor, obteniendo así una señal de salida adecuada.
+                        \item La señal captada por los electrodos se amplifica inicialmente mediante un amplificador de instrumentación AD620, con el fin de aumentar su amplitud.
+                        \item Posteriormente, la señal pasa a través de un filtro activo pasaalto y pasa bajo de segundo orden tipo Sallen-Key, diseñado para eliminar el ruido y las frecuencias no deseadas.
+                        \item A continuación, se utiliza un filtro pasabanda rechazante pasivo RC Twin-T para suprimir específicamente el ruido a 60 Hz.
+                        \item Luego, la señal se amplifica nuevamente para adecuar su rango de voltaje al nivel requerido por el ADC del ESP32.
+                        \item Para ajustar la señal al rango de entrada del ADC, se emplea un amplificador operacional con fuente única.
+                        \item Finalmente, se incorpora un comparador con histéresis para detectar los picos de la señal.
+                    \end{itemize}
+                \item \textbf{PPG}
+                    \begin{itemize}
+                        \item La señal captada por el sensor PPG pasa a través de un filtro activo pasaalto y pasa bajo de segundo orden tipo Sallen-Key, diseñado para eliminar el ruido y las frecuencias no deseadas.
+                        \item A continuación, se utiliza un filtro pasabanda rechazante pasivo RC Twin-T para suprimir específicamente el ruido a 60 Hz.
+                        \item Luego, la señal se amplifica nuevamente para adecuar su rango de voltaje al nivel requerido por el ADC del ESP32.
+                        \item Para ajustar la señal al rango de entrada del ADC, se emplea un amplificador operacional con fuente única.
+                        \item Finalmente, se incorpora un comparador con histéresis para detectar los picos de la señal.
                     \end{itemize}
             \end{itemize}
         \item \textbf{Conversión y Procesamiento Inicial}
             \begin{itemize}
                 \item \textbf{ESP32}
                     \begin{itemize}
-                        \item La señal del ECG se convierte de analógica a digital mediante un conversor analógico-digital (ADC) de 12 bits.
-                        \item La señal del PPG se procesa para eliminar el ruido y las interferencias, y posteriormente se convierte de analógica a digital mediante un ADC de 12 bits.
+                        \item El ESP32 recibe las señales del ECG y PPG a través de sus pines de entrada analógica.
+                        \item La señal analógica se convierte a digital mediante el ADC del ESP32.
                     \end{itemize}
             \end{itemize}
         \item \textbf{Transmisión de Datos}
@@ -668,20 +699,37 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
                         \item Se envian los datos fisiológicos capturados al teléfono móvil.
                     \end{itemize}
             \end{itemize}
+        \item \textbf{Aplicación Android}
+            \begin{itemize}
+                \item \textbf{Interfaz de Usuario}
+                    \begin{itemize}
+                        \item Cuando el usuario abre la aplicación por primera vez, deberá iniciar sesión o registrarse.
+                        \item Una vez dentro de la aplicación, el usuario puede ver sus datos fisiológicos graficados en tiempo real.
+                        \item El usuario puede ver los dispositivos Bluetooth disponibles y seleccionar el ESP32 para conectarse.
+                        \item La aplicación muestra el resultado de la estimación de la presión arterial y la frecuencia cardíaca.
+                    \end{itemize}
+            \end{itemize}
         \item \textbf{Visualización y Análisis en la Aplicación Android}
             \begin{itemize}
                 \item \textbf{Recepción de Datos}
                     \begin{itemize}
-                        \item La aplicación recibe los datos fisiológicos del ESP32 a través de Bluetooth.
-                    \end{itemize}
-                \item \textbf{Visualización de los Datos}
-                    \begin{itemize}
-                        \item Los datos del ECG y PPG se representan de forma gráfica en la interfaz de usuario, ofreciendo una visualización clara del electrocardiograma y del fotopletismograma.
+                        \item La aplicación recibe los datos fisiológicos del ESP32 a través de Bluetooth y los procesa para su visualización.
+                        \item Los datos recibidos incluyen la señal del ECG, la señal del PPG y los picos de ambas señales.
                     \end{itemize}
                 \item \textbf{Estimación de la Presión Arterial}
                     \begin{itemize}
                         \item La aplicación realiza un preprocesamiento para calcular el \textit{Pulse Transit Time (PTT)} utilizando la señal del ECG y del PPG.
                         \item A partir del \textit{PTT}, la aplicación estima la presión arterial sistólica y diastólica del usuario.
+                        \item Se obtiene la frecuencia cardíaca a partir de la señal del PPG.
+                    \end{itemize}
+            \end{itemize}
+        \item \textbf{Almacenamiento de Datos}
+            \begin{itemize}
+                \item \textbf{Base de Datos}
+                    \begin{itemize}
+                        \item La aplicación almacena los datos fisiológicos del usuario en Firebase.
+                        \item Los datos almacenados incluyen la fecha y hora de la captura, la frecuencia cardíaca, la presión arterial sistólica y diastólica.
+                        \item El usuario puede acceder a su historial de datos a través de la aplicación.
                     \end{itemize}
             \end{itemize}
     \end{enumerate}
@@ -706,7 +754,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             R_G = \frac{49.4 k\Omega}{G - 1} = \frac{49.4 k\Omega}{21 - 1} = 2470 \Omega \approx 2.5 k\Omega
         \end{equation}
 
-        Con la resistencia calculada, se procedió a simular el circuito en el software de diseño de circuitos Multisim, obteniendo una ganancia de 20.76, muy cercana a la deseada. La figura~\ref{fig:Simulacion_AD620} muestra la simulación del amplificador de instrumentación AD620 en Multisim.
+        Con la resistencia calculada, se procedió a diseñar el circuito en el software de diseño de circuitos Multisim, obteniendo una ganancia de 20.76, muy cercana a la deseada. La figura~\ref{fig:Simulacion_AD620} muestra la simulación del amplificador de instrumentación AD620 en Multisim.
 
         \begin{figure}[H]
             \centering
@@ -782,7 +830,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             R_2 = \frac{R_1}{m^2} = \frac{2.2 k\Omega}{(0.7071)^2} \approx 4.4 k\Omega 
         \end{equation}
 
-        Se llevó a cabo la simulación del filtro paso alto de segundo orden tipo \textit{Sallen-Key} en Multisim. La Figura~\ref{fig:Simulacion_Filtro_Pasa_Altas} presenta la simulación del filtro en Multisim, utilizando las resistencias y el capacitor seleccionados.
+        Se llevó a cabo el diseño del filtro paso alto de segundo orden tipo \textit{Sallen-Key} en Multisim. La Figura~\ref{fig:Simulacion_Filtro_Pasa_Altas} presenta la simulación del filtro en Multisim, utilizando las resistencias y el capacitor seleccionados.
 
         \begin{figure}[H]
             \centering
@@ -799,7 +847,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
         \paragraph{Ganancia del Amplificador Operacional}
         En este diseño, al igual que con el filtro pasa altas, se busca mantener una ganancia unitaria para evitar amplificar la señal y minimizar la introducción de ruido.
-        Esto configura el amplificador operacional como un seguidor de voltaje conectando su salida directamente a la entrada inversora, lo que elimina las resistencias $RA$ y $RB$, simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_bajos}.
+        Esto configura el amplificador operacional como un seguidor de voltaje conectando su salida directamente a la entrada inversora, lo que elimina las resistencias $R_a$ y $R_b$, simplificando la ganancia del amplificador operacional a la ecuación~\ref{eq:funcion_amplificador_operacional_pasa_bajos}.
 
         \begin{equation}
             \label{eq:funcion_amplificador_operacional_pasa_bajos}
@@ -866,7 +914,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             C_2 = 2.2 \mu F
         \end{equation}
 
-        Se llevó a cabo la simulación del filtro pasa bajas de segundo orden tipo \textit{Sallen-Key} en Multisim. La Figura~\ref{fig:Simulacion_Filtro_Pasa_Bajas} presenta la simulación del filtro en Multisim, utilizando las resistencias y los capacitores seleccionados.
+        Se llevó a cabo el diseño del filtro pasa bajas de segundo orden tipo \textit{Sallen-Key} en Multisim. La Figura~\ref{fig:Simulacion_Filtro_Pasa_Bajas} presenta la simulación del filtro en Multisim, utilizando las resistencias y los capacitores seleccionados.
 
         \begin{figure}[H]
             \centering
@@ -879,7 +927,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \subsubsection{Filtro Notch Pasivo Rechaza Banda RC Twin-T}
         En la etapa de acondicionamiento de la señal, se implementó un filtro notch pasivo RC tipo Twin-T para atenuar las interferencias de 60 Hz, comúnmente presentes debido al ruido de la red eléctrica. Este filtro es eficaz para eliminar una frecuencia específica sin afectar significativamente las demás componentes de la señal.
 
-        El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de "T" doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos. En otras palabras, si tenemos una frecuencia central de 100 Hz, el ancho de banda del filtro será de 200 Hz.
+        El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de ``T'' doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos. En otras palabras, si tenemos una frecuencia central de 100 Hz, el ancho de banda del filtro será de 200 Hz.
 
         Para diseñar el filtro notch pasivo RC Twin-T centrado en $f_0 = 60 Hz$, se utilizaron las siguientes ecuaciones:
 
@@ -960,35 +1008,134 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             C_3 = (1 - 2(0.25)) \cdot 100 nF = 50 nF
         \end{equation}
 
+        Con los valores de resistencias y capacitancias calculados, se llevó a cabo el diseño del filtro pasabanda rechazante pasivo RC Twin-T en Multisim. La figura~\ref{fig:Simulacion_Filtro_Rechaza_Banda} presenta la simulación del filtro en Multisim, utilizando las resistencias y los capacitores seleccionados.
+
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.5\textwidth]{img/Desarrollo/multisim_rechazaBandas.png}
             \caption[Simulación del filtro rechaza banda pasivo RC Twin-T.]{Simulación del filtro rechaza banda pasivo RC Twin-T\footnotemark}
             \label{fig:Simulacion_Filtro_Rechaza_Banda}
         \end{figure}
-        \footnotetext{Muestra la simulación del filtro rechaza banda pasivo RC Twin-T en el software Multisim, centrado en 60 Hz.}
+        \footnotetext{Muestra el diseño del filtro rechaza banda pasivo RC Twin-T en el software Multisim, centrado en 60 Hz.}
 
         \subsubsection{Amplificador no Inversor}
-        Finalmente, para visualizar la señal, es necesario amplificar nuevamente la señal ya acondicionada antes de su observación en el osciloscopio. Para ello, un amplificador no inversor sencillo es adecuado para cumplir con esta tarea. A continuación se muestra la ecuación~\ref{eq:ganancia_amplificador_no_inversor} para calcular la ganancia del amplificador no inversor.
+        Para visualizar la señal de mejor manera, es necesario amplificar nuevamente la señal ya acondicionada antes de su observación en el osciloscopio. Para ello, un amplificador no inversor sencillo es adecuado para cumplir con esta tarea. A continuación se muestra la ecuación~\ref{eq:ganancia_amplificador_no_inversor} para calcular la ganancia del amplificador no inversor.
 
         \begin{equation}
             \label{eq:ganancia_amplificador_no_inversor}
             A = 1 + \frac{R_F}{R_{1}} = 1 + \frac{1 M\Omega}{10 k\Omega} = 101
         \end{equation}
 
-        Donde $R_f$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño asegura que la señal amplificada mantenga la fidelidad necesaria para una visualización precisa en el osciloscopio.
+        Donde $R_1$ es la resistencia de realimentación y $R_g$ es la resistencia de ganancia. Este diseño amplifica la señal de ECG en un factor de 101, lo 
+        que permite observar la señal en el osciloscopio.
+        Se llevó a cabo el diseño del amplificador no inversor en Multisim. La figura~\ref{fig:Simulacion_Amplificador_No_Inversor} presenta la simulación del amplificador no inversor en Multisim, utilizando las resistencias seleccionadas.
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.5\textwidth]{img/Desarrollo/multisim_AmpNoInversor.png}
+            \includegraphics[width=0.4\textwidth]{img/Desarrollo/multisim_AmpNoInversor.png}
             \caption[Simulación del amplificador no inversor.]{Simulación del amplificador no inversor\footnotemark}
             \label{fig:Simulacion_Amplificador_No_Inversor}
         \end{figure}
-        \footnotetext{Muestra la simulación del amplificador no inversor en el software Multisim conectado a un osciloscopio.}
+        \footnotetext{Muestra la simulación del amplificador no inversor en el software Multisim.}
 
+        \subsubsection{Amplificador operacional con fuente única}
+        Una vez obtenida la señal filtrada y amplificada, es necesario establecer un nivel de referencia adecuado para la señal. Para ello, se utiliza un amplificador operacional con fuente única, que permite ajustar el nivel de referencia de modo que la señal de salida oscile entre $0\,V$ y $3.3\,V$, rango compatible con la entrada ADC del ESP32.
+
+        Para generar este nivel de referencia, se emplea un divisor de voltaje formado por dos resistencias, $R_a = 56\,k\Omega$ y $R_b = 27\,k\Omega$, conectadas a la entrada no inversora del amplificador operacional. El voltaje resultante se calcula mediante la ecuación~\ref{eq:divisor_de_voltaje}:
+
+        \begin{equation}
+            \label{eq:divisor_de_voltaje}
+            V_{out} = \frac{R_b}{R_a + R_b} \cdot V_{in}
+        \end{equation}
+
+        donde $V_{in}$ es el voltaje de alimentación del amplificador operacional, que en este caso es $5\,V$. Por lo tanto, el voltaje de referencia obtenido es:
+
+        \begin{equation}
+            \label{eq:voltaje_divisorECG}
+            V_{out} = \frac{27\,k\Omega}{56\,k\Omega + 27\,k\Omega} \cdot 5\,V = 1.62\,V
+        \end{equation}
+
+        Este voltaje de referencia se suma a la señal acondicionada del ECG, permitiendo que la señal resultante oscile dentro del rango de $0\,V$ a $3.3\,V$, que es el rango máximo soportado por el ADC del ESP32. De esta manera, se evita la saturación o pérdida de información en la adquisición de la señal.
+
+        Adicionalmente, se incorpora un filtro pasa altas RC de primer orden en la entrada inversora del amplificador operacional para eliminar componentes de corriente continua (0 Hz). Esto se logra mediante un capacitor $C_1$ en serie con una resistencia $R_1 = 10\,k\Omega$, conectados a dicha entrada. El capacitor actúa como un circuito abierto para señales de corriente continua, bloqueándolas efectivamente.
+
+        El valor del capacitor se calcula con la ecuación~\ref{eq:frecuencia_corte_filtro_RC}, correspondiente a la frecuencia de corte de un filtro RC pasa altas:
+
+        \begin{equation}
+            \label{eq:frecuencia_corte_filtro_RC}
+            f_c = \frac{1}{2\pi R_1 C}
+        \end{equation}
+
+        Donde $f_c$ es la frecuencia de corte, $R$ es la resistencia y $C$ es el capacitor. Para el filtro pasa altas, se desea una frecuencia de corte de 0.5\,Hz, por lo que se despeja la ecuación~\ref{eq:frecuencia_corte_filtro_RC} para obtener el valor del capacitor:
+
+        \begin{equation}
+            \label{eq:valor_capacitor}
+            C = \frac{1}{2\pi R_1 f_c} = \frac{1}{2\pi (10\,k\Omega)(0.5\,Hz)} = 31.8\,\mu F
+        \end{equation}
+
+        Se selecciona un capacitor comercial de $33\,\mu F$, que es el valor más cercano al calculado.
+
+        Para calcular la ganancia del amplificador operacional, se utiliza la ecuación~\ref{eq:amplitud_filtro_RC_ECG}, que relaciona la ganancia $A$ con las resistencias $R_1$ y $R_2$:
+
+        \begin{equation}
+            \label{eq:amplitud_filtro_RC_ECG}
+            A = \frac{R_2}{R_1}
+        \end{equation}
+
+        Deseamos amplificar la señal de entrada 10 veces, por lo que con un valor de $R_1 = 10\,k\Omega$, despejamos la ecuación~\ref{eq:amplitud_filtro_RC_ECG} para obtener $R_2$:
+
+        \begin{equation}
+            \label{eq:valor_R2}
+            R_2 = A \cdot R_1 = 10 \times 10\,k\Omega = 100\,k\Omega
+        \end{equation}
+
+        El diseño del amplificador operacional con fuente única se simuló en Multisim utilizando los valores seleccionados para las resistencias y el capacitor. La figura~\ref{fig:Simulacion_Amplificador_Con_Fuente_Unica} muestra la simulación obtenida en Multisim.
+
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{img/Desarrollo/multisim_ampFuenteUnica.png}
+            \caption[Simulación del amplificador operacional con fuente única.]{Simulación del amplificador operacional con fuente única\footnotemark}
+            \label{fig:Simulacion_Amplificador_Con_Fuente_Unica}
+        \end{figure}
+        \footnotetext{Muestra la simulación del amplificador operacional con fuente única en el software Multisim.}
+
+        \subsubsection{Histéresis de la señal de ECG}
+        La histéresis es un fenómeno que se presenta en los sistemas eléctricos y electrónicos, donde la salida de un sistema depende no solo de su entrada actual, sino también de su historia pasada. En el caso del ECG, la histéresis puede ayudar a detectar los picos de la señal de manera más precisa, evitando falsas detecciones causadas por ruidos o interferencias. Para implementar la histéresis en el circuito, se utiliza un comparador de voltaje, usando una resistencia y un potenciómetro que se encargarán de ajustar el voltaje de referencia. Para ello seleccionamos un potenciómetro de 10k$\Omega$ y una resistencia de 1k$\Omega$. Lo que nos da un voltaje de referencia que se calcula mediante la ecuación~\ref{eq:divisor_de_voltaje_histeresis}.
+
+        \begin{equation}
+            \label{eq:divisor_de_voltaje_histeresis}
+            V_{out} = \frac{R_b}{R_a + R_b} \cdot V_{in}
+        \end{equation}
+
+        Donde $V_{in}$ es la tensión de alimentación del comparador, que en este caso es de 5V. Por lo tanto, el voltaje de salida se calcula como:
+        
+        \begin{equation}
+            \label{eq:voltaje_divisor_histeresis}
+            V_{out} = \frac{10k\Omega}{1k\Omega + 10k\Omega} \cdot 5V = 4.55V
+        \end{equation}
+
+        Este valor será el voltaje de referencia máxima.
+        Ahora para el voltaje de referencia mínima, se utiliza la resistencia de 1k$\Omega$ y el potenciómetro ajustado a 1$\Omega$, realizando el mismo procedimiento que en la ecuación~\ref{eq:divisor_de_voltaje_histeresis}.
+        \begin{equation}
+            \label{eq:voltaje_divisor_histeresis_minimo}
+            V_{out} = \frac{1k\Omega}{1k\Omega + 10k\Omega} \cdot 5V = 0.45V
+        \end{equation}
+        Este voltaje de referencia mínimo se utiliza para establecer un umbral inferior en la señal de ECG, lo que ayuda a evitar la detección de picos inferiores.
+        Ya teniendo el voltaje máximo y mínimo, podremos ajustar con el potenciómetro de 0.45V a 4.55V, lo cual es suficiente para detectar los picos de la señal de ECG, y solo muestre una señal binaria.
+        El circuito del histéresis se muestra en la siguiente figura~\ref{fig:Simulacion_Histeresis}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth]{img/Desarrollo/multisim_histeresis.png}
+            \caption[Simulación del circuito de histéresis.]{Simulación del circuito de histéresis\footnotemark}
+            \label{fig:Simulacion_Histeresis}
+        \end{figure}
+        \footnotetext{Muestra la simulación del circuito de histéresis en el software Multisim.}
+        
         \subsubsection{Simulación del Circuito de ECG}
 
-        Finalmente, se procedió a simular el circuito completo de ECG en Multisim, incluyendo el amplificador de instrumentación AD620, los filtros activos pasa altas y pasa bajas de segundo orden tipo \textit{Sallen-Key}, el filtro notch pasivo RC Twin-T y el amplificador no inversor. La Figura~\ref{fig:Simulacion_circuito_ECG} muestra el circuito completo simulado en Multisim.
+        Finalmente, se procedió a simular el circuito completo de ECG en Multisim, incluyendo el amplificador de instrumentación AD620, los filtros activos pasa altas y pasa bajas de segundo orden tipo \textit{Sallen-Key}, el filtro notch pasivo RC Twin-T, el amplificador no inversor, el amplificador con fuente única y la histéresis de la señal. La Figura~\ref{fig:Simulacion_circuito_ECG} muestra el circuito completo simulado en Multisim.
 
         \begin{figure}[H]
             \centering
@@ -1035,19 +1182,47 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \label{fig:Pinzas_ECG}
     \end{figure}
 
-    \subsection{Visualización de la señal de ECG en el osciloscopio}
+    \subsection{Visualización de las señales en el osciloscopio}
+        \subsubsection{Visualización de la señal de ECG en el osciloscopio}
 
-    En la Figura~\ref{fig:ECG_Osciloscopio} se muestra la señal de ECG acondicionada en el osciloscopio, la cual se visualiza de forma clara y precisa, lista para ser transmitida al ESP32 para su procesamiento y análisis.
+        En la Figura~\ref{fig:ECG_Osciloscopio} se muestra la señal de ECG acondicionada tal como se visualiza en el osciloscopio. La señal aparece clara y precisa, lista para ser transmitida al ESP32 para su procesamiento y análisis.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\textwidth]{img/Desarrollo/electro_osciloscopio.png}
-        \caption{Señal de ECG acondicionada.}
-        \label{fig:ECG_Osciloscopio}
-    \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/electro_osciloscopio.png}
+            \caption{Señal de ECG acondicionada.}
+            \label{fig:ECG_Osciloscopio}
+        \end{figure}
+        \footnotetext{Muestra la señal de ECG acondicionada en el osciloscopio.}
 
-    \subsection{Desarrollo del filtro para el sensor PPG}
-    El sensor de fotopletismografía (PPG) es un método no invasivo para medir la frecuencia cardíaca y la saturación de oxígeno en la sangre. Debido a que su salida es una señal analógica susceptible a ruido eléctrico y artefactos de movimiento, es necesario incorporar filtros. Para ello, se implementaron filtros activos de segundo orden tipo \textit{Sallen-Key} para eliminar, respectivamente, el ruido de alta y baja frecuencia, junto con un filtro pasa bandas destinado a suprimir la interferencia de 60 Hz.
+        \subsubsection{Visualización de la histéresis en la señal de ECG}
+
+        En la Figura~\ref{fig:ECG_Osciloscopio_Histeresis} se presenta la señal binaria de histéresis correspondiente a la señal de ECG acondicionada, capturada en el osciloscopio. La histéresis se activa cuando la señal de ECG supera un umbral específico, permitiendo detectar los picos de la señal con mayor precisión y evitando falsas detecciones ocasionadas por ruido o interferencias.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/histerisisECG.png}
+            \caption[Señal de histéresis de ECG.]{Señal binaria de histéresis de ECG.\footnotemark}
+            \label{fig:ECG_Osciloscopio_Histeresis}
+        \end{figure}
+        \footnotetext{Señal binaria de histéresis de ECG.}
+
+        \subsubsection{Visualización de los picos en la señal de ECG}
+
+        En la Figura~\ref{fig:ECGconHisteresis} se muestra la señal de ECG acondicionada junto con la señal de histéresis aplicada, ambas visualizadas en el osciloscopio. La señal de salida del comparador se presenta como una señal binaria, donde los picos de la señal de ECG se representan mediante pulsos altos. 
+
+        Esta técnica facilita el cálculo del PTT (\textit{Pulse Transit Time}), al permitir una detección más precisa de los picos de la señal. La histéresis contribuye a evitar falsas detecciones ocasionadas por ruido o interferencias, mejorando así la calidad de la señal y la exactitud en el análisis posterior.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/electro_histeresis.png}
+            \caption[Señal de electrocardiograma con histéresis.]{Señal de electrocardiograma con histéresis.\footnotemark}
+            \label{fig:ECGconHisteresis}
+        \end{figure}
+        \footnotetext{Señal de electrocardiograma con histéresis visualizada en el osciloscopio.}
+
+    \subsection{Desarrollo del filtros para el sensor PPG}
+    El sensor de fotopletismografía (PPG) es un método no invasivo para medir la frecuencia cardíaca y la saturación de oxígeno en la sangre. Debido a que su salida es una señal analógica susceptible a ruido eléctrico y artefactos de movimiento, es necesario incorporar filtros. Para ello, se implementaron filtros activos de segundo orden tipo \textit{Sallen-Key} para eliminar, respectivamente, el ruido de alta y baja frecuencia, junto con un filtro rechaza banda destinado a suprimir la interferencia de 60 Hz. Además, se utilizó un amplificador offset para ajustar el nivel de referencia de la señal y una histéresis para mejorar la detección de picos inferiores.
 
         \subsubsection{Filtro Activo Pasa Bajas}
         Para el sensor PPG, se implementó un filtro pasa bajas de segundo orden tipo \textit{Sallen-Key}
@@ -1189,7 +1364,7 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
 
         Para el sensor PPG, se implementó un filtro notch pasivo RC tipo Twin-T para atenuar las interferencias de 60 Hz, comúnmente presentes debido al ruido de la red eléctrica. Este filtro es eficaz para eliminar una frecuencia específica sin afectar significativamente las demás componentes de la señal.
 
-        El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de "T" doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos.
+        El filtro Twin-T es un circuito pasivo que utiliza resistencias y capacitores dispuestos en una configuración en forma de ``T'' doble, lo que permite rechazar una frecuencia central $f_0$. Al ser un filtro pasivo, está compuesto únicamente por resistencias y capacitores, lo que simplifica su diseño y construcción. Sin embargo, su factor de calidad $Q$ es limitado, generalmente por debajo de 0.5, lo que implica un ancho de banda relativamente amplio en comparación con filtros activos.
 
         Para diseñar el filtro notch pasivo RC Twin-T centrado en $f_0 = 60 Hz$, se utilizaron las siguientes ecuaciones:
 
@@ -1280,6 +1455,18 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
         \footnotetext{Filtro rechaza banda pasivo RC Twin-T en el software Multisim, centrado en 60 Hz.}
 
         \subsubsection{Amplificador Inversor con fuente única}
+        \paragraph{Capacitor de acoplamiento}
+        Una vez filtrada la señal del sensor PPG, se incorpora un filtro pasa altas RC de primer orden que conecta en la entrada inversora del amplificador operacional. Este filtro se utiliza para eliminar componentes de corriente continua (0Hz). Para el valor del capacitor se seleccionó la frecuencia de corte de $0.5 Hz$, ya que, los latidos del corazón oscilan entre $1 Hz$ y $2 Hz$ en reposo. Y se calcula mediante la ecuación~\ref{eq:frecuencia_corte_filtro_pasa_altas_continua_ppg}.
+        \begin{equation}
+            \label{eq:frecuencia_corte_filtro_pasa_altas_continua_ppg}
+            f_c = \frac{1}{2\pi R_1 C_1}
+        \end{equation}
+        Donde $R_1$ se seleccionó como $1k\Omega$, asi que, para el valor de $C_1$ se despeja la ecuación~\ref{eq:frecuencia_corte_filtro_pasa_altas_continua_ppg} y se obtiene el valor de $C_1$.
+        \begin{equation}
+            C_1 = \frac{1}{2\pi R_1 f_c} = \frac{1}{2\pi (1k\Omega)(0.5Hz)} = 318.3098862 \mu F \approx 318.31 \mu F
+        \end{equation}
+        Se seleccionó un valor de $C_1 = 330 \mu F$, ya que es el valor comercial más cercano al calculado. El capacitor se conecta en serie a la resistencia $R_1$ y se coloca en la entrada inversora del amplificador operacional. Esto permite eliminar la componente de corriente continua de la señal, dejando solo la componente alterna.
+
         \paragraph{Ganancia del amplificador inversor}
         Para amplificar la señal del sensor PPG, se utilizó un amplificador inversor. La ganancia del amplificador inversor se calcula mediante la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}.
 
@@ -1288,67 +1475,534 @@ El desarrollo de un sistema de monitoreo no invasivo de la presión arterial per
             V_o = - \frac{R_2}{R_1} \cdot V_i
         \end{equation}
 
-        Donde $V_o$ es la señal de salida, $V_i$ es la señal de entrada. En este caso, se seleccionaron los valores de $R_1 = 1 k\Omega$ y $R_2 = 100 k\Omega$. Sustituyendo los valores en la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}, se obtiene el valor de $V_o$.
+        Donde $V_o$ es la señal de salida, $V_i$ es la señal de entrada. En este caso, se seleccionó $R_2 = 100 k\Omega$. Sustituyendo los valores en la ecuación~\ref{eq:ganancia_amplificador_inversor_ppg}, se obtiene el valor de $V_o$.
 
         \begin{equation}
             \label{eq:ganancia_amplificador_inversor_ppg_valor}
             V_o = - \frac{100k\Omega}{1k\Omega} \cdot V_i = -100 \cdot V_i
         \end{equation}
 
-        Lo que significa que la señal de salida será 100 veces mayor que la señal de entrada. Esto es útil para amplificar la señal del sensor PPG, que generalmente tiene un voltaje de salida bajo.
-
+        Lo que significa que la señal de salida será 100 veces mayor que la señal de entrada, con una fase invertida. Esto es útil para amplificar la señal del sensor PPG, que generalmente tiene un voltaje de salida bajo.
+        
         \paragraph{Desplazamiento de Voltaje}  
-        La señal de salida del amplificador inversor oscila entre $-V_{offset}$ y $V_{offset}$. Para que la señal de salida sea compatible con el ADC del ESP32, se necesita que oscile entre 0 y 3.3 V. Esto requiere un desplazamiento de voltaje de aproximadamente 1.5 V. Para lograr este desplazamiento, se utiliza un amplificador operacional en una configuración de desplazamiento de voltaje. 
+        La señal de salida del amplificador inversor oscila entre $-V_{offset}$ y $V_{offset}$. Para que la señal de salida sea compatible con el ADC del ESP32, se necesita que oscile entre 0 y 3.3 V. Para asi, de esta manera evitar saturaciones en el ADC y obtener un rango de lectura adecuado. Esto requiere un desplazamiento de voltaje de aproximadamente 1.65 V, lo cual es la mitad de 3.3V. Para lograr este desplazamiento, se utiliza un amplificador operacional en una configuración de desplazamiento de voltaje. 
 
-        El desplazamiento de 1.5 V se consigue mediante un divisor de voltaje compuesto por dos resistencias, $R_a = 56k\Omega$ y $R_b = 47k\Omega$. La salida del divisor de voltaje se conecta a la entrada no inversora del amplificador operacional, lo que ajusta el rango de la señal de salida a 0-3.3 V. El voltaje de desplazamiento se calcula utilizando la siguiente ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}:
-
-        \begin{equation}
-            \label{eq:desplazamiento_amplificador_inversor_ppg}
-            V_{offset} = \frac{R_b}{R_a + R_b} \cdot V_{CC}
-        \end{equation}
-
-        Donde $V_{offset}$ es el voltaje de desplazamiento, $V_{CC}$ es la tensión de alimentación del amplificador operacional, y $R_a$ y $R_b$ son las resistencias del divisor de voltaje. Al sustituir los valores en la ecuación~\ref{eq:desplazamiento_amplificador_inversor_ppg}, obtenemos el valor de $V_{offset}$:
+        El desplazamiento de 1.65 V se consigue mediante un divisor de voltaje compuesto por dos resistencias. 
+        El valor de la resistencia $R_a$ se selecciona como $56k\Omega$ y el valor de la resistencia $R_b$ se calcula de la siguiente manera:
 
         \begin{equation}
-            V_{offset} = \frac{47k\Omega}{56k\Omega + 47k\Omega} \cdot 3.3 V = \frac{47k\Omega}{103k\Omega} \cdot 3.3 V = 0.456 \cdot 3.3 V = 1.5058 V
+            \label{eq:resistencia_Rb_divisor_ppg}
+            R_b = \frac{R_a \cdot V_{offset}}{V_{CC} - V_{offset}}
         \end{equation}
 
-        El valor de $V_{offset}$ es aproximadamente 1.5 V, lo que provoca que la señal de salida se desplace hacia 1.5 V. Esto permite que la señal oscile dentro del rango adecuado de 0 a 3.3 V, lo cual es ideal para el ADC del ESP32.
-
-        \paragraph{Cálculo de la capacitancia C1}
-        Para calcular el valor de $C_1$, se utiliza la siguiente ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}:
-
+        Donde $V_{CC}$ es la tensión de alimentación del amplificador operacional, que en este caso es de 5V. Sustituyendo los valores en la ecuación~\ref{eq:resistencia_Rb_divisor_ppg}, se obtiene el valor de $R_b$.
         \begin{equation}
-            \label{eq:capacitancia_C1_amplificador_inversor_ppg}
-            C_1 \geq \frac{50}{\pi \cdot f \cdot R_1}
+            R_b = \frac{56k\Omega \cdot 1.65V}{5V - 1.65V} = 28.2 k\Omega
         \end{equation}
+        Se seleccionó un valor de $R_b = 27 k\Omega$, ya que es el valor comercial más cercano al calculado. El divisor de voltaje se conecta entre la alimentación del amplificador operacional y tierra, y se coloca en la entrada no inversora del amplificador operacional. Esto permite desplazar la señal de salida del amplificador inversor a un rango de 0 a 3.3 V.
 
-        Donde $f$ es la frecuencia de la señal de entrada. En este caso, se seleccionó una frecuencia de 15 Hz. Sustituyendo los valores en la ecuación~\ref{eq:capacitancia_C1_amplificador_inversor_ppg}, se obtiene el valor de $C_1$.
-
+        Asi que, para verificar que los valores de las resistencias seleccionadas son correctos, se utiliza la ecuación~\ref{eq:desplazamiento_ppg}.
         \begin{equation}
-            C_1 \geq \frac{50}{\pi \cdot 15 Hz \cdot 1k\Omega} = \frac{50}{47.1239} = 1.06 \mu F
+            \label{eq:desplazamiento_ppg}
+            V_{out} = \frac{R_b}{R_a + R_b} \cdot V_{CC}
         \end{equation}
-
-        Se seleccionó un valor de $C_1 = 1 \mu F$, ya que es el valor comercial más cercano al calculado.
+        Donde $V_{out}$ es el desplazamiento de voltaje. Sustituyendo los valores en la ecuación~\ref{eq:desplazamiento_ppg}, se obtiene el valor de $V_{out}$.
+        \begin{equation}
+            V_{out} = \frac{27k\Omega}{56k\Omega + 27k\Omega} \cdot 5V = 1.62 V
+        \end{equation}
+        Este valor es cercano al desplazamiento de 1.65 V que se buscaba, lo que indica que los valores de las resistencias seleccionadas son correctos. Lo que logra poder visualizar la señal en el ESP32 en el puerto ADC.
 
         \paragraph{Cálculo de la capacitancia C2}
+        Se añade un capacitor en paralelo a la resistencia $R_b$ hacia tierra, esta configuración actua como un filtro pasa bajas RC de primer orden y se encarga de suavizar la tensión de referencia, eliminando ruidos y picos de alta frecuencia. La capacitancia $C_2$ se calcula mediante la ecuación~\ref{eq:capacitancia_C2_desplazamiento_ppg}.
 
-        Para filtrar el ruido de alta frecuencia, se empleó un capacitor de $1 \mu F$ en paralelo con la resistencia $R_b$, lo que contribuye a estabilizar la señal y reducir el ruido. La Figura~\ref{fig:Simulacion_Amplificador_Inversor_PPG} muestra la simulación del amplificador inversor con desplazamiento de voltaje para el sensor PPG.
+        \begin{equation}
+            \label{eq:capacitancia_C2_desplazamiento_ppg}
+            C_2 = \frac{1}{2\pi f_c R_b}
+        \end{equation}
+
+        Donde $f_c$ es la frecuencia de corte del filtro pasa bajas, que se seleccionó como $5 Hz$. Ya que, para el corazón humano, la frecuencia cardíaca máxima es de aproximadamente $3.4 Hz$, lo que significa que el corazón humano no late más de 200 latidos por minuto. Por lo tanto, se seleccionó una frecuencia de corte de $5 Hz$ como un margen con tolerancia para evitar que la señal de PPG se vea afectada por el filtro pasa bajas.  
+        Entonces, sustituyendo los valores en la ecuación~\ref{eq:capacitancia_C2_desplazamiento_ppg}, se obtiene el valor de $C_2$.
+        
+        \begin{equation}
+            C_2 = \frac{1}{2\pi (5 Hz) (27k\Omega)} = 1.178 \mu F
+        \end{equation}
+
+        Se seleccionó un valor de $C_2 = 1.0 \mu F$, ya que es el valor comercial más cercano al calculado. El capacitor se conecta en paralelo a la resistencia $R_b$ hacia tierra, lo que permite suavizar la tensión de referencia y eliminar ruidos y picos de alta frecuencia.
+
+        Y asi, se obtiene el circuito del desplazamiento de voltaje para el sensor PPG. En la figura~\ref{fig:Simulacion_Amp_Inversor_PPG} se muestra el amplificador inversor con desplazamiento de voltaje utilizando las resistencias y los capacitores seleccionados.
 
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_AmpInversor_ppg.png}
-            \caption[Simulación del amplificador no inversor para el sensor PPG.]{Simulación del amplificador no inversor para el sensor PPG\footnotemark}
-            \label{fig:Simulacion_Amplificador_Inversor_PPG}
+            \caption[Simulación del amplificador inversor con desplazamiento de voltaje para el sensor PPG.]{Simulación del amplificador inversor con desplazamiento de voltaje para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Amp_Inversor_PPG}
         \end{figure}
-        \footnotetext{Muestra la simulación del amplificador no inversor en el software Multisim conectado a un osciloscopio.}
+        \footnotetext{Muestra el amplificador inversor con desplazamiento de voltaje en el software Multisim, con una ganancia de 100 y un desplazamiento de 1.5 V.}
+
+        \subsubsection{Histéresis de la señal de PPG}
+        Para mejorar la detección de picos en la señal de PPG, se implementó un circuito de histéresis. Este circuito ayudará a detectar los picos de la señal de PPG inferior, lo cual será importante para calcular la frecuencia cardíaca. 
+
+        Asi que, primero se debe obtener un voltaje de referencia que se ajuste entre 0 y 5V. Por lo cual se utilizó un divisor de voltaje con dos resistencias, $R_1$ y $POT_1$, el potenciometro será el encargado de ajustar el voltaje de referencia.Con lo cual, calculamos el voltaje de referencia mediante la ecuación~\ref{eq:voltaje_referencia_histeresis_ppg}.
+        \begin{equation}
+            \label{eq:voltaje_referencia_histeresis_ppg}
+            V_{ref} = \frac{R_1}{R_1 + POT_1} \cdot V_{CC}
+        \end{equation}
+        Donde $V_{CC}$ es la tensión de alimentación del amplificador operacional, que en este caso es de 5V. Se seleccionó el valor de $R_1 = 4.7 k\Omega$ y el valor de $POT_1 = 50 k\Omega$. 
+        Sustituyendo los valores en la ecuación~\ref{eq:voltaje_referencia_histeresis_ppg}, se obtiene el valor de $V_{ref}$.
+        \begin{equation}
+            V_{ref} = \frac{50k\Omega}{4.7k\Omega + 50k\Omega} \cdot 5V = 4.5 V
+        \end{equation}
+        
+        donde el voltaje de referencia tendrá un rango máximo de 4.5V. Lo cual es suficiente para ajustar en los picos de la señal de PPG, ya que este oscila entre 0 y 3.3V.
+        Para obtener el voltaje de referencia mínima, se ajustó el potenciometro al mínimo, de $POT_1 = 1\Omega$, y se calculó el voltaje de referencia mediante la ecuación~\ref{eq:voltaje_referencia_histeresis_ppg}.
+        \begin{equation}
+            V_{ref} = \frac{1\Omega}{4.7k\Omega + 1\Omega} \cdot 5V = 0.001063 V
+        \end{equation}
+        Donde el voltaje de referencia tendrá un rango mínimo de 0.001063V. Lo cual es suficiente para ajustar en los picos inferiores de la señal de PPG.
+        El voltaje de referencia se conecta a la entrada inversora del amplificador operacional, y la señal de PPG se conecta a la entrada no inversora. Realiza la comparación entre la señal de PPG y el voltaje de referencia, la salida del amplificador operacional mostrará un nivel alto cuando la señal de PPG supere el voltaje de referencia, y un nivel bajo cuando esté por debajo del voltaje de referencia. \\
+        
+        Esto genera una señal binaria que indica la presencia o ausencia de un pico en la señal de PPG.
+        La señal binaria se conecta a la entrada del ESP32, donde se enviará los datos al teléfono móvil para su procesamiento y análisis.
+        El circuito de histéresis se muestra en la figura~\ref{fig:Simulacion_Histeresis_PPG}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/Desarrollo/multisim_histeresis_ppg.png}
+            \caption[Simulación del circuito de histéresis para el sensor PPG.]{Simulación del circuito de histéresis para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Histeresis_PPG}
+        \end{figure}
+        \footnotetext{Muestra el circuito de histéresis en el software Multisim.}
+    
+        \subsubsection{Simulación del circuito completo para el sensor PPG}
+
+        En la figura~\ref{fig:Simulacion_Circuito_PPG} se muestra el circuito completo para el sensor PPG, que incluye el filtro pasa bajas, el filtro pasa altas, el filtro notch pasivo, el amplificador inversor con desplazamiento de voltaje y el circuito de histéresis. Este circuito está diseñado para acondicionar la señal de PPG y prepararla para su procesamiento en el ESP32.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.0\textwidth]{img/Desarrollo/multisim_circuitoPPG.png}
+            \caption[Diseño del circuito completo para el sensor PPG.]{Diseño del circuito completo para el sensor PPG\footnotemark}
+            \label{fig:Simulacion_Circuito_PPG}
+        \end{figure}
+        \footnotetext{Muestra el circuito completo que se implementó para el sensor PPG en el software Multisim.}
 
     \subsection{Visualización de la señal de PPG en el osciloscopio}
     En la Figura~\ref{fig:PPG_Osciloscopio} se muestra la señal de PPG acondicionada en el osciloscopio, la cual se visualiza de forma clara y precisa, lista para ser transmitida al ESP32 para su procesamiento y análisis.
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{img/Desarrollo/ppg_osciloscopio.png}
-        \caption{Señal de PPG acondicionada.}
+        \includegraphics[width=0.6\textwidth]{img/Desarrollo/ppg_osciloscopio.png}
+        \caption[Señal de PPG acondicionada.]{Señal de PPG acondicionada.\footnotemark}
         \label{fig:PPG_Osciloscopio}
     \end{figure}
+    \footnotetext{Muestra la señal de PPG acondicionada en el osciloscopio.}
+
+    \subsection{Visualización de la histéresis de PPG en el osciloscopio}
+
+    La figura~\ref{fig:PPG_Osciloscopio_Histeresis} muestra la señal de histéresis de PPG, que se genera al aplicar el circuito de histéresis a la señal acondicionada. Esta señal binaria es crucial para la detección de picos (valles) en la señal de PPG, esto debido a que los valles de la señal de PPG son difíciles de detectar debido a la presencia de ruido y variaciones en la amplitud de la señal. La histéresis ayuda a estabilizar la detección de picos, evitando falsas detecciones causadas por ruidos o fluctuaciones menores en la señal.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/Desarrollo/ppg_histeresis.png}
+        \caption[Señal de histéresis de PPG.]{Señal binaria de histéresis de PPG.\footnotemark}
+        \label{fig:PPG_Osciloscopio_Histeresis}
+    \end{figure}
+    \footnotetext{Señal binaria de histéresis de PPG.}
+
+    \subsection{Visualización de la señal de PPG con histéresis en el osciloscopio} 
+
+    La figura~\ref{fig:PPGconHisteresis} muestra la señal de PPG junto con la señal de histéresis. La señal de histéresis se superpone a la señal de PPG, lo que permite observar cómo la histéresis afecta la detección de valles en la señal de PPG. La histéresis actúa como un umbral que ayuda a filtrar el ruido y las variaciones menores en la señal, lo que facilita la identificación de los picos y valles de la señal de PPG.
+
+    Esta técnica facilita el cálculo del PTT (\textit{Pulse Transit Time}) y la frecuencia cardíaca, ya que permite identificar de manera más precisa los momentos en los que ocurren los valles en la señal de PPG.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/Desarrollo/histeresisPPG.png}
+        \caption[Señal de PPG con histéresis.]{Señal de PPG con histéresis.\footnotemark}
+        \label{fig:PPGconHisteresis}
+    \end{figure}
+    \footnotetext{Señal de PPG con histéresis visualizada en el osciloscopio.}
+
+    \subsection{Desarrollo del código para el ESP32}
+    El código para el ESP32 se desarrolló utilizando el editor de código Visual Studio Code, con la extensión PlatformIO. Esta extensión permite programar el ESP32 de manera sencilla y eficiente, facilitando la carga del código en la placa. El código se basa en el lenguaje de programación C++ y utiliza la biblioteca Arduino para interactuar con el hardware del ESP32.
+
+    El código desarrollado para el ESP32 tiene como objetivo principal la adquisición de datos provenientes de sensores biomédicos, específicamente señales de ECG (electrocardiograma) y PPG (fotopletismografía), y la transmisión de estos datos a un teléfono móvil mediante comunicación Bluetooth.
+
+    El programa está estructurado para aprovechar las capacidades del ESP32, especialmente su arquitectura de doble núcleo, lo que permite ejecutar tareas concurrentemente y optimizar el rendimiento.
+
+    \lstinputlisting[
+        language=c++,
+        caption={Implementación de la multitarea en el ESP32.},
+        label={lst:multitarea_esp32},
+        firstline=174,
+        lastline=192
+    ]{code/esp32.cpp}
+    
+    El envío de datos se realiza utilizando un \texttt{struct}, lo que permite organizar y agrupar la información de manera eficiente. Este \texttt{struct} contiene los datos de los sensores, como la frecuencia cardíaca, la señal de ECG, el timestamp de cada lectura y los valres booleanos de los picos de PPG y ECG.
+
+    \lstinputlisting[
+        language=c++,
+        caption={Estructura de datos para el envío de información.},
+        label={lst:estructura_datos_esp32},
+        firstline=14,
+        lastline=20
+    ]{code/esp32.cpp}
+
+        \subsubsection{Tareas de muestreo y procesamiento de señales (Nucleo 0)}
+
+        El núcleo 0 del ESP32 se encarga de leer periódicamente los datos de los sensores analógicos provenientes de los circuitos acondicionadores de señales. Estos datos se obtienen a través de los pines analógicos del ESP32, que permiten la conversión de señales analógicas a digitales mediante un convertidor analógico-digital (ADC).
+
+        \lstinputlisting[
+            language=c++,
+            caption={Nucleo 0 del ESP32},
+            label={lst:nucleo_0_esp32},
+            firstline=76,
+            lastline=108
+        ]{code/esp32.cpp}
+
+        \subsubsection{Tareas de comunicación Bluetooth (Nucleo 1)}
+
+        El núcleo 1 del ESP32 es el encargado de gestionar la comunicación Bluetooth con el teléfono móvil. Utiliza la biblioteca BluetoothSerial para establecer una conexión Bluetooth y enviar los datos de los sensores al dispositivo móvil. La comunicación se realiza mediante el protocolo Serial, lo que permite una transmisión eficiente de datos,  se utiliza un semáforo que protege la zona crítica de transmisión.
+
+        Además, la comunicación Bluetooth se maneja con un callback que detecta eventos como la conexión o desconexión del cliente, y permite iniciar o detener la transmisión mediante comandos recibidos.
+
+        \lstinputlisting[
+            language=c++,
+            caption={Nucleo 1 del ESP32},
+            label={lst:nucleo_1_esp32},
+            firstline=111,
+            lastline=138
+        ]{code/esp32.cpp}
+
+    \subsection{Desarrollo de la aplicación Android}
+
+        La aplicación Android fue desarrollada utilizando el entorno de desarrollo Android Studio, y se utilizó el lenguaje de programación Kotlin. Se utilizó un teléfono pixel 6 para realizar las pruebas de la aplicación. Esto permitió hacer las pruebas necesarias para la conexión Bluetooth y la visualización de los datos en tiempo real.
+
+        \subsubsection{Inicio de sesión}
+
+        La función \ref{lst:iniciar_sesion_correo} permite a los usuarios iniciar sesión en la aplicación utilizando su correo electrónico y contraseña. Esta función verifica las credenciales del usuario y, si son válidas, permite el acceso a la aplicación. En caso de que el usuario no tenga una cuenta, se le ofrece la opción de crear una cuenta desde la misma pantalla de inicio de sesión.
+
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Función para iniciar sesión con correo electrónico y contraseña.},
+            label={lst:iniciar_sesion_correo},
+            firstline=115,
+            lastline=143
+        ]{code/LoginActivity.kt}
+
+        La función \ref{lst:iniciar_sesion_google} permite a los usuarios iniciar sesión en la aplicación utilizando su cuenta de Google. Esta función utiliza la API de autenticación de Google para iniciar sesión de manera segura y sencilla.
+        
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Función para iniciar sesión con cuenta de Google.},
+            label={lst:iniciar_sesion_google},
+            firstline=211,
+            lastline=221
+        ]{code/LoginActivity.kt}
+
+        \subsubsection{Obtener el PTT sistólico}
+
+        La función \ref{lst:obtener_ptt_sistolico} calcula el PTT sistólico obteniendo los picos R del electrocardiograma (ECG) y los picos de la señal de fotopletismografía (PPG). Dado que la señal de PPG no cuenta con histéresis, se utiliza un algoritmo de detección de picos para identificar los picos en esta señal, mientras que la señal de ECG sí dispone de histéresis para una detección más precisa de los picos R.
+
+        La función determina el intervalo de tiempo entre cada pico R del ECG y el siguiente pico correspondiente en la señal de PPG, lo que permite obtener el Tiempo de Transmisión del Pulso (PTT) sistólico.
+
+
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Función para obtener el PTT sistólico.},
+            label={lst:obtener_ptt_sistolico},
+            firstline=22,
+            lastline=67
+        ]{code/PTTCalculator.kt}
+
+        \subsubsection{Obtener el PTT diastólico}
+
+        La función \ref{lst:obtener_ptt_diastolico} calcula el PTT diastólico de manera similar a la función anterior, pero en este caso si se utiliza la histéresis de la señal de PPG para detectar los picos. La función busca el pico R del ECG y el valle correspondiente en la señal de PPG. El intervalo de tiempo entre el pico R y el valle de PPG se utiliza para calcular el PTT diastólico.
+
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Función para obtener el PTT diastólico.},
+            label={lst:obtener_ptt_diastolico},
+            firstline=73,
+            lastline=98
+        ]{code/PTTCalculator.kt}
+
+        \subsubsection{Estimar la presión arterial}
+
+        Se declara los coeficientes de estimación de la presión arterial sistólica y diastólica.. Estos coeficientes se utilizan para calcular la presión arterial a partir del PTT sistólico y diastólico.
+
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Coeficiente de estimación de la presión arterial.},
+            label={lst:coef_estimacion_presion},
+            firstline=6,
+            lastline=12
+        ]{code/BloodPressureCalculator.kt}
+
+        La función \ref{lst:presion_sistolica} estima la presión arterial sistólica a partir del PTT sistólico. Para ello, utiliza la ecuación~\ref{eq:BP2}, la cual modela la relación inversa entre el PTT y la presión arterial sistólica. Esta función recibe como entrada el valor del PTT sistólico y devuelve la presión arterial sistólica estimada.
+
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Estimación de la presión arterial sistólica.},
+            label={lst:presion_sistolica},
+            firstline=19,
+            lastline=32
+        ]{code/BloodPressureCalculator.kt}
+
+        De manera similar, la función \ref{lst:presion_diastolica} estima la presión arterial diastólica a partir del PTT diastólico. También utiliza la ecuación~\ref{eq:BP2} para calcular la presión arterial diastólica. Esta función toma como entrada el valor del PTT diastólico y devuelve la presión arterial diastólica estimada.
+
+        \lstinputlisting[
+            language=Kotlin,
+            caption={Estimación de la presión arterial diastólica.},
+            label={lst:presion_diastolica},
+            firstline=39,
+            lastline=52
+        ]{code/BloodPressureCalculator.kt}
+
+        \subsubsection{Guardar los datos en Firebase}
+
+        La función \ref{lst:guardar_resultados_firebase} se encarga de guardar los resultados obtenidos en Firebase. Esta función toma como entrada los cálculos de la presión arterial sistólica y diastólica, así como los valores del PTT sistólico y diastólico, junto con la fecha y hora de la medición. Utiliza la API de Firebase para almacenar estos datos en la base de datos de Firebase, lo que garantiza que los datos sean accesibles desde cualquier dispositivo con conexión a Internet. Esta funcionalidad facilita el seguimiento y análisis continuo de la salud del usuario, permitiéndole acceder a su historial de mediciones de manera sencilla y en tiempo real.
+
+        \lstinputlisting[
+            language=Java,
+            caption={Función para guardar los resultados en Firebase.},
+            label={lst:guardar_resultados_firebase},
+            firstline=28,
+            lastline=65
+        ]{code/FirebaseDataManager.kt}
+
+        La función \ref{lst:recuperar_resultados_firebase} se encarga de recuperar los resultados almacenados en Firebase. Esta función permite al usuario recuperar las últimas mediciones realizadas y almacenadas en la base de datos. Utiliza la API de Firebase para acceder a los datos y mostrarlos en la aplicación. Esta funcionalidad es útil para que el usuario pueda revisar su historial de mediciones y realizar un seguimiento de su salud a lo largo del tiempo.
+
+        \lstinputlisting[
+            language=Java,
+            caption={Función para recuperar los resultados de Firebase.},
+            label={lst:recuperar_resultados_firebase},
+            firstline=97,
+            lastline=114
+        ]{code/FirebaseDataManager.kt}
+
+\newpage
+
+\section{Resultados}
+
+    En esta sección se presentan los resultados obtenidos durante el desarrollo del proyecto. Se incluyen imágenes de la interfaz de la aplicación Android, así como ejemplos de las señales de PPG y ECG visualizadas en el teléfono móvil. Además, se muestran los resultados de la base de datos de Firebase, donde se almacenan los datos de los usuarios y los resultados obtenidos.
+
+    \subsection{Interfaz de la aplicación Android}
+
+    La aplicación Android fue desarrollada utilizando el entorno de desarrollo Android Studio, y se utilizó el lenguaje de programación Kotlin. La interfaz de la aplicación fue diseñada para ser intuitiva y fácil de usar.
+
+    En la figura~\ref{fig:Android_Login} se muestra la interfaz de inicio de sesión de la aplicación Android. Esta pantalla permite al usuario ingresar su correo electrónico y contraseña para acceder a la aplicación, también puede ingresar usando una cuenta de Google para facilitar el inicio de sesión. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_login.png}
+        \caption[Interfaz de iniciar sesión de la aplicación Android.]{Interfaz de iniciar sesión de la aplicación Android\footnotemark}
+        \label{fig:Android_Login}
+    \end{figure}
+    \footnotetext{Muestra la interfaz que se tiene al iniciar la aplicación Android.}
+
+    Para crear una cuenta, el usuario debe ingresar un correo electrónico y una contraseña. Al presionar el botón de ``Iniciar sesión'', la aplicación verifica si el correo electrónico y la contraseña son válidos. En caso de que no lo sean, aparecerá un checkbox que ofrece la opción de crear una cuenta. 
+
+    Si el usuario selecciona este checkbox, se registrará una nueva cuenta en la base de datos de Firebase con el correo electrónico y la contraseña ingresados.
+
+    En la Figura~\ref{fig:Android_CrearCuenta} se muestra la opción para crear una cuenta desde la interfaz de inicio de sesión.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_crearCuenta.png}
+        \caption[Opción de crear cuenta desde la interfaz de login.]{Opción de crear cuenta desde la interfaz de login\footnotemark}
+        \label{fig:Android_CrearCuenta}
+    \end{figure}
+    \footnotetext{Se debe seleccionar el checkbox para crear una cuenta e iniciar sesión.}
+
+    El botón de ``Iniciar sesión'' por defecto está deshabilitado. Este botón se habilitará cuando el usuario ingrese un correo electrónico y una contraseña válidos. En la figura~\ref{fig:Android_IniciarSesionCorreo} se que al momento de ingresar un correo válido y una contraseña, el botón de ``Iniciar sesión'' cambia de color y se habilita. Esto indica que el usuario puede iniciar sesión en la aplicación.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_iniciarSesionCorreo.png}
+        \caption[El usuario puede iniciar sesión con su correo y contraseña.]{El usuario puede iniciar sesión con su correo y contraseña\footnotemark}
+        \label{fig:Android_IniciarSesionCorreo}
+    \end{figure}
+    \footnotetext{Cuando el usuario ponga un correo válido y una contraseña en los campos correspondientes, el botón de iniciar sesión se habilitará.}
+
+    En la figura~\ref{fig:Android_RecuperarPassword} se muestra la opción de ``Olvidé mi contraseña''. Esta opción permite al usuario recuperar su contraseña en caso de que la haya olvidado. Al presionar este botón, el usuario recibirá un correo electrónico con instrucciones para restablecer su contraseña. Es importante destacar que esta opción solo estará disponible si el usuario ha ingresado un correo electrónico válido en el campo correspondiente.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_olvidarPassword.png}
+        \caption[El usuario puede recuperar su contraseña.]{El usuario puede recuperar su contraseña\footnotemark}
+        \label{fig:Android_RecuperarPassword}
+    \end{figure}
+    \footnotetext{El usuario puede recuperar su contraseña si la ha olvidado presionando el botón de ``Olvidé mi contraseña''.}
+
+    En la interfaz de inicio de sesión, el usuario también tiene la opción de iniciar sesión utilizando su cuenta de Google. Al presionar el botón de ``Iniciar sesión con Google'', se abrirá una ventana emergente que permitirá al usuario seleccionar su cuenta de Google y otorgar los permisos necesarios para acceder a la aplicación. En la figura~\ref{fig:Android_IniciarSesionGoogle} se muestra la interfaz donde el usuario puede iniciar sesión con su cuenta de Google.
+
+    Esta opción es útil para aquellos usuarios que prefieren no crear una cuenta específica para la aplicación y desean utilizar su cuenta de Google existente.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_iniciarSesionGoogle.png}
+        \caption[El usuario puede iniciar sesión con su cuenta de Google.]{El usuario puede iniciar sesión con su cuenta de Google\footnotemark}
+        \label{fig:Android_IniciarSesionGoogle}
+    \end{figure}
+    \footnotetext{El usuario puede iniciar sesión con su cuenta de Google presionando el botón de ``Iniciar sesión con Google''.}
+
+    Una vez que el usuario ha iniciado sesión correctamente, es redirigido a la pantalla principal. En caso de que el Bluetooth no esté activado, se solicitará al usuario que lo habilite. En la Figura~\ref{fig:Android_PermisosBT} se muestra el mensaje que solicita activar el Bluetooth.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_permisosBT.png}
+        \caption[Permisos de Bluetooth.]{Permisos de Bluetooth\footnotemark}
+        \label{fig:Android_PermisosBT}
+    \end{figure}
+    \footnotetext{Si el usuario no tiene prendido el Bluetooth, se le solicitará que lo active.}
+
+    Una vez activado el Bluetooth y con la sesión iniciada, el usuario accede a la pantalla principal de la aplicación, donde puede visualizar en tiempo real sus datos fisiológicos. En esta pantalla, se muestran las señales de ECG y PPG graficadas, la frecuencia cardíaca calculada y la presión arterial estimada.
+
+    Asimismo, la interfaz incluye un botón para conectar el dispositivo Bluetooth deseado y otro para iniciar o detener la medición de los datos fisiológicos.
+
+    En la Figura~\ref{fig:Android_PantallaPrincipal} se presenta la interfaz de la pantalla principal de la aplicación Android, mostrando las gráficas y controles mencionados.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_pantallaPrincipal.png}
+        \caption[Interfaz de la pantalla principal de la aplicación Android.]{Interfaz de la pantalla principal de la aplicación Android\footnotemark}
+        \label{fig:Android_PantallaPrincipal}
+    \end{figure}
+    \footnotetext{Muestra la interfaz de la pantalla principal de la aplicación Android, donde se pueden ver los datos fisiológicos del usuario.}
+
+    Si el usuario intenta iniciar las mediciones sin conectar el dispositivo Bluetooth primero, se mostrará un mensaje de advertencia. En la figura~\ref{fig:Android_ConectarDispPrimero} se muestra el mensaje que indica que el usuario debe conectar el dispositivo Bluetooth antes de iniciar las mediciones.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_conectarDispPrimero.png}
+        \caption[Mensaje al intentar iniciar las mediciones sin conectar el dispositivo por Bluetooth primero.]{Mensaje al intentar iniciar las mediciones sin conectar el dispositivo por Bluetooth primero\footnotemark}
+        \label{fig:Android_ConectarDispPrimero}
+    \end{figure}
+    \footnotetext{Este mensaje aparece si el usuario intenta iniciar las mediciones sin conectar el dispositivo por Bluetooth primero.}
+
+    Al presionar el botón de ``Dispositivos'', el usuario puede visualizar los dispositivos Bluetooth emparejados previamente con el teléfono móvil. Esta funcionalidad permite al usuario seleccionar el dispositivo Bluetooth al que desea conectarse para recibir los datos fisiológicos en tiempo real. En la figura~\ref{fig:Android_DispositivosBT} se muestra la interfaz de la pantalla donde se pueden visualizar los dispositivos Bluetooth emparejados.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_dispositivosBT.png}
+        \caption[Interfaz de la pantalla donde se puede visualizar los dispositivos Bluetooth emparejados.]{Interfaz de la pantalla donde se puede visualizar los dispositivos Bluetooth emparejados\footnotemark}
+        \label{fig:Android_DispositivosBT}
+    \end{figure}
+    \footnotetext{Esta interfaz aparece al seleccionar el botón de ``Dispositivos'' en la pantalla principal.}
+
+    Al seleccionar un dispositivo Bluetooth de la lista, se inicia el proceso de conexión. En la figura~\ref{fig:Android_Conectando} se muestra el mensaje que indica que se está intentando conectar al dispositivo Bluetooth seleccionado.
+
+    Este mensaje es importante para que el usuario sepa que la aplicación está intentando establecer una conexión con el dispositivo Bluetooth.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_conectando.png}
+        \caption[Mensaje de intento de conexión a un dispositivo Bluetooth.]{Mensaje de intento de conexión a un dispositivo Bluetooth\footnotemark}
+        \label{fig:Android_Conectando}
+    \end{figure}
+    \footnotetext{Este mensaje aparece al intentar conectarse a un dispositivo Bluetooth.}
+
+    Si la ocurre un error durante el proceso de conexión o el dispositivo Bluetooth al que se intenta conectar no está disponible, se mostrará un mensaje de error. En la figura~\ref{fig:Android_ErrorConexion} se muestra el mensaje de error que indica que no se pudo establecer la conexión con el dispositivo Bluetooth.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_errorConexion.png}
+        \caption[Mensaje de error de conexión a un dispositivo Bluetooth.]{Mensaje de error de conexión a un dispositivo Bluetooth\footnotemark}
+        \label{fig:Android_ErrorConexion}
+    \end{figure}
+    \footnotetext{Este mensaje aparece si no se logra conectar al dispositivo Bluetooth.}
+
+    Si la conexión se establece correctamente, se mostrará un mensaje de éxito. En la figura~\ref{fig:Android_ConexionExitosa} se muestra el mensaje que indica que la conexión al dispositivo Bluetooth fue exitosa.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_conexionExitosa.png}
+        \caption[Mensaje de conexión exitosa a un dispositivo Bluetooth.]{Mensaje de conexión exitosa a un dispositivo Bluetooth\footnotemark}
+        \label{fig:Android_ConexionExitosa}
+    \end{figure}
+    \footnotetext{Este mensaje aparece si se logra conectar al dispositivo Bluetooth correctamente.}
+
+    Una vez conectado el dispositivo Bluetooth, el usuario puede iniciar las mediciones de los datos fisiológicos. Al presionar el botón de ``Iniciar medición'', la aplicación comenzará a recibir y procesar los datos del sensor. En la figura~\ref{fig:Android_Grafica} muestra las graficas de los datos fisiológicos como el electrocardiograma (ECG) y la fotopletismografía (PPG) en tiempo real.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_grafica.png}
+        \caption[Interfaz de la pantalla donde se visualizan los datos fisiológicos en tiempo real.]{Interfaz de la pantalla donde se visualizan los datos fisiológicos en tiempo real\footnotemark}
+        \label{fig:Android_Grafica}
+    \end{figure}
+    \footnotetext{Muestra al usuario las graficaciones de los datos fisiológicos en tiempo real.}
+
+    La aplicación toma un muestreo de 15 segundos de los datos fisiológicos y los procesa para calcular la frecuencia cardíaca, el PTT (\textit{Pulse Transit Time}) y la presión arterial estimada. Al finalizar el muestreo, se muestran los resultados en la pantalla, además de guardar los datos en la base de datos de Firebase. En la figura~\ref{fig:Android_GraficaResultados} se muestra el mensaje que indica los resultados fueron guardados en la base de datos.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/android_graficaResultados.png}
+        \caption[Mensaje al terminar las mediciones.]{Mensaje al terminar las mediciones\footnotemark}
+        \label{fig:Android_GraficaResultados}
+    \end{figure}
+    \footnotetext{Una vez que se termina el muestreo de 15 segundos, se muestran los resultados y se detiene la medición.}
+
+    \subsection{Base de datos de Firebase}
+    La aplicación utiliza Firebase como base de datos para almacenar los datos fisiológicos del usuario. Firebase es una plataforma de desarrollo de aplicaciones móviles que proporciona una base de datos en tiempo real, autenticación de usuarios y almacenamiento en la nube. Firebase permite almacenar y sincronizar datos entre la aplicación y la base de datos en tiempo real, lo que facilita el acceso a los datos desde cualquier dispositivo.
+
+    En la Figura~\ref{fig:Firebase_BD_Resultados} se muestra la base de datos de Firebase donde se almacenan los resultados de los datos fisiológicos del usuario. Esta base de datos registra la frecuencia cardíaca, el Tiempo de Tránsito del Pulso (PTT, por sus siglas en inglés) sistólico y diastólico, así como las estimaciones de presión arterial sistólica y diastólica, además de la fecha y hora en que se tomaron los datos.
+
+    Al estar almacenados en Firebase, estos datos pueden ser accedidos desde cualquier dispositivo con conexión a Internet, lo que permite al usuario visualizar su historial simplemente ingresando su correo electrónico y contraseña.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/firebase_BD_resultados.png}
+        \caption[Base de datos de Firebase donde se almacenan los resultados.]{Base de datos de Firebase donde se almacenan los resultados\footnotemark}
+        \label{fig:Firebase_BD_Resultados}
+    \end{figure}
+    \footnotetext{Muestra la base de datos de Firebase donde se almacenan los resultados de los datos fisiológicos del usuario.}
+
+    Al momento en el que el usuario crea una cuenta, se almacenan en la base de datos de Firebase el correo electrónico y la fecha de creación de la cuenta. En la figura~\ref{fig:Firebase_BD_Usuarios} se muestra la base de datos de Firebase donde se almacenan estos datos.
+
+    Esta información es importante para la autenticación de usuarios y para mantener un registro de las cuentas creadas en la aplicación. La base de datos de Firebase permite gestionar y almacenar estos datos de manera segura y eficiente.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/firebase_BD_users.png}
+        \caption[Base de datos de Firebase donde se almacenan el correo y fecha de creación de la cuenta.]{Base de datos de Firebase donde se almacenan el correo y fecha de creación de la cuenta\footnotemark}
+        \label{fig:Firebase_BD_Usuarios}
+    \end{figure}
+    \footnotetext{Estos datos son almacenados en la base de datos de Firebase al crear una cuenta.}
+
+    Finalmente, en la figura~\ref{fig:Firebase_auth} se muestra la base de datos de Firebase donde se almacenan los datos de autenticación de los usuarios. Estos datos son gestionados por Firebase Authentication.
+
+    Firebase Authentication es un servicio que permite a los desarrolladores autenticar a los usuarios de sus aplicaciones de manera sencilla y segura. Proporciona una variedad de métodos de autenticación, como correo electrónico y contraseña, autenticación de Google, Facebook, entre otros. Esto facilita la implementación de la autenticación en la aplicación y mejora la seguridad de los datos del usuario.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/Resultados/firebase_auth.png}
+        \caption[Los datos de autenticación de los usuarios se almacenan en Firebase.]{Los datos de autenticación de los usuarios se almacenan en Firebase\footnotemark}
+        \label{fig:Firebase_auth}
+    \end{figure}
+    \footnotetext{Estos datos son almacenados y gestionados por Firebase Authentication.}
+
+\newpage
+\section{Análisis de Resultados}
+
+    Durante la fase de pruebas del sistema desarrollado para la estimación de la presión arterial mediante el cálculo del Tiempo de Transmisión del Pulso (PTT) a partir de señales de ECG y PPG, se presentaron diversas dificultades técnicas que impactaron significativamente en la calidad y precisión de los resultados obtenidos.
+
+    En primer lugar, la señal del electrocardiograma (ECG) mostró un nivel considerable de ruido en la mayoría de las pruebas realizadas. Este ruido se manifiesta como fluctuaciones no deseadas y artefactos en la gráfica, lo que dificulta la correcta identificación de los picos R necesarios para calcular los intervalos de tiempo precisos entre eventos cardíacos. La presencia de este ruido puede deberse a múltiples factores, entre ellos interferencias electromagnéticas. Por esta razón, se optó por implementar un circuito con histéresis para detectar los picos R en la señal de ECG, con el fin de minimizar el porcentaje de error al realizar el cálculo del PTT.
+
+    Esta dificultad en el manejo de las señales analógicas impactó directamente en la calidad de los datos procesados. Como resultado, los valores calculados y almacenados en Firebase para la presión arterial sistólica y diastólica presentaron una desviación significativa respecto a los valores esperados de referencia clínica. El margen de error aproximado se estima en un $\pm30\%$, lo cual refleja la imprecisión derivada principalmente del ruido y la dificultad en la detección exacta de los eventos relevantes en las señales.
+
+    El proyecto logró demostrar una alternativa para estimar la presión arterial basada en PTT, validando que es posible realizar este cálculo con señales fisiológicas adquiridas por sensores no invasivos. Sin embargo, el mayor reto identificado fue la gestión y procesamiento adecuado de las señales analógicas. La calidad del ECG y PPG es crítica para obtener resultados confiables, y el ruido presente en estas señales es el principal factor que limita la precisión del sistema.
+
+    En futuras iteraciones, será fundamental mejorar la adquisición de señales mediante mejores sensores, técnicas de filtrado avanzadas y acondicionamiento de la señal para reducir el ruido y mejorar la detección de eventos característicos. También se recomienda evaluar el uso de algoritmos más robustos para la identificación de picos y valles, así como la incorporación de calibraciones personalizadas para mitigar variaciones individuales.
+
+\newpage
+\section{Conclusiones}
+    
+    El presente proyecto se ha desarrollado con el objetivo de diseñar un dispositivo no invasivo capaz de medir la presión arterial utilizando un sensor de fotopletismografía (PPG) y un electrocardiograma (ECG) con el método de \textit{Pulse Transit Time} (PTT). A pesar de las limitaciones y desafíos técnicas encontrados durante el desarrollo, principalmente el alto ruido en las señales analógicas adquiridas, se demostró la viabilidad de la propuesta del sistema. 
+
+    Una mejora clave para futuro sería el diseño y fabricación en placa PCB de manera profesional, ya que la implementación casera utilizada mostró ser propensa a interferencias y ruido, afectando la calidad de las señales. La adopción de componentes SMD y la selección de dispositivos diseñados específicamente para manejar señales biomédicas de bajo voltaje y alto ruido será fundamental para aumentar la precisión y confiabilidad del sistema.
+
+    El impacto de este proyecto es significativo, ya que permite el registro continuo y accesible de la presión arterial del usuario, posibilitando el monitoreo frecuente desde cualquier lugar mediante autenticación segura. Al ser un método no invasivo, fomenta el auto-monitoreo de la salud cardiovascular sin la necesidad de equipos médicos especializados.
+
+    No obstante, el principal desafío pendiente es la reducción del margen de error actual, que ronda aproximadamente un $\pm30\%$. Este margen elevado limita la aceptación y confianza del usuario final en la estimación. Por ello, se deben priorizar mejoras en el acondicionamiento de señales, algoritmos de procesamiento y calibración individualizada para acercar los resultados a estándares clínicos.
+
+    En conclusión, este proyecto representa un avance en la búsqueda de soluciones no invasivas y accesibles para el monitoreo de la presión arterial, con un enfoque en la mejora continua.
